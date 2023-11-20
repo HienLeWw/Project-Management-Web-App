@@ -1,0 +1,145 @@
+body{
+    margin: 0;
+    background-color: #c0d0ef;
+    height: 100%;
+    width: 100%;
+}
+
+.container{
+    position: absolute;
+    border-top-left-radius: 5% 9%;
+    border-top-right-radius: 5% 9%;
+    border-bottom-left-radius: 5% 9%;
+    border-bottom-right-radius: 5% 9%;
+    display: flex;
+    top: 10%;
+    left: 10%;
+    width: 80%;
+    height: 80%;
+    background-color: #304a6e;
+    overflow: hidden;
+}
+
+.img_contain{
+    position: relative;
+    overflow: hidden;
+    width: 40%;
+    height: 100%;
+}
+
+.img_contain img{
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    vertical-align: middle;
+    margin: 0 auto;
+}
+
+.login_form{
+    position: relative;
+    width: 60%;
+    height: 100%;
+    top: 3%;
+}
+
+.login_form .logo_contain{
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 20%;
+    color: white;
+}
+
+.login_form .logo_contain img{
+    position: relative;
+    width: 40%;
+    height: 60%;
+    /* width: 245px;
+    height: 70px; */
+    top: 25%;
+    left: 30%;
+}
+
+
+.login_form h1{
+    position: relative;
+    margin: 0;
+    color: white;
+    text-align: center;
+    top: -2%;
+    font-size: 2.5vw;
+}
+
+.login_form .deco{
+    position: relative;
+    background-color: #668dc0;
+    width: 12%;
+    height: 0.5%;
+    left: 44%;
+    top: -1.2%;
+    border-radius: 500px;
+}
+
+.login_form form{
+    position: relative;
+    display: grid;
+    top: -3%
+}
+
+.login_form form input[type=text], input[type=password]{
+    position: relative;
+    left: 10%;
+    width: 77%;
+    margin: 2% 0 2% 0;
+    font-size: large;
+    padding: 4% 0 1% 2%;
+    background-color: #304a6e;
+    color: #c0d0ef;
+    border: none;
+    border-bottom: 1px solid #668dc0;
+    font-size: 1.5vw;
+}
+
+::placeholder{
+    color: #c0d0ef;
+}
+
+.login_form form a{
+    position: relative;
+    top: 0.5vw;
+    left: 12%;
+    width: 80%;
+    color: #c0d0ef;
+}
+
+.login_form form button{
+    position: relative;
+    top: 2.5vw;
+    width: 60%;
+    height: 3vw;
+    border-radius: 500px;
+    left: 20%;
+    font-size: 1.5vw;
+    color: #000000;
+    background-color: #668dc0;
+    border: none;
+}
+
+.login_form .sign_up{
+    position: relative;
+    width: 80%;
+    left: 10%;
+    font-size: 1.3vw;
+    text-align: right;
+    display: grid;
+}
+
+.login_form .sign_up p, a{
+    position: relative;
+    color: #c0d0ef;
+    right: 2%;
+    top: 3vw;
+    margin: 0;
+}
+

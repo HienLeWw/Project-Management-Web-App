@@ -1,0 +1,187 @@
+body {
+    margin: 0;
+    background-color: #C0D0EF;
+}
+.w3-sidebar{
+    background-color: #C0D0EF;
+    width: 15%;
+}
+.w3-container{
+    background-color: #C0D0EF;
+    height: 100%;
+    padding: 0;
+    margin-left:15%; 
+    width: 100%;
+}
+html{
+    background-color: #C0D0EF;
+}
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 15%;
+    background-color: #304A6E;
+    position: fixed;
+    height: 100%;
+    overflow: auto;
+}
+li a {
+    display: block;
+    color: #dfdfdf;
+    padding: 8px 16px;
+    text-decoration: none;
+    text-align: center;
+    font-size: large;
+}
+  
+li a.active {
+    color: white;
+}
+.logo_contain img{
+    position: relative;
+    width: 100%;
+    height: 60%;
+    top: 25%;
+    left: 0%;
+    margin-bottom: 5%;
+}
+.logo_contain{
+  background-color: #304A6E;
+}
+li a:hover:not(.active) {
+    color: white;
+    text-decoration: none;
+}
+.nav-items{
+    display: flex; 
+    width: auto;
+    margin: 0;
+    /* margin-left: 20%; */
+    /* margin-right: 10%; */
+    margin-bottom: 5%;
+}
+.nav-items img{
+    left: 0%;
+}
+.header{
+    display: flex; 
+    margin-top: 0%; 
+    position: relative;
+}
+.notify-btn{
+    background-color: transparent; 
+    border: none; 
+    left: 80%; 
+    top: 1%;
+    position: fixed;
+}
+.notify-btn svg{
+    transition: 0.3s;
+}
+.notify-btn:hover svg{
+    transform: scale(1.2);
+}
+.profile{
+    background-color: transparent; 
+    border: none; 
+    left: 85%; 
+    position: fixed; 
+    display: flex;
+}
+.profile-img{
+    border-radius: 50%;
+    background-color: red;
+    text-align: center;
+    justify-content: center;
+    justify-items: center;
+    font-size: x-large;
+    width: 36px;
+    height: 36px;
+    margin-top: 5%;
+}
+.profile-content{
+    margin-left: 2%;
+}
+.functional-btn{
+    display: flex; margin-top: 10%; margin-bottom: 1%;
+}
+.add-project-btn{
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: large;
+    color: rgb(77, 75, 75);
+    left: 18%;
+    position: fixed;
+}
+.add-project-btn:hover{
+    color: black;
+    text-decoration: underline; 
+    transition-duration: 200ms;
+}
+.dropdown{
+    /* margin-right: 35%; */
+    position: fixed;
+    left: 60%;
+}
+#dropdownMenuButton{
+    background-color: #668DC0;
+    color: black;
+    width: 100px;
+}
+#main{
+    display: flex;
+    margin-top: 2%;
+    padding: 0;
+    left: 5%;
+    position: absolute;
+    width: 100%;
+}
+#color-calendar{
+    width: 50%;
+}
+table{
+    background-color: white;
+    margin: 2%;
+    width: 50%;
+}
+thead{
+    text-align: center;
+    background-color: white;
+}
+.project-block{
+    margin-left: 4%;
+}
+th{
+    font-size: large;
+    justify-content: center;
+}
+tbody{
+    text-align: center;
+    background-color: white;
+}
+.edit-btn{
+    margin: 0;
+    padding: 0;;
+    background-color: transparent;
+    border: none;
+}
+.edit-btn img{
+    transition: 0.3s;
+}
+.edit-btn:hover img{
+    transform: scale(1.2);
+}
+.delete-btn{
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+    border: none;
+}
+.delete-btn img{
+    transition: 0.3s;
+}
+.delete-btn:hover img{
+    transform: scale(1.2);
+}
