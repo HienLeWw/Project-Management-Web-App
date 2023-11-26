@@ -34,7 +34,7 @@ li a {
     text-align: center;
     font-size: large;
 }
-  
+
 li a.active {
     color: white;
 }
@@ -91,7 +91,7 @@ li a:hover:not(.active) {
 }
 .profile-img{
     border-radius: 50%;
-    background-color: red;
+    background-color: rgb(68, 162, 149);
     text-align: center;
     justify-content: center;
     justify-items: center;
@@ -103,8 +103,12 @@ li a:hover:not(.active) {
 .profile-content{
     margin-left: 2%;
 }
+.project-title{
+    margin-top: 8%;
+    margin-left: 3%;
+}
 .functional-btn{
-    display: flex; margin-top: 10%; margin-bottom: 1%;
+    display: flex; margin-top: 3%; margin-bottom: 0%;
 }
 .add-project-btn{
     background-color: transparent;
@@ -112,8 +116,8 @@ li a:hover:not(.active) {
     cursor: pointer;
     font-size: large;
     color: rgb(77, 75, 75);
-    left: 18%;
-    position: fixed;
+    left: 3%;
+    position: relative;
 }
 .add-project-btn:hover{
     color: black;
@@ -184,4 +188,189 @@ tbody{
 }
 .delete-btn:hover img{
     transform: scale(1.2);
+}
+
+.popup-notify{
+    position: absolute;
+    width: 400px;
+    height: 200px;
+    background-color: white;
+    border: solid black 0.5px;
+    top: 0%;
+    transform: translate(-50%, -50%) scale(0.1);
+    left: 50%;
+    z-index: 10;
+    visibility: hidden;
+    transition: transform 0.3s, top 0.3s;
+}
+.open-notify{
+    visibility: visible;
+    top: 30%;
+    transform: translate(-50%, -50%) scale(1);
+}
+.popup-head{
+    margin-top: 2%;
+    margin-bottom: 2%;
+    width: 80%;
+    display: flex;
+    border-bottom: solid black 0.5px;
+    margin-left: 5%;
+}
+
+.popup-head img{
+    width: 36px;
+    height: 36px;
+    /* margin-right: 50%; */
+}
+
+.popup-head button{
+    background-color: transparent;    
+    border: black solid 1px;    
+    width: 30px;
+    height: 30px;
+    /* margin-left: 50%; */
+    position: absolute;
+    left: 90%;
+}
+
+.popup-body{
+    width: 80%;
+    margin-left: 5%;
+}
+
+.popup-body .notify-content{
+    display: flex;
+    border-bottom: gray solid 0.3px;
+    margin-bottom: 2%;
+}
+
+.popup-body .notify-content .notify-img{
+    border-radius: 50%;
+    background-color: rgb(68, 162, 149);
+    text-align: center;
+    justify-content: center;
+    justify-items: center;
+    font-size: large;
+    width: 28px;
+    height: 28px;
+    margin-right: 1%;
+}
+
+.popup-add-prj{
+    position: absolute;
+    width: 600px;
+    height: 400px;
+    background-color: white;
+    border: solid black 0.5px;
+    top: 40%;
+    transform: translate(-50%, -50%) scale(0.1);
+    left: 0%;
+    z-index: 20;
+    visibility: hidden;
+    transition: transform 0.3s, top 0.3s;
+}
+
+.open-add-prj{
+    visibility: visible;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.popup-add-prj form input[type=text]{
+    position: relative;
+    left: 5%;
+    width: 77%;
+    margin: 0;
+    font-size: medium;
+    padding: 4% 0 1% 2%;
+    background-color: #F5F5F5;
+    color: #5e6269;
+    border: none;
+    border-bottom: 1px solid #4f6480;
+    /* font-size: 1.5vw; */
+}
+
+/* .header input{
+    position: relative;
+    left: 15%;
+    width: 40%;
+    margin: 1% 0% 1% 0%;
+    font-size: large;
+    padding: 0;
+    background-color: #F5F5F5;
+    color: #5e6269;
+    border: none;
+    height: 20%;
+    
+}
+
+.header .search-img{
+    position: relative;
+    left: 14%;
+    margin: 1% 0% 1% 0%;
+} */
+
+.search{
+    width: 100%;
+    display: flex;
+    left: 15%;
+    position: absolute;
+    justify-content: left;
+    align-items: center;
+}
+
+.search-btn{
+    background-color: #F5F5F5;
+    border: solid 1px black;
+    float: left;
+    height: 50%;
+}
+
+.search-btn:hover{
+    background-color: #e6e1e1;
+    transition: 200ms;
+}
+
+.header input{
+    position: relative;
+    width: 40%;
+    margin: 1% 0% 1% 0%;
+    /* left: 15%; */
+    float: left;
+}
+
+.popup-add-prj form label{
+    position: absolute;
+    left: 5%;
+    margin: 0;
+    padding: 0;
+    font-size: large;
+}
+
+#invite-btn{
+    background-color: transparent;
+    border: 0;
+    position: absolute;
+    left: 85%;
+    top: 60%;
+}
+#invite-btn img:hover{
+    transform: scale(1.1);
+    transition: 200ms;
+}
+
+.create-proj-btn{
+    background-color: #F5F5F5;
+    width: 15%;
+    height: 10%;
+    position: absolute;
+    top: 85%;
+    left: 80%;
+    border: solid black 0.5px;
+}
+
+.create-proj-btn:hover{
+    font-size: medium;
+    transition: 200ms;
+    border: solid black 1px;
 }

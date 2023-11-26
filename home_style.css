@@ -34,20 +34,21 @@ li a {
     text-align: center;
     font-size: large;
 }
+  
 li a.active {
     color: white;
     justify-content: center;
 }
 .logo_contain img{
-      position: relative;
-      width: 100%;
-      height: 60%;
-      top: 25%;
-      left: 0%;
-      margin-bottom: 5%;
+    position: relative;
+    width: 100%;
+    height: 60%;
+    top: 25%;
+    left: 0%;
+    margin-bottom: 5%;
 }
 .logo_contain{
-    background-color: #304A6E;
+  background-color: #304A6E;
 }
 li a:hover:not(.active) {
     color: white;
@@ -71,13 +72,55 @@ li a:hover:not(.active) {
     margin-top: 0%; 
     position: relative;
 }
-#task-id{
-    text-decoration: underline;
-}
-.add-task-container{
+
+.search{
+    width: 100%;
     display: flex;
+    left: 15%;
+    position: absolute;
+    justify-content: left;
+    align-items: center;
 }
 
+.search-btn{
+    background-color: #F5F5F5;
+    border: solid 1px black;
+    float: left;
+    height: 50%;
+}
+
+.search-btn:hover{
+    background-color: #e6e1e1;
+    transition: 200ms;
+}
+
+.header input{
+    position: relative;
+    width: 40%;
+    margin: 1% 0% 1% 0%;
+    /* left: 15%; */
+    float: left;
+}
+
+.project-title{
+    margin-top: 8%;
+    margin-left: 3%;
+}
+
+.add-task-btn{
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: large;
+    color: rgb(77, 75, 75);
+    left: 18%;
+    position: absolute;
+}
+.add-task-btn:hover{
+    color: black;
+    text-decoration: underline; 
+    transition-duration: 200ms;
+}
 .profile{
     background-color: transparent; 
     border: none; 
@@ -87,7 +130,7 @@ li a:hover:not(.active) {
 }
 .profile-img{
     border-radius: 50%;
-    background-color: rgb(68, 162, 149);
+    background-color:rgb(68, 162, 149);
     text-align: center;
     justify-content: center;
     justify-items: center;
@@ -105,24 +148,13 @@ li a:hover:not(.active) {
 .profile-content{
     margin-left: 2%;
 }
-.add-task-btn{
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    font-size: large;
-    color: rgb(77, 75, 75);
-    left: 18%;
-    position: fixed;
-}
-.add-task-btn:hover{
-    color: black;
-    text-decoration: underline; 
-    transition-duration: 200ms;
-}
 .dropdown{
     /* margin-right: 35%; */
     position: fixed;
     left: 60%;
+}
+#scheduler{
+    width: 85%; height: 600px; margin-top: 10%; margin-bottom: 1%; left: 15%; position: absolute;
 }
 #dropdownMenuButton{
     background-color: #668DC0;
@@ -193,6 +225,7 @@ tbody{
 .delete-btn:hover img{
     transform: scale(1.2);
 }
+
 .popup-notify{
     position: absolute;
     width: 400px;

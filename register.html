@@ -2,7 +2,7 @@
 <html>
     <head>
         <title>Freeze Time</title>
-        <link rel="stylesheet" href="login.css">
+        <link rel="stylesheet" href="register_style.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
@@ -14,23 +14,27 @@
                 <div class="logo_contain">
                     <img src="images\combine_logo.png" alt="logo">
                 </div>
-                <h1>Login</h1>
+                <h1>Register</h1>
                 <div class="deco"></div>
                 <form action="login.php" method="post">
+                    <label for="email"></label>
+                    <input type="text" placeholder="Enter your email" name="email" required>
+
                     <label for="uname"></label>
                     <input type="text" placeholder="Enter Username" name="uname" required>
 
                     <label for="psw"></label>
                     <input type="password" placeholder="Enter Password" name="psw" required>
 
-                    <a href="reco_pwd.html"><i>Forgot your password?</i></a>
+                    <label for="repsw"></label>
+                    <input type="password" placeholder="Enter your password again" name="repsw" required>
 
-                    <button type="submit">LOGIN</button>
+                    <button type="submit">SIGN UP</button>
                 </form>
-                <div class="sign_up">
-                    <p>Don't have any account yet?</p>
-                    <a href="register.html">Sign up</a>
-                </div>
+                <!-- <div class="sign_up">
+                    <p>Don't have an account yet?</p>
+                    <a href="signup.html">Sign up</a>
+                </div> -->
             </div>
         </div>
     </body>

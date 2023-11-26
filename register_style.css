@@ -91,9 +91,12 @@ body{
     position: relative;
     left: 10%;
     width: 77%;
+    /* width: 60%; */
     margin: 2% 0 2% 0;
-    font-size: large;
-    padding: 4% 0 1% 2%;
+    /* margin: 0; */
+    font-size: medium;
+    padding: 2% 0 0.5% 1%;
+    /* padding: 0; */
     background-color: #304a6e;
     color: #c0d0ef;
     border: none;
@@ -122,9 +125,8 @@ body{
     left: 20%;
     font-size: 1.5vw;
     color: #000000;
-    background-color: #88aad6;;
+    background-color: #88aad6;
     border: none;
-    z-index: 1;
 }
 
 .login_form form button:hover{
@@ -133,20 +135,19 @@ body{
     cursor: pointer;
 }
 
-.login_form .sign_up{
+/* .login_form .sign_up{
     position: relative;
     width: 80%;
     left: 10%;
     font-size: 1.3vw;
     text-align: right;
     display: grid;
-}
+} */
 
-.login_form .sign_up p, a{
+/* .login_form .sign_up p, a{
     position: relative;
     color: #c0d0ef;
     right: 2%;
     top: 3vw;
     margin: 0;
-}
-
+} */
