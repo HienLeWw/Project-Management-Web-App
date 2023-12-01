@@ -104,7 +104,7 @@ li a:hover:not(.active) {
     margin-left: 2%;
 }
 .project-title{
-    margin-top: 8%;
+    margin-top: 3%;
     margin-left: 3%;
 }
 .functional-btn{
@@ -309,28 +309,14 @@ tbody{
     left: 14%;
     margin: 1% 0% 1% 0%;
 } */
-
 .search{
-    width: 100%;
-    display: flex;
-    left: 15%;
-    position: absolute;
-    justify-content: left;
-    align-items: center;
+    width: 70%;
+    position: relative;
+    left: 20%;
 }
-
-.search-btn{
-    background-color: #F5F5F5;
-    border: solid 1px black;
-    float: left;
-    height: 50%;
+.search .form-control{
+    margin: 0;
 }
-
-.search-btn:hover{
-    background-color: #e6e1e1;
-    transition: 200ms;
-}
-
 .header input{
     position: relative;
     width: 40%;

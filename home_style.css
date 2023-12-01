@@ -72,26 +72,13 @@ li a:hover:not(.active) {
     margin-top: 0%; 
     position: relative;
 }
-
 .search{
-    width: 100%;
-    display: flex;
-    left: 15%;
-    position: absolute;
-    justify-content: left;
-    align-items: center;
+    width: 70%;
+    position: relative;
+    left: 20%;
 }
-
-.search-btn{
-    background-color: #F5F5F5;
-    border: solid 1px black;
-    float: left;
-    height: 50%;
-}
-
-.search-btn:hover{
-    background-color: #e6e1e1;
-    transition: 200ms;
+.search .form-control{
+    margin: 0;
 }
 
 .header input{
@@ -103,7 +90,7 @@ li a:hover:not(.active) {
 }
 
 .project-title{
-    margin-top: 8%;
+    margin-top: 3%;
     margin-left: 3%;
 }
 
