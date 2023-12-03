@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
-  <title>Task Page</title>
+  <title>Home Page</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -56,7 +56,6 @@
     </ul>
   </div>
 
-<!-- <div style="margin-left:20%;padding:1px 16px;height:1000px;"> -->
   <div class="w3-container">
     <!-- pop up -->
     <div class="popup-notify" id="notify">
@@ -71,6 +70,18 @@
       </div>
     </div>
 
+    <div class="popup-share" id="share">
+      <div class="popup-head">
+        <h3 class="popup-title">Invite new member</h3>
+        <button onclick="closePopupShare()">X</button>
+      </div>
+      <form class="invitation-info" action="">
+        <label for="invitation">Invite Some Friends</label>
+        <input type="text" name="invitation" placeholder="link">
+        <button id="invite-btn"><img src="images/icons8-copy-24.png" alt=""></button>
+      </form>
+    </div>
+
     <!-- Project Name -->
     <div class="header">
       <div class="search">
@@ -79,10 +90,7 @@
           Search
         </button>
       </div>
-      <!-- <div class="search">
-        <input type="text" name="search" placeholder="Search for any thing" size="500">
-        <button type="submit" class="search-btn"><img src="images\icons8-search-50.png" alt="" width="24px" height="24px"></button>
-      </div> -->
+
 
       <!-- notify button -->
       <button class="notify-btn" onclick="openNotify()">
@@ -103,17 +111,108 @@
       <h1>Project Name</h1>
     </div>
     <!-- buttons -->
+    <!-- Filter Button -->
+    <div class="functional-btn">
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown">
+          Filter
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="#">Today</a>
+          <a class="dropdown-item" href="#">This Week</a>
+          <a class="dropdown-item" href="#">Late</a>
+        </div>
+      </div>
+
+      <button type="button" class="btn btn-secondary btn-sm" id="share-btn" onclick="openPopupShare()"><img src="images/icons8-member-30.png" alt="" width="24px" height="24px"> Share</button>
+    </div>
+    <!-- buckets -->
+    <div class="bucket-parent">
+      <div class="bucket-child">
+          
+
+          <div class="bucket-header">
+            <div class="bucket-title">To Do</div>
+            <div class="group-item" id="todo-item"></div>
+          </div>
+          <img class="vector-icon" alt="" src="/images/vector-11.svg" />
+          <div class="task-list">
+            <div class="task" draggable="true">
+              <p class="task-name">Task 4</p>
+              <div class="info">
+                <p class="due-date">12/1</p>
+                <div class="profile-img" id="assignee">U</div>
+              </div>
+            </div>
+          </div>
+      </div>
+      <div class="bucket-child">
+        
+
+          <div class="bucket-header">
+            <div class="bucket-title"><p>In progress</p></div>
+            <div class="group-item" id="progress-item"></div>
+          </div>
+          <img class="vector-icon" alt="" src="/images/vector-12.svg" />
+          <div class="task-list">
+            <div class="task" draggable="true">
+              <p class="task-name">Task 2</p>
+              <div class="info">
+                <p class="due-date">8/1</p>
+                <div class="profile-img" id="assignee">U</div>
+              </div>
+            </div>
+            <div class="task" draggable="true">
+              <p class="task-name">Task 3</p>
+              <div class="info">
+                <p class="due-date">8/1</p>
+                <div class="profile-img" id="assignee">U</div>
+              </div>
+            </div>
+          </div>
+      </div>
+      <div class="bucket-child">
+        
+
+          <div class="bucket-header">
+            <div class="bucket-title">Done</div>
+            <div class="group-item" id="done-item"></div>
+          </div>
+          <img class="vector-icon" alt="" src="/images/vector-13.svg" />
+          <div class="task-list">
+            <div class="task" draggable="true">
+              <p class="task-name">Task 1</p>
+              <div class="info">
+                <p class="due-date">4/1</p>
+                <div class="profile-img" id="assignee">U</div>
+              </div>
+            </div>
+          </div>
+          <!-- <img
+            class="vuesaxbulkadd-square-icon"
+            alt=""
+            src="/images/vuesaxbulkaddsquare.svg"
+          /> -->
+      </div>
+    </div>
     
   </div>
 </body>
 <script>
   let popupNotify = document.getElementById("notify");
+  let popupShare = document.getElementById("share");
 
   function openNotify(){
     popupNotify.classList.add("open-notify");
   }
   function closeNotify(){
     popupNotify.classList.remove("open-notify");
+  }
+  function openPopupShare(){
+    popupShare.classList.add("open-share");
+  }
+  function closePopupShare(){
+    popupShare.classList.remove("open-share");
   }
 </script>
 </html>

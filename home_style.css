@@ -74,8 +74,8 @@ li a:hover:not(.active) {
 }
 .search{
     width: 70%;
-    position: relative;
-    left: 20%;
+    position: fixed;
+    left: 35%;
 }
 .search .form-control{
     margin: 0;
@@ -135,42 +135,26 @@ li a:hover:not(.active) {
 .profile-content{
     margin-left: 2%;
 }
-.dropdown{
+/* .dropdown{ */
     /* margin-right: 35%; */
-    position: fixed;
+    /* position: fixed; */
+    /* left: 60%; */
+/* } */
+.functional-btn{
+    display: flex;
+    position: relative;
     left: 60%;
-}
-#scheduler{
-    width: 85%; height: 600px; margin-top: 10%; margin-bottom: 1%; left: 15%; position: absolute;
 }
 #dropdownMenuButton{
     background-color: #668DC0;
     color: black;
     width: 100px;
 }
-table{
-    background-color: white;
-}
-thead{
-    text-align: center;
-    background-color: white;
-}
-tbody{
-    text-align: center;
-    background-color: white;
-}
-#Done{
-    background-color: #EBF9F1;
-    color: #1F9254;
-    text-align: center;
-}
-#In-progress{
-    background-color: #FEF2E5;
-    color: #CD6200;
-}
-#To-do{
-    background-color: #EFE5FE;
-    color: #AB30E5;
+#share-btn{
+    margin-left: 1%;
+    background-color: #668DC0;
+    color: black;
+    font-size: 15px;
 }
 .status{
     width: 100%;
@@ -216,7 +200,7 @@ tbody{
 .popup-notify{
     position: absolute;
     width: 400px;
-    height: 200px;
+    height: auto;
     background-color: white;
     border: solid black 0.5px;
     top: 0%;
@@ -258,6 +242,7 @@ tbody{
 
 .popup-body{
     width: 80%;
+    height: auto;
     margin-left: 5%;
 }
 
@@ -277,4 +262,182 @@ tbody{
     width: 28px;
     height: 28px;
     margin-right: 1%;
+}
+
+.popup-share{
+    position: absolute;
+    width: 600px;
+    height: 180px;
+    background-color: white;
+    border: solid black 0.5px;
+    top: 40%;
+    transform: translate(-50%, -50%) scale(0.1);
+    left: 0%;
+    z-index: 20;
+    visibility: hidden;
+    transition: transform 0.3s, top 0.3s;
+}
+
+.open-share{
+    visibility: visible;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.popup-share form input[type=text]{
+    position: relative;
+    left: 5%;
+    width: 77%;
+    margin: 0;
+    font-size: medium;
+    padding: 4% 0 1% 2%;
+    background-color: #F5F5F5;
+    color: #5e6269;
+    border: none;
+    border-bottom: 1px solid #4f6480;
+    /* font-size: 1.5vw; */
+}
+.header input{
+    position: relative;
+    width: 40%;
+    margin: 1% 0% 1% 0%;
+    /* left: 15%; */
+    float: left;
+}
+
+.popup-share form label{
+    position: absolute;
+    left: 5%;
+    margin: 0;
+    padding: 0;
+    font-size: large;
+}
+
+#invite-btn{
+    background-color: transparent;
+    border: 0;
+    position: absolute;
+    left: 85%;
+    top: 45%;
+}
+#invite-btn img:hover{
+    transform: scale(1.1);
+    transition: 200ms;
+}
+
+.bucket-parent{
+    display: flex;
+    position: absolute;
+    width: 80%;
+    height: 80%;
+    /* background-color: #1F9254; */
+}
+
+.bucket-parent .bucket-child{
+    overflow-y: scroll;
+    overflow-x: hidden;
+    position: relative;
+    width: 10%;
+    height: 550px;
+    background-color: #EFEFEF;
+    margin-left: 3%;
+    margin-top: 1%;
+    border-radius: 5%;
+    flex: 1;
+    display: flex;
+    /* justify-content: center; */
+    /* align-items: flex-start; */
+    /* flex-direction: row; */
+}
+.vector-icon {
+    position: absolute;
+    margin: 0 !important;
+    width: 100%;
+    top: 61.5px;
+    /* right: 6.53%; */
+    /* left: 6.64%; */
+    /* max-width: 100%; */
+    overflow: hidden;
+    height: 3px;
+    z-index: 1;
+}
+.bucket-header {
+    position: relative;
+    margin: 0 !important;
+    top: 20.67px;
+    left: 24px;
+    width: 100%;
+    height: 19.07px;
+    z-index: 2;
+}
+.bucket-title {
+    position: absolute;
+    top: 0;
+    left: 16px;
+    font-weight: 100;
+    display: inline-block;
+    width: 80%;
+    height: 19.07px;
+}
+.group-item {
+    position: relative;
+    top: 5.02px;
+    left: 0;
+    border-radius: 50%;
+    width: 8px;
+    height: 8.03px;
+}
+#todo-item{
+    background-color: #5030e5;
+}
+#progress-item{
+    background-color: orange;
+}
+#done-item{
+    background-color: #76a5ea;
+}
+.vuesaxbulkadd-square-icon {
+    position: absolute;
+    margin: 0 !important;
+    top: 20px;
+    right: 13.93px;
+    width: 24px;
+    height: 24px;
+    z-index: 4;
+}
+.task-list{
+    position: absolute;
+    /* background-color: white; */
+    width: 90%;
+    height: auto;
+    top: 15%;
+    left: 5%;
+}
+.task-list .task{
+    background-color: white;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+.task-list .task .task-name{
+    margin: 0;
+    width: 80%;
+    margin-left: 10%;
+    border-bottom: solid black 0.5px;
+}
+.task-list .task .info{
+    display: flex;
+}
+.task-list .task .info .due-date{
+    margin: 0;
+    margin-left: 10%;
+}
+#assignee{
+    position: relative;
+    width: 20px;
+    height: 20px;
+    left: 60%;
+    font-size: small;
+    top: 50%;
+    margin-top: 2px;
 }

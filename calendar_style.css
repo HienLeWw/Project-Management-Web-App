@@ -193,7 +193,7 @@ tbody{
 .popup-notify{
     position: absolute;
     width: 400px;
-    height: 200px;
+    height: auto;
     background-color: white;
     border: solid black 0.5px;
     top: 0%;
@@ -235,6 +235,7 @@ tbody{
 
 .popup-body{
     width: 80%;
+    height: auto;
     margin-left: 5%;
 }
 
