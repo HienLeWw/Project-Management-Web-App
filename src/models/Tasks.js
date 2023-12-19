@@ -5,7 +5,7 @@ const Task_Schema = new mongoose.Schema({
         require: [true, "name your task"]
     },
 
-    user_id: {
+    user_ids: {
         type: [Number],
         require: [true, "need at least 1 worker assign to this task"]
     },
@@ -21,7 +21,7 @@ const Task_Schema = new mongoose.Schema({
     },
 
     status: {
-        type: Number,
+        type: Number, // 0: To do, 1: In progress, 2: Done.
         require: [true, "set a status for this task"]
     },
 
@@ -37,4 +37,4 @@ const Task_Schema = new mongoose.Schema({
 })
 
 const Task = mongoose.model('Task', Task_Schema);
-module.exports(Task);
+module.exports = Task;
