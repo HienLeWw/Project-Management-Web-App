@@ -31,7 +31,7 @@ const errorHandler = (req, err) => {
 const Delete_Project = (req, res) => {
     const id_admin = req.user.id;
 
-    const Project_name = req.body;
+    const Project_name = req.body.name;
 
     Project_to_delete = Project.deleteOne({ name: Project_name, admin: id_admin }, function (err) {
         if (err) throw err;

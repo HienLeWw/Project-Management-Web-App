@@ -3,10 +3,10 @@ const router = express.Router()
 
 const { getTaskPage, TaskCreate, ModTaskContent, getTask, deleteTask } = require('../controllers/TaskController')
 
-router.get("/Tasks", getTaskPage)
-router.post("/Tasks/Creation", TaskCreate)
-router.get("/Tasks/Task", getTask)
-router.post("/Tasks/Content", ModTaskContent)
-router.post("/Tasks/Delete", deleteTask)
+router.get("/Projects/Tasks", getTaskPage)
+router.post("/Projects/Tasks/Creation", TaskCreate)
+router.get("/Projects/Tasks/Task", getTask)
+router.post("/Projects/Tasks/Content", ModTaskContent)
+router.post("/Projects/Tasks/Delete", deleteTask)
 
 module.exports = router

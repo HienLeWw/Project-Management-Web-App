@@ -6,7 +6,7 @@ const Task_Schema = new mongoose.Schema({
     },
 
     user_ids: {
-        type: [Number],
+        type: [String],
         require: [true, "need at least 1 worker assign to this task"]
     },
 
@@ -16,7 +16,7 @@ const Task_Schema = new mongoose.Schema({
     },
 
     content: {
-        type: Text,
+        type: String,
         require: [true, "at least leave sth to describe the task"]
     },
 

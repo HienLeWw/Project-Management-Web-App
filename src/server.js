@@ -3,6 +3,7 @@ const express = require('express')
 const configViewEngine = require('./config/viewEngine')
 const webRoutes = require('./routes/web');
 const projectRoute = require('./routes/Create_project')
+const taskRoute = require('./routes/Task')
 const cookieParser = require('cookie-parser')
 const { requireAuth, checkUser } = require('./middleware/authMiddleware')
 
@@ -23,6 +24,7 @@ app.use(cookieParser())
 app.get('*', checkUser);
 app.use('/', webRoutes);
 app.use('/', projectRoute);
+app.use('/', taskRoute);
 app.listen(port, () => {
 
     console.log(`App listening on port ${port}`)
