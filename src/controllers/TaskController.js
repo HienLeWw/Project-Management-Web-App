@@ -24,9 +24,9 @@ const TaskCreate = (req, res) => {
     var user_ids = req.user.id;
 
     try {
-        const task = await Task.create({ "name": name, "content": content, 
-                    "master_project": master_project, "status": status, "user_ids": user_ids,
-                    "created_date": created_date, "end_date": end_date});
+        const task = await Task.create({ "name": name, "user_ids": user_ids, 
+                    "master_project": master_project, "status": status, "content": content,
+                    "created_date": created_date, "end_date": end_date });
         res.status(201).json(task);
     }
     catch(err){
@@ -37,7 +37,7 @@ const TaskCreate = (req, res) => {
 }
 
 const ModTaskContent = (req, res) => {
-
+    
 } 
 
 const getTask = (req, res) => {
