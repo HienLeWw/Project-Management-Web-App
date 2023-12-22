@@ -11,6 +11,26 @@ const errorHandler = (req, err) => {
     return errors
 }
 
+const Check_dup_task_create = async (name, master_project) => {
+    // kiểm tra trùng project name và trùng tên task khi tạo 
+    let task_name = name;
+    master_project = new mongoose.Types.ObjectId(master_project);
+
+    let check_task = await Task.find({ "name": task_name });
+    let check_Project = await Project.find({ "_id": master_project });
+    
+    if (check_Project.length > 0){
+        if (check_task.length <= 0){
+            return;
+        }
+    }
+    
+    let err = "Invalid Task name or this project was terminated";
+    throw err;
+    
+
+}
+
 const getTaskPage = (req, res) => {
     res.status(200)
 }
@@ -19,15 +39,17 @@ const TaskCreate = async (req, res) => {
     //tạo 1 task
 
     // những tham số cần thiết để khởi tạo 1 task mới
-    var name = req.body.name;
-    var content = req.body.content;
-    var master_project = req.body.master_project;
-    var created_date = new Date();
-    var status = 0; // mặc định để to do
-    var end_date = req.body.end_date;
-    var user_ids = req.body.user_ids;
+    let name = req.body.name;
+    let content = req.body.content;
+    let master_project = new mongoose.Types.ObjectId(req.body.master_project); // id project chứa task này
+    let created_date = new Date();
+    let status = 0; // mặc định để to do
+    let end_date = req.body.end_date; // giả định dữ liệu đã được parse sang 
+                                      // kiểu Date trước khi được gửi đi 
+    let user_ids = req.body.user_ids;
 
     try {
+        await Check_dup_task_create(name, master_project);
         const task = await Task.create({ "name": name, "user_ids": user_ids, 
                     "master_project": master_project, "status": status, "content": content,
                     "created_date": created_date, "end_date": end_date });
@@ -62,8 +84,8 @@ const ModTaskContent = (req, res) => {
         res.status(201).send('Modify OK!')
 
     } catch (err) {
-        res.status(401).json(err);
-        throw err;
+        errors = errorHandler(req, err)
+        res.status(400).json({errors})
     }
     
 } 
@@ -74,7 +96,8 @@ const getTask = async (req, res) => {
         res_task = await Task.find({ "_id": task_id})
         res.status(200).json({res_task});
     } catch (err) {
-        res.status(400).json(err);
+        errors = errorHandler(req, err)
+        res.status(400).json({errors})
     }
 } 
 
@@ -84,7 +107,8 @@ const deleteTask = async (req, res) => {
         task_to_del = await Task.deleteOne({ "_id": task_id})
         res.status(200).send("task deleted");
     } catch (err) {
-        res.status(400).json(err);
+        errors = errorHandler(req, err)
+        res.status(400).json({errors})
     }
 }
 
