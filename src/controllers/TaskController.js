@@ -4,6 +4,7 @@ const User = require('../models/Users');
 const Project = require('../models/Projects');
 const Task = require('../models/Tasks')
 
+
 const errorHandler = (req, err) => {
     //handle sth
     errors = [err]
@@ -17,6 +18,7 @@ const getTaskPage = (req, res) => {
 const TaskCreate = async (req, res) => {
     //tạo 1 task
 
+    // những tham số cần thiết để khởi tạo 1 task mới
     var name = req.body.name;
     var content = req.body.content;
     var master_project = req.body.master_project;
@@ -39,14 +41,19 @@ const TaskCreate = async (req, res) => {
 }
 
 const ModTaskContent = (req, res) => {
+
+    // Các thuộc tính cần thiết
     const task_to_mod = req.body.name;
     const master_project = req.body.master_project;
+
+    // Các thuộc tính có thể được thay đổi
     const new_content = req.body.content;
     const new_end_date = req.body.end_date;
     const update_user_ids = req.body.user_ids;
+    
     try {
         update_content = Task.updateOne(
-            {"name": task_to_mod}, 
+            {"name": task_to_mod, "master_project": master_project}, 
             {
                 $set: { 'content': new_content, 'end_date': new_end_date, 'user_ids': update_user_ids}
             }
@@ -61,13 +68,24 @@ const ModTaskContent = (req, res) => {
     
 } 
 
-const getTask = (req, res) => {
-    
-    res.status(200)
+const getTask = async (req, res) => {
+    try {
+        task_id = new mongoose.Types.ObjectId(req.body.task); //lấy ID task từ req
+        res_task = await Task.find({ "_id": task_id})
+        res.status(200).json({res_task});
+    } catch (err) {
+        res.status(400).json(err);
+    }
 } 
 
-const deleteTask = (req, res) => {
-    res.status(200)
+const deleteTask = async (req, res) => {
+    try {
+        task_id = new mongoose.Types.ObjectId(req.body.task); //lấy ID task từ req
+        task_to_del = await Task.deleteOne({ "_id": task_id})
+        res.status(200).send("task deleted");
+    } catch (err) {
+        res.status(400).json(err);
+    }
 }
 
 module.exports = { getTaskPage, TaskCreate, ModTaskContent, getTask, deleteTask };
