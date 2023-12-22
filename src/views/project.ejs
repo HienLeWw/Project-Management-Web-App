@@ -186,9 +186,11 @@
   $(document).ready(function () {
     $.ajax({
       type: "GET",
-      url: "http://127.0.0.1:8081/getProjects",
-      success: function (response) {
-        console.log(response.body)
+      url: "/getProjects",
+      contentType: "application/json",
+      success: function (res) {
+        console.log(res.project_list)
+
       }
     });
   });
