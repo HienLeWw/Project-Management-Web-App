@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 const User = require('../models/Users');
 const Project = require('../models/Projects');
 const Task = require('../models/Tasks')
+const url = require('url')
 
 
 const errorHandler = (req, err) => {
@@ -28,7 +29,17 @@ const Check_dup_task_create = async (name, master_project) => {
     let err = "Invalid Task name or this project was terminated";
     throw err;
     
+}
 
+const Check_Task_exist = async (task_id = mongoose.Types.ObjectId) => {
+    let task_req = await Task.find({ "_id": task_id });
+
+    if (task_req.length > 0){
+        return ;
+    }
+
+    let err = "Task not exist";
+    throw err;
 }
 
 const getTaskPage = (req, res) => {
@@ -68,11 +79,11 @@ const TaskCreate = async (req, res) => {
 
 }
 
-const ModTaskContent = (req, res) => {
+const ModTaskContent = async (req, res) => {
 
     // Các thuộc tính cần thiết
-    const task_to_mod = req.body.name;
-    const master_project = req.body.master_project;
+    const task_to_mod = req.body.task; // lấy task id
+    
 
     // Các thuộc tính có thể được thay đổi
     const new_content = req.body.content;
@@ -80,8 +91,9 @@ const ModTaskContent = (req, res) => {
     const update_user_ids = req.body.user_ids;
     
     try {
+        await Check_Task_exist(task_to_mod);
         update_content = Task.updateOne(
-            {"name": task_to_mod, "master_project": master_project}, 
+            {"_id": task_to_mod}, 
             {
                 $set: { 'content': new_content, 'end_date': new_end_date, 'user_ids': update_user_ids}
             }
@@ -98,7 +110,12 @@ const ModTaskContent = (req, res) => {
 
 const getTask = async (req, res) => {
     try {
-        task_id = new mongoose.Types.ObjectId(req.body.task); //lấy ID task từ req
+        let task_query = await url.parse(req.url, true)
+        task_id = new mongoose.Types.ObjectId(task_query.query.task); //lấy ID task từ req
+        
+        //console.log(task_id)
+        
+        await Check_Task_exist(task_id);
         res_task = await Task.find({ "_id": task_id})
         res.status(200).json({res_task});
     } catch (err) {
@@ -110,6 +127,7 @@ const getTask = async (req, res) => {
 const deleteTask = async (req, res) => {
     try {
         task_id = new mongoose.Types.ObjectId(req.body.task); //lấy ID task từ req
+        await Check_Task_exist(task_id);
         task_to_del = await Task.deleteOne({ "_id": task_id})
         res.status(200).send("task deleted");
     } catch (err) {
