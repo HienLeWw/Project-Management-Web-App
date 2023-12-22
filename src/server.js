@@ -20,7 +20,6 @@ app.use(cookieParser())
 
 
 // Route
-app.get('*', checkUser);
 app.use('/', webRoutes);
 app.use('/', projectRoute);
 app.listen(port, () => {

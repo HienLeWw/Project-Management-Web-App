@@ -60,4 +60,15 @@ const Create_Project = async (req, res) => {
     }
 }
 
-module.exports = { Create_Project, Delete_Project };
+const getProjects = async (req, res) => {
+    const Project_list = [];
+    //const proID = list(res.locals.user.project_ID)
+    for (let i = 0; i < res.locals.user.project_ID.length; i++) {
+        console.log(res.locals.user.project_ID[i])
+        const project = await Project.findById(res.locals.user.project_ID[i])
+        Project_list.push(project);
+    }
+    res.status(200).json({ "project_list": Project_list })
+}
+
+module.exports = { Create_Project, Delete_Project, getProjects };

@@ -3,6 +3,7 @@ const { db } = require('../config/database')
 const User = require('../models/Users')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
+const Project = require('../models/Projects')
 
 
 const handleErrors = (err) => {
@@ -79,8 +80,17 @@ const logout = (req, res) => {
     res.redirect('/')
 }
 
-const getWorkspace = (req, res) => {
-    res.render('home.ejs')
+const getWorkspace = async (req, res) => {
+    const Project_list = [];
+    //const proID = list(res.locals.user.project_ID)
+    for (let i = 0; i < res.locals.user.project_ID.length; i++) {
+        console.log(res.locals.user.project_ID[i])
+        const project = await Project.findById(res.locals.user.project_ID[i])
+        Project_list.push(project);
+    }
+    console.log(Project_list);
+    res.render('project.ejs', { 'project_list': Project_list })
+    //res.json({ 'project': Project_list })
 }
 
 module.exports = {
