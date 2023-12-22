@@ -32,7 +32,13 @@ const Check_dup_task_create = async (name, master_project) => {
 }
 
 const getTaskPage = (req, res) => {
-    res.status(200)
+    try {
+        res.render("task.ejs");
+        res.status(200);
+    } catch(err) {
+        let error = errorHandler(req, err);
+        res.status(400).json({error});
+    }
 }
 
 const TaskCreate = async (req, res) => {
