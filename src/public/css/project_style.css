@@ -104,7 +104,7 @@ li a:hover:not(.active) {
     margin-left: 2%;
 }
 .project-title{
-    margin-top: 8%;
+    margin-top: 3%;
     margin-left: 3%;
 }
 .functional-btn{
@@ -138,28 +138,38 @@ li a:hover:not(.active) {
     display: flex;
     margin-top: 2%;
     padding: 0;
-    left: 5%;
+    left: 15%;
     position: absolute;
-    width: 100%;
+    width: 85%;
 }
 #color-calendar{
     width: 50%;
 }
+/* .project-block{
+    display: flex;
+} */
 table{
     background-color: white;
-    margin: 2%;
+    margin-right: 2%;
+    margin-left: 5%;
     width: 50%;
 }
 thead{
     text-align: center;
     background-color: white;
 }
-.project-block{
-    margin-left: 4%;
+tr{
+    justify-content: center;
+    justify-items: center;
 }
 th{
     font-size: large;
     justify-content: center;
+}
+th p{
+    padding: 0;
+    /* margin-top: 10%; */
+    /* top: 50% */
 }
 tbody{
     text-align: center;
@@ -193,13 +203,13 @@ tbody{
 .popup-notify{
     position: absolute;
     width: 400px;
-    height: 200px;
+    height: auto;
     background-color: white;
     border: solid black 0.5px;
     top: 0%;
     transform: translate(-50%, -50%) scale(0.1);
     left: 50%;
-    z-index: 10;
+    z-index: 1000;
     visibility: hidden;
     transition: transform 0.3s, top 0.3s;
 }
@@ -235,6 +245,7 @@ tbody{
 
 .popup-body{
     width: 80%;
+    height: auto;
     margin-left: 5%;
 }
 
@@ -289,48 +300,14 @@ tbody{
     border-bottom: 1px solid #4f6480;
     /* font-size: 1.5vw; */
 }
-
-/* .header input{
-    position: relative;
-    left: 15%;
-    width: 40%;
-    margin: 1% 0% 1% 0%;
-    font-size: large;
-    padding: 0;
-    background-color: #F5F5F5;
-    color: #5e6269;
-    border: none;
-    height: 20%;
-    
-}
-
-.header .search-img{
-    position: relative;
-    left: 14%;
-    margin: 1% 0% 1% 0%;
-} */
-
 .search{
-    width: 100%;
-    display: flex;
-    left: 15%;
-    position: absolute;
-    justify-content: left;
-    align-items: center;
+    width: 70%;
+    position: relative;
+    left: 20%;
 }
-
-.search-btn{
-    background-color: #F5F5F5;
-    border: solid 1px black;
-    float: left;
-    height: 50%;
+.search .form-control{
+    margin: 0;
 }
-
-.search-btn:hover{
-    background-color: #e6e1e1;
-    transition: 200ms;
-}
-
 .header input{
     position: relative;
     width: 40%;

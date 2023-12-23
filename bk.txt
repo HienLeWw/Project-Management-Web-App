@@ -19,7 +19,7 @@
 <body>
   <!-- Navigation Bar -->
   <div class="w3-sidebar">
-    <ul id="nav-project">
+    <ul>
       <a class="active" href="#home">
         <div class="logo_contain">
           <img src="img/combine_logo.png" alt="logo">
@@ -28,19 +28,35 @@
       <% for(let i=0; i < project_list.length; ++i){ %>
         <li>
           <div class="nav-items">
-            <a href="/"><img src="img/icons8-project-50.png" alt="" class="nav-img" width="32px" height="32px"
-                style="margin-right: 10px; margin-left: 20px;">
-              <%= project_list[i]['name'] %>
-            </a>
+            <a href="home.html"><img src="img/icons8-project-50.png" alt="" class="nav-img" width="32px" height="32px"
+                style="margin-right: 10px; margin-left: 20px;"><%= project_list[i]['name'] %></a>
           </div>
         </li>
-        <% } %>
-          <li>
-            <div class="nav-items">
-              <a href="#setting"><img src="img/icons8-settings-64.png" alt="" class="nav-img" width="32px" height="32px"
-                  style="margin-right: 10px; margin-left: 20px;">Setting</a>
-            </div>
-          </li>
+      <% } %>
+      <!-- <li>
+        <div class="nav-items">
+          <a href="home.html"><img src="img/icons8-project-50.png" alt="" class="nav-img" width="32px" height="32px"
+              style="margin-right: 10px; margin-left: 20px;">Project 1</a>
+        </div>
+      </li> -->
+      <!-- <li>
+        <div class="nav-items">
+          <a href="home.html"><img src="img/icons8-project-50.png" alt="" class="nav-img" width="32px" height="32px"
+              style="margin-right: 10px; margin-left: 20px;">Project 2</a>
+        </div>
+      </li>
+      <li>
+        <div class="nav-items">
+          <a href="home.html"><img src="img/icons8-project-50.png" alt="" class="nav-img" width="32px" height="32px"
+              style="margin-right: 10px; margin-left: 20px;">Project 3</a>
+        </div>
+      </li> -->
+      <li>
+        <div class="nav-items">
+          <a href="#setting"><img src="img/icons8-settings-64.png" alt="" class="nav-img" width="32px" height="32px"
+              style="margin-right: 10px; margin-left: 20px;">Setting</a>
+        </div>
+      </li>
     </ul>
   </div>
 
@@ -81,6 +97,8 @@
         <button id="invite-btn"><img src="img/Add Administrator.png" alt=""></button>
         <button type="submit" class="create-proj-btn" id="createProjectBtn">Create</button>
       </form>
+      <!-- <div> -->
+      <!-- </div> -->
     </div>
 
     <!-- Project Name -->
@@ -107,10 +125,10 @@
         <div class="profile-img">U</div>
         <div class="profile-content">
           <p style="font-size: large; margin: 0;">
-            <%= user.username %>
+            <%user.username %>
           </p>
           <p style="font-size: medium; margin: 0;">
-            <%= user.email %>
+            <%user.email %>
           </p>
         </div>
       </div>
@@ -137,24 +155,24 @@
       <table class="table" id="projectTable">
         <thead style="justify-items: center;">
           <tr>
-            <th scope="col" id="test-id">Project List</th>
+            <th scope="col">Project List</th>
             <th scope="col">Action</th>
           </tr>
         </thead>
         <tbody>
           <% for(let i=0; i < project_list.length; i++){ %>
             <tr>
-              <th scope="row">
-                <%= project_list[i]['name'] %>
-              </th>
-              <td>
-                <div class="action">
-                  <button class="edit-btn"><img src="img/edit.png" alt="">
-                  </button>
-                  <button class="delete-btn"><img src="img/delete.png" alt="">
-                  </button>
-                </div>
-              </td>
+                <th scope="row">
+                  <%= project_list[i]['name'] %>
+                </th>
+                <td>
+                  <div class="action">
+                    <button class="edit-btn"><img src="img/edit.png" alt="">
+                    </button>
+                    <button class="delete-btn"><img src="img/delete.png" alt="">
+                    </button>
+                  </div>
+                </td>
 
             </tr>
             <% } %>
@@ -171,42 +189,39 @@
   });
   let popupNotify = document.getElementById("notify");
   let popupAddProject = document.getElementById("add-prj");
-  let navigationLinks = document.getElementsByTagName("a");
-  let nameProjectToNavigate;
-  let idProjectToNavigate = "";  
+  //let currentProjectList = {};
 
   $(document).ready(function () {
     $.ajax({
       type: "GET",
-      url: "/Projects",
+      url: "/getProjects",
       contentType: "application/json",
       success: function (res) {
-        //console.log(res.project_list);
+        console.log(res.project_list)
         res.project_list.forEach(element => {
-          //console.log(element);
-          window.sessionStorage.setItem("project" + element['_id'], JSON.stringify(element));
-        });
+          console.log(element)
+          window.sessionStorage.setItem("project" + element['_id'], JSON.stringify(element))
+        }); 
       }
     });
   });
 
   $(document).ready(function () {
-    $("form").submit(function (event) {
+    $("form").submit(function(event){
       var projectInfo = {
         Project_name: $("#proj-name").val()
       };
       // console.log(projectInfo);
       $.ajax({
         type: "POST",
-        url: "/Projects/project",
+        url: "/workspace/project",
         data: JSON.stringify(projectInfo),
         //dataType: "json",
         contentType: "application/json",
         //encode: true,
-        success: function (res) {
+        success: function(res){
           console.log("successfully send request!");
           console.log(res);
-          updateProjectList();
         }
       }).done(function (data) {
         // console.log(data);
@@ -215,87 +230,41 @@
     });
   });
 
-  function updateProjectList() {
-    // Send request to get data from server
-    $.ajax({
-      url: '/Projects',
-      method: 'GET',
-      contentType: "application/json",
-      success: function (data) {
-        // Remove current data
-        console.log("new data!");
-        console.log(data['project_list'][0].name);
-        console.log(data['project_list'])
-        $('#projectTable tbody').empty();
-        $('#nav-project').empty();
 
-        // Update new data
-        $('#nav-project').append('<a class="active" href="#home"><div class="logo_contain"><img src="img/combine_logo.png" alt="logo"></div></a>');
-        for (var i = 0; i < data['project_list'].length; i++) {
-          var row = '<tr>' +
-            '<th scope="row">' + data['project_list'][i].name + '</th>' +
-            '<td>' +
-            '<div class="action">' +
-            '<button class="edit-btn"><img src="img/edit.png" alt=""></button>' +
-            '<button class="delete-btn"><img src="img/delete.png" alt=""></button>' +
-            '</div>' +
-            '</td>' +
-            '</tr>';
-          var item = '<li>'+
-            '<div class="nav-items">' +
-            '<a href="home.html"><img src="img/icons8-project-50.png" alt="" class="nav-img" width="32px" height="32px"style="margin-right: 10px; margin-left: 20px;">'+
-            data['project_list'][i].name +
-            '</a>'+
-            '</div>'+
-            '</li>'
-          $('#projectTable tbody').append(row);
-          $('#nav-project').append(item);
-        }
-        $('#nav-project').append('<li><div class="nav-items"><a href="#setting"><img src="img/icons8-settings-64.png" alt="" class="nav-img" width="32px" height="32px"style="margin-right: 10px; margin-left: 20px;">Setting</a></div></li>')
-      },
-      error: function (xhr, status, error) {
-        console.log('Error:', error);
-      }
-    });
-  }
-
-  for (let i=0;i<navigationLinks.length;++i){
-    console.log("I'm here!");
-    navigationLinks[i].addEventListener("click",function(event){
-      event.preventDefault();
-      nameProjectToNavigate = this.textContent.trim();
-      console.log(nameProjectToNavigate);
-      for(let index=0;index<window.sessionStorage.length;index++){
-        let key = window.sessionStorage.key(index);
-        console.log(key);
-        console.log(typeof(key));
-        let item = JSON.parse(window.sessionStorage.getItem(key));
-        console.log(item.name);
-        if(item && item.name == nameProjectToNavigate){
-          console.log("Found!");
-          idProjectToNavigate = key;
-          break;
-        }
-      }
+  $(document).ready(function() {
+  // Gán sự kiện click cho nút "Update Table"
+    $('#createProjectBtn').click(function() {
+      // Gửi yêu cầu AJAX để lấy dữ liệu mới từ máy chủ
       $.ajax({
-            url: "/Projects/project",
-            type: "get",
-            //contentType: "application/json",
-            data: {  
-              id: idProjectToNavigate
-            },
-            success: function(response) {
-              //Do Something
-              console.log(response);
-              console.log("Successfully send request!");
-              // window.location.href = "/";
-            }
-            // error: function(xhr) {
-            // }
-          });
-    })
-  }
+        url: '/getProjects',
+        method: 'GET',
+        contentType: "application/json",
+        success: function(data) {
+          // Xóa dữ liệu hiện tại trong bảng
+          console.log("new data!");
+          console.log(data['project_list'][0].name);
+          $('#projectTable tbody').empty();
 
+          // Lặp qua dữ liệu mới và cập nhật bảng
+          for (var i = 0; i < data['project_list'].length; i++) {
+            var row = '<tr>' +
+                        '<th scope="row">' + data['project_list'][i].name + '</th>' +
+                        '<td>' +
+                          '<div class="action">' +
+                            '<button class="edit-btn"><img src="img/edit.png" alt=""></button>' +
+                            '<button class="delete-btn"><img src="img/delete.png" alt=""></button>' +
+                          '</div>' +
+                        '</td>' +
+                      '</tr>';
+            $('#projectTable tbody').append(row);
+          }
+        },
+        error: function(xhr, status, error) {
+          console.log('Error:', error);
+        }
+      });
+    });
+  });
 
   function openNotify() {
     popupNotify.classList.add("open-notify");
