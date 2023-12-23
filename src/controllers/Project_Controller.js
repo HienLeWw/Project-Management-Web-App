@@ -77,4 +77,8 @@ const projectPage = async (req, res) => {
     res.render('home.ejs', { "project": project })
 }
 
-module.exports = { Create_Project, Delete_Project, getProjects, projectPage };
+const memberPage = async (req, res) => {
+
+}
+
+module.exports = { Create_Project, Delete_Project, getProjects, projectPage, memberPage };

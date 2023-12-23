@@ -20,7 +20,7 @@
   <!-- Navigation Bar -->
   <div class="w3-sidebar">
     <ul id="nav-project">
-      <a class="active" href="#home">
+      <a class="active" href="/">
         <div class="logo_contain">
           <img src="img/combine_logo.png" alt="logo">
         </div>
@@ -193,7 +193,7 @@
   $(document).ready(function () {
     $("form").submit(function (event) {
       var projectInfo = {
-        Project_name: $("#proj-name").val()
+        name: $("#proj-name").val()
       };
       // console.log(projectInfo);
       $.ajax({
