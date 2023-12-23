@@ -19,7 +19,6 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser())
 
-
 // Route
 app.get('*', checkUser);
 app.use('/', webRoutes);

@@ -6,6 +6,7 @@ const Task = require('../models/Tasks')
 const url = require('url')
 
 
+
 const errorHandler = (req, err) => {
     //handle sth
     errors = [err]
@@ -44,6 +45,7 @@ const Check_Task_exist = async (task_id = mongoose.Types.ObjectId) => {
 
 const getTaskPage = (req, res) => {
     try {
+        
         res.render("task.ejs");
         res.status(200);
     } catch(err) {
