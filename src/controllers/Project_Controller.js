@@ -9,7 +9,7 @@ const errorHandler = (req, err) => {
 
     // Project Name Duplicated
     try {
-        if (err.code === 11000) {
+        if (err.code === 11000) {   
             if (err.message.includes('name')) {
 
                 for (let i = 0; i < 999; i++) {
@@ -31,9 +31,9 @@ const errorHandler = (req, err) => {
 const Delete_Project = (req, res) => {
     const id_admin = req.user.id;
 
-    const Project_name = req.body;
+    const Project_name = req.body.name;
 
-    Project_to_detele = Project.deleteOne({ name: Project_name, admin: id_admin }, function (err) {
+    Project_to_delete = Project.deleteOne({ name: Project_name, admin: id_admin }, function (err) {
         if (err) throw err;
         console.log("Project deleted");
     });
@@ -46,7 +46,7 @@ const Create_Project = async (req, res) => {
     //id_admin = User.findOne(username)._id;
     const admin = req.user.id;
     console.log(admin);
-    const { Project_name } = req.body;
+    const { Project_name } = req.body.name;
     const task = [];
 
     try {
