@@ -9,11 +9,11 @@ const authorization = async (req, res, next) => {
             next();
         }
         else {
-            res.redirect('/Projects/project')
+            res.redirect('/')
         }
     }
     catch (error) {
-        res.redirect('/Projects/project')
+        res.redirect('/')
     }
 }
 

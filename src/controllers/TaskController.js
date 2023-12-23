@@ -64,7 +64,7 @@ const TaskCreate = async (req, res) => {
     let master_project = new mongoose.Types.ObjectId(req.body.master_project); // id project chứa task này
     let created_date = new Date();
     let status = 0; // mặc định để to do
-    let end_date = req.body.end_date; // giả định dữ liệu đã được parse sang 
+    let end_date = Date(req.body.end_date); // giả định dữ liệu đã được parse sang 
     // kiểu Date trước khi được gửi đi 
     let user_ids = req.body.user_ids;
 

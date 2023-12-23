@@ -9,7 +9,7 @@ const errorHandler = (req, err) => {
 
     // Project Name Duplicated
     try {
-        if (err.code === 11000) {   
+        if (err.code === 11000) {
             if (err.message.includes('name')) {
 
                 for (let i = 0; i < 999; i++) {
@@ -42,8 +42,6 @@ const Delete_Project = (req, res) => {
 
 
 const Create_Project = async (req, res) => {
-    //username = req.cookies.username;
-    //id_admin = User.findOne(username)._id;
     const admin = req.user.id;
     console.log(admin);
     const { Project_name } = req.body.name;
@@ -74,7 +72,7 @@ const getProjects = async (req, res) => {
 }
 
 const projectPage = (req, res) => {
-    res.render('home.ejs',)
+    res.render('home.ejs')
 }
 
 module.exports = { Create_Project, Delete_Project, getProjects, projectPage };
