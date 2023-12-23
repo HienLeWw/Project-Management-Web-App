@@ -9,3 +9,5 @@ router.get('/Projects/project', requireAuth, checkUser, authorization, projectPa
 
 //api
 router.get('/Projects', requireAuth, checkUser, getProjects);
+
+module.exports = router
