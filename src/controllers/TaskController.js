@@ -21,6 +21,8 @@ const Check_dup_task_create = async (name, master_project) => {
     let check_task = await Task.find({ "name": task_name });
     let check_Project = await Project.find({ "_id": master_project });
     
+    console.log(check_Project)
+
     if (check_Project.length > 0){
         if (check_task.length <= 0){
             return;
