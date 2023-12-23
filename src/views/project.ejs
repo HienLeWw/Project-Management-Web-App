@@ -173,7 +173,7 @@
   let popupAddProject = document.getElementById("add-prj");
   let navigationLinks = document.getElementsByTagName("a");
   let nameProjectToNavigate;
-  let idProjectToNavigate = "";  
+  let idProjectToNavigate = "";
 
   $(document).ready(function () {
     $.ajax({
@@ -241,12 +241,12 @@
             '</div>' +
             '</td>' +
             '</tr>';
-          var item = '<li>'+
+          var item = '<li>' +
             '<div class="nav-items">' +
-            '<a href="home.html"><img src="img/icons8-project-50.png" alt="" class="nav-img" width="32px" height="32px"style="margin-right: 10px; margin-left: 20px;">'+
+            '<a href="home.html"><img src="img/icons8-project-50.png" alt="" class="nav-img" width="32px" height="32px"style="margin-right: 10px; margin-left: 20px;">' +
             data['project_list'][i].name +
-            '</a>'+
-            '</div>'+
+            '</a>' +
+            '</div>' +
             '</li>'
           $('#projectTable tbody').append(row);
           $('#nav-project').append(item);
@@ -259,40 +259,41 @@
     });
   }
 
-  for (let i=0;i<navigationLinks.length;++i){
+  for (let i = 0; i < navigationLinks.length; ++i) {
     console.log("I'm here!");
-    navigationLinks[i].addEventListener("click",function(event){
+    navigationLinks[i].addEventListener("click", function (event) {
       event.preventDefault();
       nameProjectToNavigate = this.textContent.trim();
       console.log(nameProjectToNavigate);
-      for(let index=0;index<window.sessionStorage.length;index++){
+      for (let index = 0; index < window.sessionStorage.length; index++) {
         let key = window.sessionStorage.key(index);
         console.log(key);
-        console.log(typeof(key));
+        console.log(typeof (key));
         let item = JSON.parse(window.sessionStorage.getItem(key));
         console.log(item.name);
-        if(item && item.name == nameProjectToNavigate){
+        if (item && item.name == nameProjectToNavigate) {
           console.log("Found!");
-          idProjectToNavigate = key;
+          console.log(item._id)
+          idProjectToNavigate = item._id;
           break;
         }
       }
       $.ajax({
-            url: "/Projects/project",
-            type: "get",
-            //contentType: "application/json",
-            data: {  
-              id: idProjectToNavigate
-            },
-            success: function(response) {
-              //Do Something
-              console.log(response);
-              console.log("Successfully send request!");
-              // window.location.href = "/";
-            }
-            // error: function(xhr) {
-            // }
-          });
+        url: "/Projects/project",
+        type: "get",
+        //contentType: "application/json",
+        data: {
+          id: idProjectToNavigate
+        },
+        success: function (response) {
+          //Do Something
+          console.log(response);
+          console.log("Successfully send request!");
+          // window.location.href = "/";
+        }
+        // error: function(xhr) {
+        // }
+      });
     })
   }
 
