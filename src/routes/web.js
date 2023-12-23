@@ -2,6 +2,8 @@ const express = require('express')
 const router = express.Router()
 const { getHomepage, loginPage, loginRequest, signUpPage, signUpRequest, logout, getWorkspace, test } = require('../controllers/homeController')
 const { requireAuth, checkUser } = require('../middleware/authMiddleware')
+
+// route before login
 router.get('/', getHomepage)
 router.get('/login', loginPage)
 router.post('/login', loginRequest)

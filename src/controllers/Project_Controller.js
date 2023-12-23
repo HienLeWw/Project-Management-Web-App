@@ -50,7 +50,11 @@ const Create_Project = async (req, res) => {
     const task = [];
 
     try {
+        //create project and add project to owner
         const project = await Project.create({ "name": Project_name, admin, task });
+        const user = await User.findById(req.user.id);
+        user['project_ID'].push(project['_id']);
+        user.save()
         res.status(201).json(project);
     }
     catch (err) {
@@ -62,7 +66,6 @@ const Create_Project = async (req, res) => {
 
 const getProjects = async (req, res) => {
     const Project_list = [];
-    //const proID = list(res.locals.user.project_ID)
     for (let i = 0; i < res.locals.user.project_ID.length; i++) {
         console.log(res.locals.user.project_ID[i])
         const project = await Project.findById(res.locals.user.project_ID[i])
