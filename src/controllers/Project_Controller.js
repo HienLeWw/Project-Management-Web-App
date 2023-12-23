@@ -71,8 +71,10 @@ const getProjects = async (req, res) => {
     res.status(200).json({ "project_list": Project_list })
 }
 
-const projectPage = (req, res) => {
-    res.render('home.ejs')
+const projectPage = async (req, res) => {
+    console.log("datoihamnay")
+    const project = await Project.findById(req.query.id)
+    res.render('home.ejs', { "project": project })
 }
 
 module.exports = { Create_Project, Delete_Project, getProjects, projectPage };

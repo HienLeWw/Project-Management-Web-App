@@ -35,38 +35,38 @@
   <div class="w3-sidebar">
     <a class="active" href="/src/views/project.ejs">
       <div class="logo_contain">
-        <img src="img/combine_logo.png" alt="logo">
+        <img src="/img/combine_logo.png" alt="logo">
       </div>
     </a>
     <ul>
       <li>
         <div class="nav-items">
-          <a href="/src/views/home.ejs"><img src="img/icons8-dashboard-layout-48.png" alt="" class="nav-img"
+          <a href="/src/views/home.ejs"><img src="/img/icons8-dashboard-layout-48.png" alt="" class="nav-img"
               width="32px" height="32px">Home</a>
         </div>
       </li>
       <li>
         <div class="nav-items">
-          <a href="/src/views/member.ejs"><img src="img/icons8-member-48.png" alt="" class="nav-img" width="32px"
+          <a href="/src/views/member.ejs"><img src="/img/icons8-member-48.png" alt="" class="nav-img" width="32px"
               height="32px">Member</a>
         </div>
       </li>
       <li>
         <div class="nav-items">
 
-          <a href="/src/views/task.ejs"><img src="img/icons8-task-50.png" alt="" class="nav-img" width="32px"
+          <a href="/src/views/task.ejs"><img src="/img/icons8-task-50.png" alt="" class="nav-img" width="32px"
               height="32px">Task</a>
         </div>
       </li>
       <li>
         <div class="nav-items">
-          <a href="/src/views/calendar.ejs"><img src="img/icons8-calendar-64.png" alt="" class="nav-img" width="32px"
+          <a href="/src/views/calendar.ejs"><img src="/img/icons8-calendar-64.png" alt="" class="nav-img" width="32px"
               height="32px">Calendar</a>
         </div>
       </li>
       <li>
         <div class="nav-items">
-          <a href="#setting"><img src="img/icons8-settings-64.png" alt="" class="nav-img" width="32px"
+          <a href="#setting"><img src="/img/icons8-settings-64.png" alt="" class="nav-img" width="32px"
               height="32px">Setting</a>
         </div>
       </li>
@@ -78,7 +78,7 @@
     <div class="popup-notify" id="notify">
       <div class="popup-head">
         <h3 class="popup-title">Notification</h3>
-        <img src="img/Notification-button.png" alt="">
+        <img src="/img/Notification-button.png" alt="">
         <button onclick="closeNotify()">X</button>
       </div>
       <div class="popup-body">
@@ -99,7 +99,7 @@
       <form class="invitation-info" action="">
         <label for="invitation">Invite Some Friends</label>
         <input type="text" name="invitation" placeholder="link">
-        <button id="invite-btn"><img src="img/icons8-copy-24.png" alt=""></button>
+        <button id="invite-btn"><img src="/img/icons8-copy-24.png" alt=""></button>
       </form>
     </div>
 
@@ -124,8 +124,12 @@
       <div class="profile">
         <div class="profile-img">U</div>
         <div class="profile-content">
-          <p class="profile-user">Username</p>
-          <p class="profile-email">Email</p>
+          <p class="profile-user">
+            <%= user.username %>
+          </p>
+          <p class="profile-email">
+            <%= user.email %>
+          </p>
         </div>
       </div>
     </div>
@@ -133,7 +137,9 @@
 
     <!-- Main -->
     <div class="project-title">
-      <h1>Project Name</h1>
+      <h1>
+        <%= project.name %>
+      </h1>
     </div>
     <!-- buttons -->
     <!-- Filter Button -->
@@ -150,7 +156,7 @@
       </div>
 
       <button type="button" class="btn btn-secondary btn-sm" id="share-btn" onclick="openPopupShare()"><img
-          src="img/icons8-member-30.png" alt="" width="24px" height="24px"> Share</button>
+          src="/img/icons8-member-30.png" alt="" width="24px" height="24px"> Share</button>
     </div>
     <!-- buckets -->
     <div class="bucket-parent">
@@ -219,7 +225,7 @@
         <!-- <img
             class="vuesaxbulkadd-square-icon"
             alt=""
-            src="/img/vuesaxbulkaddsquare.svg"
+            src="//img/vuesaxbulkaddsquare.svg"
           /> -->
       </div>
     </div>
