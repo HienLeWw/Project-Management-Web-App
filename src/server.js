@@ -2,7 +2,7 @@ require('dotenv').config()
 const express = require('express')
 const configViewEngine = require('./config/viewEngine')
 const webRoutes = require('./routes/web');
-const projectRoute = require('./routes/Create_project')
+const projectRoute = require('./routes/project')
 const taskRoute = require('./routes/Task')
 const cookieParser = require('cookie-parser')
 const { requireAuth, checkUser } = require('./middleware/authMiddleware')
