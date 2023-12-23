@@ -2,6 +2,7 @@ require('dotenv').config();
 const jwt = require('jsonwebtoken');
 const User = require('../models/Users');
 
+//check login user
 const requireAuth = (req, res, next) => {
     const token = req.cookies.jwt;
 
@@ -37,7 +38,6 @@ const checkUser = (req, res, next) => {
                 next();
             }
             else {
-                console.log(decodedToken);
                 let user = await User.findById(decodedToken.id);
                 res.locals.user = user;
                 req.user = user;
