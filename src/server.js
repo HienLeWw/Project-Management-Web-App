@@ -22,9 +22,11 @@ app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser())
 
 // Route
+app.use('*', checkUser);
 app.use('/', webRoutes);
 app.use('/', projectRoute);
 app.use('/', taskRoute);
+
 app.listen(port, () => {
 
     console.log(`App listening on port ${port}`)
