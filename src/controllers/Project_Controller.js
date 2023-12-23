@@ -44,7 +44,7 @@ const Delete_Project = (req, res) => {
 const Create_Project = async (req, res) => {
     const admin = req.user.id;
     console.log(admin);
-    const { Project_name } = req.body.name;
+    const Project_name = req.body.name;
     const task = [];
 
     try {

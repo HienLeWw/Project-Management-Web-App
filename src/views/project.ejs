@@ -207,6 +207,7 @@
           console.log("successfully send request!");
           console.log(res);
           updateProjectList();
+          // closePopupAddProject();
         }
       }).done(function (data) {
         // console.log(data);
@@ -275,28 +276,12 @@
           console.log("Found!");
           console.log(item._id)
           idProjectToNavigate = item._id;
+          window.location.href = "/Projects/project?id=" + idProjectToNavigate;
           break;
         }
       }
-      $.ajax({
-        url: "/Projects/project",
-        type: "get",
-        //contentType: "application/json",
-        data: {
-          id: idProjectToNavigate
-        },
-        success: function (response) {
-          //Do Something
-          console.log(response);
-          console.log("Successfully send request!");
-          // window.location.href = "/";
-        }
-        // error: function(xhr) {
-        // }
-      });
     })
   }
-
 
   function openNotify() {
     popupNotify.classList.add("open-notify");
