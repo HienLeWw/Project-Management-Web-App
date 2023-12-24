@@ -73,19 +73,54 @@ const TaskCreate = async (req, res) => {
     console.log(req.body)
     let name = req.body.name;
     let content = "";
-    //let master_project = new mongoose.Types.ObjectId(req.body.master_project); // id project chứa task này
+    
+    // let master_project = new mongoose.Types.ObjectId(req.body.master_project); // id project chứa task này
+
     let master_project = req.query.id; // id project chứa task này
     
-    // cần kiểm tra và đổi lại created date thành begin date
-    // cần kiểm tra begin date để xác định giá trị khởi tạo cho status
-    
-    
-    // mặc định để In progress, begin date == created date
-    let created_date = new Date();
-    let status = 1; 
-
+    let begin_date = new Date()
     let end_date = Date(req.body.end_date); // giả định dữ liệu đã được parse sang 
-    // kiểu Date trước khi được gửi đi 
+                                            // kiểu Date trước khi được gửi đi 
+
+    // DONE:
+    //  - cần kiểm tra và đổi lại created date thành begin date 
+    //  - cần kiểm tra begin date và end date để xác định giá trị khởi tạo cho status 
+
+    // mặc định để In progress, begin date == created date
+    var status = 1
+
+    // TO DO:
+    //  - Viết thành 1 hàm riêng
+    //  - Kiểm lỗi
+    try {
+        begin_date = Date(req.body.begin_date);
+        let current_Date = new Date()
+        
+        // current date < begin => 0: To Do
+        // begin <= current date < end date => 1: In progress
+        // current date >= end date và chưa xong => 3: Due to
+        let time_to_begin = current_Date - begin_date;
+        let time_to_end = end_date - current_Date;
+
+        // đổi mili giây thành ngày
+        let Milisec2Day = 1000 * 60 * 60 * 24
+        let diff_now_begin = Math.floor(time_to_begin / Milisec2Day)
+        let diff_now_end = Math.floor(time_to_end / Milisec2Day)
+
+
+        if (diff_now_begin < 0){
+            status = 0  // current date < begin => 0: To Do
+        } else if (diff_now_end) {
+            status = 3 // current date >= end date và chưa xong => 3: Due to
+        } else {
+            status = 1 // begin <= current date < end date => 1: In progress
+        }
+    }
+    catch (err) {
+        // default case
+        console.warn("enable to receive or process begining date, using default setting"); 
+    }
+
     let user_ids = req.body.user_ids;
 
     try {
@@ -94,7 +129,7 @@ const TaskCreate = async (req, res) => {
         const task = await Task.create({
             "name": name, "user_ids": user_ids,
             "master_project": master_project, "status": status, "content": content,
-            "created_date": created_date, "end_date": end_date
+            "begin_date": begin_date, "end_date": end_date
         });
 
         //add task to project
@@ -119,6 +154,13 @@ const ModTaskContent = async (req, res) => {
     const new_content = req.body.content;
     const new_end_date = req.body.end_date;
     const update_user_ids = req.body.user_ids;
+
+    // TO DO:
+    // - status cần được cập nhật theo begin date, end date và current date sau khi đc được đưa lên db
+    // - người dùng chỉ có thể thay đổi trực tiếp status để đánh dấu công việc đã xong hay chưa?:
+    //      + người dùng gửi giá trị done = 0 => status giữ nguyên 
+    //      + người dùng gửi giá trị done = 1 => status = 2 (done)
+    // - mọi thay đổi khác liên quan đến status phải thực hiện gián tiếp thông qua thay đổi ngày
     const update_status = req.body.status;
 
     try {
@@ -167,4 +209,4 @@ const deleteTask = async (req, res) => {
     }
 }
 
-module.exports = { getTaskPage, TaskCreate, ModTaskContent, getTask, deleteTask };
+module.exports = { getTaskPage, TaskCreate, ModTaskContent, getTask, deleteTask, Check_Task_exist };

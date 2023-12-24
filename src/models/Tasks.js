@@ -21,11 +21,12 @@ const Task_Schema = new mongoose.Schema({
     },
 
     status: {
-        type: Number, // 0: To do, 1: In progress, 2: Done.
+        type: Number, // 0: To do, 1: In progress, done = true => Done: 2
+                      // 3: Due to. *Due to: quá hạn;
         required: [true, "set a status for this task"]
     },
 
-    created_date: {
+    begin_date: {
         type: Date,
         required: [true, "when is the begining of this task?"]
     },
@@ -34,6 +35,7 @@ const Task_Schema = new mongoose.Schema({
         type: Date,
         required: [true, "give this a deadline"]
     },
+
 })
 
 const Task = mongoose.model('Task', Task_Schema);

@@ -10,7 +10,7 @@ router.get("/Projects/Tasks/Task", requireAuth, checkUser, authorization, getTas
 router.put("/Projects/Tasks", requireAuth, checkUser, authorization, ModTaskContent)
 router.post("/Projects/Tasks/Delete", requireAuth, checkUser, authorization, deleteTask)
 
-// "/Projects"
-// "/Projects/Project"
+// testing router
+// router.post("/Projects/Tasks", TaskCreate)
 
 module.exports = router
