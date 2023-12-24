@@ -79,13 +79,17 @@ const projectPage = async (req, res) => {
 }
 
 const memberPage = async (req, res) => {
+    res.render('member.ejs')
+}
 
+const calendarPage = async (req, res) => {
+    res.render('calendar.ejs')
 }
 
 const getAllMembers = async (req, res) => {
     const users = await User.find({ 'project_ID': req.query.id })
     console.log(users)
-    res.status(200).json({"users":users})
+    res.status(200).json({ "users": users })
 }
 
-module.exports = { Create_Project, Delete_Project, getProjects, projectPage, memberPage, getAllMembers };
+module.exports = { Create_Project, Delete_Project, getProjects, projectPage, memberPage, getAllMembers, calendarPage };
