@@ -1,6 +1,8 @@
+const { underscore } = require('consolidate');
 const { db } = require('../config/database');
 const Project = require('../models/Projects');
 const User = require('../models/Users');
+const Task = require('../models/Tasks')
 const mongoose = require('mongoose');
 
 const errorHandler = (req, err) => {
@@ -9,7 +11,7 @@ const errorHandler = (req, err) => {
 
     // Project Name Duplicated
     try {
-        if (err.code === 11000) {   
+        if (err.code === 11000) {
             if (err.message.includes('name')) {
 
                 for (let i = 0; i < 999; i++) {
@@ -42,11 +44,9 @@ const Delete_Project = (req, res) => {
 
 
 const Create_Project = async (req, res) => {
-    //username = req.cookies.username;
-    //id_admin = User.findOne(username)._id;
     const admin = req.user.id;
     console.log(admin);
-    const { Project_name } = req.body.name;
+    const Project_name = req.body.name;
     const task = [];
 
     try {
@@ -54,7 +54,7 @@ const Create_Project = async (req, res) => {
         const project = await Project.create({ "name": Project_name, admin, task });
         const user = await User.findById(req.user.id);
         user['project_ID'].push(project['_id']);
-        await user.save()
+        await user.save();
         res.status(201).json(project);
     }
     catch (err) {
@@ -73,8 +73,64 @@ const getProjects = async (req, res) => {
     res.status(200).json({ "project_list": Project_list })
 }
 
-const projectPage = (req, res) => {
-    res.render('home.ejs',)
+const projectPage = async (req, res) => {
+    console.log("datoihamnay")
+    const project = await Project.findById(req.query.id)
+    res.render('home.ejs', { "project": project })
 }
 
-module.exports = { Create_Project, Delete_Project, getProjects, projectPage };
+const memberPage = async (req, res) => {
+    res.render('member.ejs')
+}
+
+const calendarPage = async (req, res) => {
+    res.render('calendar.ejs')
+}
+
+const getAllInfo = async (req, res) => {
+    const users = await User.find({ 'project_ID': req.query.id })
+    const project = await Project.findById(req.query.id);
+    console.log("test", project['task'][0])
+    const taskList = []
+    for (let i = 0; i < project['task'].length; i++) {
+        const task = await Task.findById(project['task'][0]);
+        taskList.push(task);
+    }
+
+    res.status(200).json({ "users": users, "tasks": taskList })
+}
+const modProject = async (req, res) => {
+    try {
+        const userList = []
+        console.log(req.body.username.length)
+        for (let i = 0; i < req.body.username.length; i++) {
+            const user = await User.find({ 'username': req.body.username[i] });
+            console.log(user)
+            console.log(user[i]['project_ID'])
+            user[0]['project_ID'].push(req.query.id);
+            console.log("push dc nha")
+            await user[0].save();
+            userList.push(user)
+        }
+        res.status(201).json({ "user": userList })
+    }
+    catch (err) {
+        console.log(err.message)
+        res.status(400).json({ "error": err.message })
+    }
+}
+
+const leaveProject = async (req, res) => {
+    try {
+        console.log(req.user['project_ID'])
+        const index = req.user['project_ID'].indexOf(2);
+        req.user['project_ID'].splice(index, 1)
+        console.log(req.user['project_ID'])
+        await req.user.save();
+        res.status(200).redirect('/');
+    }
+    catch (err) {
+    }
+}
+
+module.exports = { Create_Project, Delete_Project, getProjects, projectPage, memberPage, getAllInfo, calendarPage, modProject, leaveProject };

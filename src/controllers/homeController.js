@@ -7,7 +7,6 @@ const Project = require('../models/Projects')
 
 
 const handleErrors = (err) => {
-    console.log(err.message, err.code);
     let errors = { email: '', password: '', username: '' };
 
     //duplicate error code
@@ -45,12 +44,14 @@ const getHomepage = async (req, res) => {
         const project = await Project.findById(res.locals.user.project_ID[i])
         Project_list.push(project);
     }
+    console.log(Project_list)
     res.render('project.ejs', { 'project_list': Project_list })
 }
 
 const loginPage = (req, res) => {
-    res.render('login.ejs');
-}
+    const { loginSuccess, loginError } = req.query;
+    res.render('login', { loginSuccess, loginError });
+};
 
 const signUpPage = (req, res) => {
     res.render('register.ejs')
@@ -68,6 +69,20 @@ const signUpRequest = async (req, res) => {
     }
 }
 
+// const loginRequest = async (req, res) => {
+//     const { username, password } = req.body;
+//     console.log(username);
+//     try {
+//         const user = await User.login(username, password);
+//         const token = createToken(user._id);
+//         res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
+//         res.status(200).redirect('/');
+//     }
+//     catch (err) {
+//         console.log(err)
+//         res.status(400).redirect('/login');
+//     }
+// }
 const loginRequest = async (req, res) => {
     const { username, password } = req.body;
     console.log(username);
@@ -75,13 +90,12 @@ const loginRequest = async (req, res) => {
         const user = await User.login(username, password);
         const token = createToken(user._id);
         res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
-        res.status(200).redirect('/');
+        res.status(200).redirect('/?loginSuccess=true');
+    } catch (err) {
+        console.log(err);
+        res.status(400).redirect('/login?loginError=true');
     }
-    catch (err) {
-        console.log(err)
-        res.status(400).redirect('/login');
-    }
-}
+};
 const logout = (req, res) => {
     res.cookie('jwt', '', { maxAge: 1 });
     res.redirect('/')

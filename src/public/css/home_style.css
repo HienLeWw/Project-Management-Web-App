@@ -2,20 +2,24 @@ body {
     margin: 0;
     background-color: #C0D0EF;
 }
-.w3-sidebar{
+
+.w3-sidebar {
     background-color: #C0D0EF;
     width: 15%;
 }
-.w3-container{
+
+.w3-container {
     background-color: #C0D0EF;
     height: 100%;
     padding: 0;
-    margin-left:15%; 
+    margin-left: 15%;
     width: 100%;
 }
-html{
+
+html {
     background-color: #C0D0EF;
 }
+
 ul {
     list-style-type: none;
     margin: 0;
@@ -26,6 +30,7 @@ ul {
     height: 100%;
     overflow: auto;
 }
+
 li a {
     display: block;
     color: #dfdfdf;
@@ -34,12 +39,13 @@ li a {
     text-align: center;
     font-size: large;
 }
-  
+
 li a.active {
     color: white;
     justify-content: center;
 }
-.logo_contain img{
+
+.logo_contain img {
     position: relative;
     width: 100%;
     height: 60%;
@@ -47,54 +53,48 @@ li a.active {
     left: 0%;
     margin-bottom: 5%;
 }
-.logo_contain{
-  background-color: #304A6E;
+
+.logo_contain {
+    background-color: #304A6E;
 }
+
 li a:hover:not(.active) {
     color: white;
     text-decoration: none;
 }
-.nav-items{
-    display: flex; 
+
+.nav-items {
+    display: flex;
     width: auto;
     margin: 0;
     /* margin-left: 20%; */
     /* margin-right: 10%; */
     margin-bottom: 5%;
-    margin-right: 10px; 
+    margin-right: 10px;
     margin-left: 20px;
 }
-.nav-items img{
+
+.nav-items img {
     left: 0%;
 }
-.header{
-    display: flex; 
-    margin-top: 0%; 
+
+.header {
+    display: flex;
+    margin-top: 0%;
     position: relative;
 }
 
-.search{
-    width: 100%;
-    display: flex;
-    left: 15%;
-    position: absolute;
-    justify-content: left;
-    align-items: center;
+.search {
+    width: 70%;
+    position: fixed;
+    left: 35%;
 }
 
-.search-btn{
-    background-color: #F5F5F5;
-    border: solid 1px black;
-    float: left;
-    height: 50%;
+.search .form-control {
+    margin: 0;
 }
 
-.search-btn:hover{
-    background-color: #e6e1e1;
-    transition: 200ms;
-}
-
-.header input{
+.header input {
     position: relative;
     width: 40%;
     margin: 1% 0% 1% 0%;
@@ -102,12 +102,12 @@ li a:hover:not(.active) {
     float: left;
 }
 
-.project-title{
-    margin-top: 8%;
+.project-title {
+    margin-top: 3%;
     margin-left: 3%;
 }
 
-.add-task-btn{
+.add-task-btn {
     background-color: transparent;
     border: none;
     cursor: pointer;
@@ -116,21 +116,24 @@ li a:hover:not(.active) {
     left: 18%;
     position: absolute;
 }
-.add-task-btn:hover{
+
+.add-task-btn:hover {
     color: black;
-    text-decoration: underline; 
+    text-decoration: underline;
     transition-duration: 200ms;
 }
-.profile{
-    background-color: transparent; 
-    border: none; 
-    left: 85%; 
-    position: fixed; 
+
+.profile {
+    background-color: transparent;
+    border: none;
+    left: 85%;
+    position: fixed;
     display: flex;
 }
-.profile-img{
+
+.profile-img {
     border-radius: 50%;
-    background-color:rgb(68, 162, 149);
+    background-color: rgb(68, 162, 149);
     text-align: center;
     justify-content: center;
     justify-items: center;
@@ -139,97 +142,100 @@ li a:hover:not(.active) {
     height: 36px;
     margin-top: 5%;
 }
-.profile-user{
-    font-size: large; margin: 0;
+
+.profile-user {
+    font-size: large;
+    margin: 0;
 }
-.profile-email{
-    font-size: medium; margin: 0;
+
+.profile-email {
+    font-size: medium;
+    margin: 0;
 }
-.profile-content{
+
+.profile-content {
     margin-left: 2%;
 }
-.dropdown{
-    /* margin-right: 35%; */
-    position: fixed;
+
+/* .dropdown{ */
+/* margin-right: 35%; */
+/* position: fixed; */
+/* left: 60%; */
+/* } */
+.functional-btn {
+    display: flex;
+    position: relative;
     left: 60%;
 }
-#scheduler{
-    width: 85%; height: 600px; margin-top: 10%; margin-bottom: 1%; left: 15%; position: absolute;
-}
-#dropdownMenuButton{
+
+#dropdownMenuButton {
     background-color: #668DC0;
     color: black;
     width: 100px;
 }
-table{
-    background-color: white;
+
+#share-btn {
+    margin-left: 1%;
+    background-color: #668DC0;
+    color: black;
+    font-size: 15px;
 }
-thead{
-    text-align: center;
-    background-color: white;
-}
-tbody{
-    text-align: center;
-    background-color: white;
-}
-#Done{
-    background-color: #EBF9F1;
-    color: #1F9254;
-    text-align: center;
-}
-#In-progress{
-    background-color: #FEF2E5;
-    color: #CD6200;
-}
-#To-do{
-    background-color: #EFE5FE;
-    color: #AB30E5;
-}
-.status{
+
+.status {
     width: 100%;
 }
-.notify-btn{
-    background-color: transparent; 
-    border: none; 
-    left: 80%; 
+
+.notify-btn {
+    background-color: transparent;
+    border: none;
+    left: 80%;
     top: 1%;
     position: fixed;
 }
-.notify-btn svg{
+
+.notify-btn svg {
     transition: 0.3s;
 }
-.notify-btn:hover svg{
+
+.notify-btn:hover svg {
     transform: scale(1.2);
 }
-.edit-btn{
+
+.edit-btn {
     margin: 0;
-    padding: 0;;
+    padding: 0;
+    ;
     background-color: transparent;
     border: none;
 }
-.edit-btn img{
+
+.edit-btn img {
     transition: 0.3s;
 }
-.edit-btn:hover img{
+
+.edit-btn:hover img {
     transform: scale(1.2);
 }
-.delete-btn{
+
+.delete-btn {
     margin: 0;
     padding: 0;
     background-color: transparent;
     border: none;
 }
-.delete-btn img{
+
+.delete-btn img {
     transition: 0.3s;
 }
-.delete-btn:hover img{
+
+.delete-btn:hover img {
     transform: scale(1.2);
 }
 
-.popup-notify{
+.popup-notify {
     position: absolute;
     width: 400px;
-    height: 200px;
+    height: auto;
     background-color: white;
     border: solid black 0.5px;
     top: 0%;
@@ -239,12 +245,14 @@ tbody{
     visibility: hidden;
     transition: transform 0.3s, top 0.3s;
 }
-.open-notify{
+
+.open-notify {
     visibility: visible;
     top: 30%;
     transform: translate(-50%, -50%) scale(1);
 }
-.popup-head{
+
+.popup-head {
     margin-top: 2%;
     margin-bottom: 2%;
     width: 80%;
@@ -253,15 +261,15 @@ tbody{
     margin-left: 5%;
 }
 
-.popup-head img{
+.popup-head img {
     width: 36px;
     height: 36px;
     /* margin-right: 50%; */
 }
 
-.popup-head button{
-    background-color: transparent;    
-    border: black solid 1px;    
+.popup-head button {
+    background-color: transparent;
+    border: black solid 1px;
     width: 30px;
     height: 30px;
     /* margin-left: 50%; */
@@ -269,18 +277,19 @@ tbody{
     left: 90%;
 }
 
-.popup-body{
+.popup-body {
     width: 80%;
+    height: auto;
     margin-left: 5%;
 }
 
-.popup-body .notify-content{
+.popup-body .notify-content {
     display: flex;
     border-bottom: gray solid 0.3px;
     margin-bottom: 2%;
 }
 
-.popup-body .notify-content .notify-img{
+.popup-body .notify-content .notify-img {
     border-radius: 50%;
     background-color: rgb(68, 162, 149);
     text-align: center;
@@ -290,4 +299,197 @@ tbody{
     width: 28px;
     height: 28px;
     margin-right: 1%;
+}
+
+.popup-share {
+    position: absolute;
+    width: 600px;
+    height: 180px;
+    background-color: white;
+    border: solid black 0.5px;
+    top: 40%;
+    transform: translate(-50%, -50%) scale(0.1);
+    left: 0%;
+    z-index: 20;
+    visibility: hidden;
+    transition: transform 0.3s, top 0.3s;
+}
+
+.open-share {
+    visibility: visible;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.popup-share form input[type=text] {
+    position: relative;
+    left: 5%;
+    width: 77%;
+    margin: 0;
+    font-size: medium;
+    padding: 4% 0 1% 2%;
+    background-color: #F5F5F5;
+    color: #5e6269;
+    border: none;
+    border-bottom: 1px solid #4f6480;
+    /* font-size: 1.5vw; */
+}
+
+.header input {
+    position: relative;
+    width: 40%;
+    margin: 1% 0% 1% 0%;
+    /* left: 15%; */
+    float: left;
+}
+
+.popup-share form label {
+    position: absolute;
+    left: 5%;
+    margin: 0;
+    padding: 0;
+    font-size: large;
+}
+
+#invite-btn {
+    background-color: transparent;
+    border: 0;
+    position: absolute;
+    left: 85%;
+    top: 45%;
+}
+
+#invite-btn img:hover {
+    transform: scale(1.1);
+    transition: 200ms;
+}
+
+.bucket-parent {
+    display: flex;
+    position: absolute;
+    width: 80%;
+    height: 80%;
+    /* background-color: #1F9254; */
+}
+
+.bucket-parent .bucket-child {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    position: relative;
+    width: 10%;
+    height: 550px;
+    background-color: #EFEFEF;
+    margin-left: 3%;
+    margin-top: 1%;
+    border-radius: 5%;
+    flex: 1;
+    display: flex;
+    /* justify-content: center; */
+    /* align-items: flex-start; */
+    /* flex-direction: row; */
+}
+
+.vector-icon {
+    position: absolute;
+    margin: 0 !important;
+    width: 100%;
+    top: 61.5px;
+    /* right: 6.53%; */
+    /* left: 6.64%; */
+    /* max-width: 100%; */
+    overflow: hidden;
+    height: 3px;
+    z-index: 1;
+}
+
+.bucket-header {
+    position: relative;
+    margin: 0 !important;
+    top: 20.67px;
+    left: 24px;
+    width: 100%;
+    height: 19.07px;
+    z-index: 2;
+}
+
+.bucket-title {
+    position: absolute;
+    top: 0;
+    left: 16px;
+    font-weight: 100;
+    display: inline-block;
+    width: 80%;
+    height: 19.07px;
+}
+
+.group-item {
+    position: relative;
+    top: 5.02px;
+    left: 0;
+    border-radius: 50%;
+    width: 8px;
+    height: 8.03px;
+}
+
+#todo-item {
+    background-color: #5030e5;
+}
+
+#progress-item {
+    background-color: orange;
+}
+
+#done-item {
+    background-color: #76a5ea;
+}
+
+.vuesaxbulkadd-square-icon {
+    position: absolute;
+    margin: 0 !important;
+    top: 20px;
+    right: 13.93px;
+    width: 24px;
+    height: 24px;
+    z-index: 4;
+}
+
+.task-list {
+    position: absolute;
+    /* background-color: white; */
+    width: 90%;
+    height: auto;
+    top: 15%;
+    left: 5%;
+}
+
+.task-list .task {
+    background-color: white;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+.task-list .task .task-name {
+    margin: 0;
+    width: 80%;
+    margin-left: 10%;
+    border-bottom: solid black 0.5px;
+}
+
+.task-list .task .info {
+    display: flex;
+}
+
+.task-list .task .info .due-date {
+    margin: 0;
+    margin-left: 10%;
+}
+
+#assignee {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    left: 60%;
+    font-size: small;
+    top: 50%;
+    margin-top: 2px;
 }

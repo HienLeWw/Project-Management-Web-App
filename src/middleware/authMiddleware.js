@@ -10,6 +10,7 @@ const requireAuth = (req, res, next) => {
     if (token) {
         jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decodedToken) => {
             if (err) {
+                console.log("thong bao loi o authmiddleware")
                 console.log(err.message);
                 res.redirect('/login')
             }

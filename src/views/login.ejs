@@ -4,6 +4,28 @@
 <head>
     <title>Freeze Time</title>
     <link rel="stylesheet" href="/css/login.css">
+    <style>
+        .notification {
+            position: relative;
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .notification.success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .notification .close {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            cursor: pointer;
+        }
+    </style>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
@@ -18,6 +40,17 @@
             </div>
             <h1>Login</h1>
             <div class="deco"></div>
+            <% if (loginSuccess) { %>
+                <div class="notification success">
+                    Login successful!
+                    <span class="close" onclick="this.parentNode.style.display = 'none';">&times;</span>
+                </div>
+            <% } else if (loginError) { %>
+                <div class="notification">
+                    Invalid username or password. Please try again.
+                    <span class="close" onclick="this.parentNode.style.display = 'none';">&times;</span>
+                </div>
+            <% } %>
             <form action="login" method="post">
                 <label for="username"></label>
                 <input type="text" placeholder="Enter Username" name="username" required>

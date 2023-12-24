@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Task_Schema = new mongoose.Schema({
     name: {
         type: String,
-        require: [true, "name your task"]
+        required: [true, "name your task"]
     },
 
     user_ids: {
@@ -27,7 +27,7 @@ const Task_Schema = new mongoose.Schema({
 
     created_date: {
         type: Date,
-        required: [true, "when is this created?"]
+        required: [true, "when is the begining of this task?"]
     },
 
     end_date: {
