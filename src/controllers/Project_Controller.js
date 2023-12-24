@@ -101,16 +101,21 @@ const getAllInfo = async (req, res) => {
 }
 const modProject = async (req, res) => {
     try {
+        const userList = []
+        console.log(req.body.username.length)
         for (let i = 0; i < req.body.username.length; i++) {
             const user = await User.find({ 'username': req.body.username[i] });
-            console.log(user[0]['project_ID'])
-
-            user[i]['project_ID'].push(req.query.id);
-            await user[i].save();
+            console.log(user)
+            console.log(user[i]['project_ID'])
+            user[0]['project_ID'].push(req.query.id);
+            console.log("push dc nha")
+            await user[0].save();
+            userList.push(user)
         }
-        res.status(201).json({ "user": user })
+        res.status(201).json({ "user": userList })
     }
     catch (err) {
+        console.log(err.message)
         res.status(400).json({ "error": err.message })
     }
 }
