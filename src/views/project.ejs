@@ -28,7 +28,7 @@
       <% for(let i=0; i < project_list.length; ++i){ %>
         <li>
           <div class="nav-items">
-            <a href="#"><img src="img/icons8-project-50.png" alt="" class="nav-img" width="32px" height="32px"
+            <a href="/Projects/project?id=" + idProjectToNavigate><img src="img/icons8-project-50.png" alt="" class="nav-img" width="32px" height="32px"
                 style="margin-right: 10px; margin-left: 20px;">
               <%= project_list[i]['name'] %>
             </a>
@@ -172,6 +172,7 @@
   let popupNotify = document.getElementById("notify");
   let popupAddProject = document.getElementById("add-prj");
   let navigationLinks = document.getElementsByTagName("a");
+  // let navigationLinks;
   let nameProjectToNavigate;
   let idProjectToNavigate = "";
 
@@ -206,8 +207,11 @@
         success: function (res) {
           console.log("successfully send request!");
           console.log(res);
+          console.log(typeof(res));
+          window.sessionStorage.setItem("project" + res['_id'], JSON.stringify(res));
           updateProjectList();
           closePopupAddProject();
+          // navigateToHomePage();
         }
       }).done(function (data) {
         // console.log(data);
@@ -244,7 +248,7 @@
             '</tr>';
           var item = '<li>' +
             '<div class="nav-items">' +
-            '<a href="#"><img src="img/icons8-project-50.png" alt="" class="nav-img" width="32px" height="32px"style="margin-right: 10px; margin-left: 20px;">' +
+            '<a href="/Projects/project?id=' + idProjectToNavigate +'"><img src="img/icons8-project-50.png" alt="" class="nav-img" width="32px" height="32px"style="margin-right: 10px; margin-left: 20px;">' +
             data['project_list'][i].name +
             '</a>' +
             '</div>' +
@@ -253,6 +257,7 @@
           $('#nav-project').append(item);
         }
         $('#nav-project').append('<li><div class="nav-items"><a href="#setting"><img src="img/icons8-settings-64.png" alt="" class="nav-img" width="32px" height="32px"style="margin-right: 10px; margin-left: 20px;">Setting</a></div></li>')
+        navigateToHomePage()
       },
       error: function (xhr, status, error) {
         console.log('Error:', error);
@@ -260,27 +265,30 @@
     });
   }
 
-  for (let i = 0; i < navigationLinks.length; ++i) {
-    console.log("I'm here!");
-    navigationLinks[i].addEventListener("click", function (event) {
-      event.preventDefault();
-      nameProjectToNavigate = this.textContent.trim();
-      console.log(nameProjectToNavigate);
-      for (let index = 0; index < window.sessionStorage.length; index++) {
-        let key = window.sessionStorage.key(index);
-        console.log(key);
-        console.log(typeof (key));
-        let item = JSON.parse(window.sessionStorage.getItem(key));
-        console.log(item.name);
-        if (item && item.name == nameProjectToNavigate) {
-          console.log("Found!");
-          console.log(item._id)
-          idProjectToNavigate = item._id;
-          window.location.href = "/Projects/project?id=" + idProjectToNavigate;
-          break;
+  function navigateToHomePage(){
+    navigationLinks = document.getElementsByTagName("a");
+    for (let i = 0; i < navigationLinks.length; ++i) {
+      console.log("I'm here!");
+      navigationLinks[i].addEventListener("click", function (event) {
+        event.preventDefault();
+        nameProjectToNavigate = this.textContent.trim();
+        console.log(nameProjectToNavigate);
+        for (let index = 0; index < window.sessionStorage.length; index++) {
+          let key = window.sessionStorage.key(index);
+          console.log(key);
+          console.log(typeof (key));
+          let item = JSON.parse(window.sessionStorage.getItem(key));
+          console.log(item.name);
+          if (item && item.name == nameProjectToNavigate) {
+            console.log("Found!");
+            console.log(item._id)
+            idProjectToNavigate = item._id;
+            window.location.href = "/Projects/project?id=" + idProjectToNavigate;
+            break;
+          }
         }
-      }
-    })
+      })
+    }
   }
 
   function openNotify() {
@@ -295,6 +303,32 @@
   function closePopupAddProject() {
     popupAddProject.classList.remove("open-add-prj");
   }
+
+  // function navigateToHomePage() {
+  //   document.addEventListener("DOMContentLoaded", function() {
+  //     navigationLinks = document.querySelectorAll("a"); // Replace "a" with the appropriate selector for your navigation links
+      
+  //     for (let i = 0; i < navigationLinks.length; ++i) {
+  //       navigationLinks[i].addEventListener("click", function(event) {
+  //         event.preventDefault();
+  //         nameProjectToNavigate = this.textContent.trim();
+          
+  //         for (let index = 0; index < window.sessionStorage.length; index++) {
+  //           let key = window.sessionStorage.key(index);
+  //           let item = JSON.parse(window.sessionStorage.getItem(key));
+            
+  //           if (item && item.name == nameProjectToNavigate) {
+  //             idProjectToNavigate = item._id;
+  //             window.location.href = "/Projects/project?id=" + idProjectToNavigate;
+  //             break;
+  //           }
+  //         }
+  //       });
+  //     }
+  //   });
+  // }
+
+  navigateToHomePage();
 </script>
 
 </html>

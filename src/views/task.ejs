@@ -330,17 +330,14 @@
   });
 
   // Get all the buttons with the class "open-assign-btn"
+  // Get all the buttons with the class "open-assign-btn"
   var buttons = document.querySelectorAll('.open-assign-btn');
 
   // Attach a click event listener to each button
-  buttons.forEach(function (button) {
-    button.addEventListener('click', function () {
-      // Get the assignee element
-      var assigneeElement = this.parentNode.querySelector('.assignee');
-
+  buttons.forEach(function(button) {
+    button.addEventListener('click', function() {
       // Get the content of the assignee element
-      var assigneeContent = assigneeElement.textContent.trim();
-
+      var assigneeContent = this.parentNode.textContent.trim();
       // Output the content to the console (you can modify this to suit your needs)
       console.log(assigneeContent);
     });

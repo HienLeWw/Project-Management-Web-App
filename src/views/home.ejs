@@ -28,12 +28,14 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdn.dhtmlx.com/scheduler/edge/dhtmlxscheduler_material.css">
   <script src="https://cdn.dhtmlx.com/scheduler/edge/dhtmlxscheduler.js"></script>
+
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 </head>
 
 <body>
   <!-- Navigation Bar -->
   <div class="w3-sidebar">
-    <a class="active" href="/">
+    <a class="active" href="/src/views/project.ejs">
       <div class="logo_contain">
         <img src="/img/combine_logo.png" alt="logo">
       </div>
@@ -41,26 +43,26 @@
     <ul>
       <li>
         <div class="nav-items">
-          <a href="#"><img src="/img/icons8-dashboard-layout-48.png" alt="" class="nav-img" width="32px"
-              height="32px">Home</a>
+          <a href="/"><img src="/img/icons8-dashboard-layout-48.png" alt="" class="nav-img"
+              width="32px" height="32px">Home</a>
         </div>
       </li>
       <li>
         <div class="nav-items">
-          <a href="/Projects/members"><img src="/img/icons8-member-48.png" alt="" class="nav-img" width="32px"
+          <a href="/projects/project/members"><img src="/img/icons8-member-48.png" alt="" class="nav-img" width="32px"
               height="32px">Member</a>
         </div>
       </li>
       <li>
         <div class="nav-items">
 
-          <a href="/Projects/tasks"><img src="/img/icons8-task-50.png" alt="" class="nav-img" width="32px"
+          <a href="/projects/tasks"><img src="/img/icons8-task-50.png" alt="" class="nav-img" width="32px"
               height="32px">Task</a>
         </div>
       </li>
       <li>
         <div class="nav-items">
-          <a href="/Projects/calendar"><img src="/img/icons8-calendar-64.png" alt="" class="nav-img" width="32px"
+          <a href="/projects/project/calendar"><img src="/img/icons8-calendar-64.png" alt="" class="nav-img" width="32px"
               height="32px">Calendar</a>
         </div>
       </li>
@@ -235,6 +237,37 @@
 <script>
   let popupNotify = document.getElementById("notify");
   let popupShare = document.getElementById("share");
+  let currentProjectId;
+
+  $(document).ready(function () {
+    $.ajax({
+      type: "GET",
+      url: "/Projects/project/members"+window.location.search,
+      contentType: "application/json",
+      success: function (res) {
+        window.sessionStorage.clear();
+        console.log(res.users);
+        // res.users.forEach(element => {
+        //   //console.log(element);
+        //   window.sessionStorage.setItem("project" + element['_id'], JSON.stringify(element));
+        // });
+      }
+    });
+  });
+
+  function navigateToHomePage(){
+    navigationLinks = document.getElementsByTagName("a");
+    for (let i = 0; i < navigationLinks.length; ++i) {
+      console.log("I'm here!");
+      currentProjectId = window.location.search;
+      console.log(currentProjectId);
+      navigationLinks[i].addEventListener("click", function (event) {
+        event.preventDefault();
+        console.log(navigationLinks[i]);
+        window.location.href = "/Projects/tasks"+currentProjectId;
+      })
+    }
+  }
 
   function openNotify() {
     popupNotify.classList.add("open-notify");
@@ -248,6 +281,7 @@
   function closePopupShare() {
     popupShare.classList.remove("open-share");
   }
+  navigateToHomePage();
 </script>
 
 </html>

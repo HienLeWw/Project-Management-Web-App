@@ -85,7 +85,7 @@ const memberPage = async (req, res) => {
 const getAllMembers = async (req, res) => {
     const users = await User.find({ 'project_ID': req.query.id })
     console.log(users)
-    res.status(200).json(users)
+    res.status(200).json({"users":users})
 }
 
 module.exports = { Create_Project, Delete_Project, getProjects, projectPage, memberPage, getAllMembers };
