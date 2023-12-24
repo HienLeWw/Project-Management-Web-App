@@ -1,3 +1,4 @@
+const { underscore } = require('consolidate');
 const { db } = require('../config/database');
 const Project = require('../models/Projects');
 const User = require('../models/Users');
@@ -52,7 +53,7 @@ const Create_Project = async (req, res) => {
         const project = await Project.create({ "name": Project_name, admin, task });
         const user = await User.findById(req.user.id);
         user['project_ID'].push(project['_id']);
-        await user.save()
+        await user.save();
         res.status(201).json(project);
     }
     catch (err) {
@@ -81,4 +82,10 @@ const memberPage = async (req, res) => {
 
 }
 
-module.exports = { Create_Project, Delete_Project, getProjects, projectPage, memberPage };
+const getAllMembers = async (req, res) => {
+    const users = await User.find({ 'project_ID': req.query.id })
+    console.log(users)
+    res.status(200).json(users)
+}
+
+module.exports = { Create_Project, Delete_Project, getProjects, projectPage, memberPage, getAllMembers };

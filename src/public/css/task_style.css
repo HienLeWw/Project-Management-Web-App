@@ -2,20 +2,24 @@ body {
     margin: 0;
     background-color: #C0D0EF;
 }
-.w3-sidebar{
+
+.w3-sidebar {
     background-color: #C0D0EF;
     width: 15%;
 }
-.w3-container{
+
+.w3-container {
     background-color: #C0D0EF;
     height: 100%;
     padding: 0;
-    margin-left:15%; 
+    margin-left: 15%;
     width: 100%;
 }
-html{
+
+html {
     background-color: #C0D0EF;
 }
+
 ul {
     list-style-type: none;
     margin: 0;
@@ -26,6 +30,7 @@ ul {
     height: 100%;
     overflow: auto;
 }
+
 li a {
     display: block;
     color: #dfdfdf;
@@ -34,58 +39,68 @@ li a {
     text-align: center;
     font-size: large;
 }
+
 li a.active {
     color: white;
     justify-content: center;
 }
-.logo_contain img{
-      position: relative;
-      width: 100%;
-      height: 60%;
-      top: 25%;
-      left: 0%;
-      margin-bottom: 5%;
+
+.logo_contain img {
+    position: relative;
+    width: 100%;
+    height: 60%;
+    top: 25%;
+    left: 0%;
+    margin-bottom: 5%;
 }
-.logo_contain{
+
+.logo_contain {
     background-color: #304A6E;
 }
+
 li a:hover:not(.active) {
     color: white;
     text-decoration: none;
 }
-.nav-items{
-    display: flex; 
+
+.nav-items {
+    display: flex;
     width: auto;
     margin: 0;
     /* margin-left: 20%; */
     /* margin-right: 10%; */
     margin-bottom: 5%;
-    margin-right: 10px; 
+    margin-right: 10px;
     margin-left: 20px;
 }
-.nav-items img{
+
+.nav-items img {
     left: 0%;
 }
-.header{
-    display: flex; 
-    margin-top: 0%; 
+
+.header {
+    display: flex;
+    margin-top: 0%;
     position: relative;
 }
-#task-id{
+
+#task-id {
     text-decoration: underline;
 }
-.add-task-container{
+
+.add-task-container {
     display: flex;
 }
 
-.profile{
-    background-color: transparent; 
-    border: none; 
-    left: 85%; 
-    position: fixed; 
+.profile {
+    background-color: transparent;
+    border: none;
+    left: 85%;
+    position: fixed;
     display: flex;
 }
-.profile-img{
+
+.profile-img {
     border-radius: 50%;
     background-color: rgb(68, 162, 149);
     text-align: center;
@@ -96,16 +111,22 @@ li a:hover:not(.active) {
     height: 36px;
     margin-top: 5%;
 }
-.profile-user{
-    font-size: large; margin: 0;
+
+.profile-user {
+    font-size: large;
+    margin: 0;
 }
-.profile-email{
-    font-size: medium; margin: 0;
+
+.profile-email {
+    font-size: medium;
+    margin: 0;
 }
-.profile-content{
+
+.profile-content {
     margin-left: 2%;
 }
-.add-task-btn{
+
+.add-task-btn {
     background-color: transparent;
     border: none;
     cursor: pointer;
@@ -114,89 +135,131 @@ li a:hover:not(.active) {
     left: 18%;
     position: fixed;
 }
-.add-task-btn:hover{
+
+.add-task-btn:hover {
     color: black;
-    text-decoration: underline; 
+    text-decoration: underline;
     transition-duration: 200ms;
 }
-.dropdown{
+
+.dropdown {
     /* margin-right: 35%; */
     position: fixed;
     left: 60%;
 }
-#dropdownMenuButton{
+
+#dropdownMenuButton {
     background-color: #668DC0;
     color: black;
     width: 100px;
 }
-table{
+
+table {
     background-color: white;
 }
-thead{
+
+thead {
     text-align: center;
     background-color: white;
 }
-tbody{
+
+tbody {
     text-align: center;
     background-color: white;
 }
-#Done{
+
+table tbody {
+    justify-content: center;
+    align-items: center;
+}
+
+.assignee-list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+tr td .profile-img {
+    position: relative;
+    top: 0%;
+    margin: 0;
+    width: 24px;
+    height: 24px;
+    font-size: medium;
+}
+
+#Done {
     background-color: #EBF9F1;
     color: #1F9254;
     text-align: center;
 }
-#In-progress{
+
+#In-progress {
     background-color: #FEF2E5;
     color: #CD6200;
 }
-#To-do{
+
+#To-do {
     background-color: #EFE5FE;
     color: #AB30E5;
 }
-.status{
+
+.status {
     width: 100%;
 }
-.notify-btn{
-    background-color: transparent; 
-    border: none; 
-    left: 80%; 
+
+.notify-btn {
+    background-color: transparent;
+    border: none;
+    left: 80%;
     top: 1%;
     position: fixed;
 }
-.notify-btn svg{
+
+.notify-btn svg {
     transition: 0.3s;
 }
-.notify-btn:hover svg{
+
+.notify-btn:hover svg {
     transform: scale(1.2);
 }
-.edit-btn{
+
+.edit-btn {
     margin: 0;
-    padding: 0;;
+    padding: 0;
+    ;
     background-color: transparent;
     border: none;
 }
-.edit-btn img{
+
+.edit-btn img {
     transition: 0.3s;
 }
-.edit-btn:hover img{
+
+.edit-btn:hover img {
     transform: scale(1.2);
 }
-.delete-btn{
+
+.delete-btn {
     margin: 0;
     padding: 0;
     background-color: transparent;
     border: none;
 }
-.delete-btn img{
+
+.delete-btn img {
     transition: 0.3s;
 }
-.delete-btn:hover img{
+
+.delete-btn:hover img {
     transform: scale(1.2);
 }
-.popup-notify{
+
+.popup-notify {
     position: absolute;
     width: 400px;
-    height: 200px;
+    height: auto;
     background-color: white;
     border: solid black 0.5px;
     top: 0%;
@@ -206,12 +269,14 @@ tbody{
     visibility: hidden;
     transition: transform 0.3s, top 0.3s;
 }
-.open-notify{
+
+.open-notify {
     visibility: visible;
     top: 30%;
     transform: translate(-50%, -50%) scale(1);
 }
-.popup-head{
+
+.popup-head {
     margin-top: 2%;
     margin-bottom: 2%;
     width: 80%;
@@ -220,15 +285,15 @@ tbody{
     margin-left: 5%;
 }
 
-.popup-head img{
+.popup-head img {
     width: 36px;
     height: 36px;
     /* margin-right: 50%; */
 }
 
-.popup-head button{
-    background-color: transparent;    
-    border: black solid 1px;    
+.popup-head button {
+    background-color: transparent;
+    border: black solid 1px;
     width: 30px;
     height: 30px;
     /* margin-left: 50%; */
@@ -236,18 +301,19 @@ tbody{
     left: 90%;
 }
 
-.popup-body{
+.popup-body {
     width: 80%;
+    height: auto;
     margin-left: 5%;
 }
 
-.popup-body .notify-content{
+.popup-body .notify-content {
     display: flex;
     border-bottom: gray solid 0.3px;
     margin-bottom: 2%;
 }
 
-.popup-body .notify-content .notify-img{
+.popup-body .notify-content .notify-img {
     border-radius: 50%;
     background-color: rgb(68, 162, 149);
     text-align: center;
@@ -257,4 +323,156 @@ tbody{
     width: 28px;
     height: 28px;
     margin-right: 1%;
+}
+
+.popup-assign {
+    position: absolute;
+    width: 400px;
+    height: auto;
+    background-color: white;
+    border: solid black 0.5px;
+    top: 0%;
+    transform: translate(-50%, -50%) scale(0.1);
+    left: 50%;
+    z-index: 30;
+    visibility: hidden;
+    transition: transform 0.3s, top 0.3s;
+}
+
+.open-assign {
+    visibility: visible;
+    top: 30%;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+
+.popup-body .assignee {
+    display: flex;
+    border-bottom: gray solid 0.3px;
+    margin-bottom: 2%;
+    font-size: large;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-body .assignee .assignee-img {
+    border-radius: 50%;
+    background-color: rgb(68, 162, 149);
+    text-align: center;
+    justify-content: center;
+    justify-items: center;
+    font-size: large;
+    width: 28px;
+    height: 28px;
+    margin-right: 1%;
+}
+
+.popup-add-task {
+    position: absolute;
+    width: 440px;
+    height: 400px;
+    background-color: white;
+    border: solid black 0.5px;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(0.1);
+    left: 0%;
+    z-index: 20;
+    visibility: hidden;
+    transition: transform 0.3s, top 0.3s;
+}
+
+.open-add-task {
+    visibility: visible;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+
+.popup-body .assignee {
+    display: flex;
+    border-bottom: gray solid 0.3px;
+    margin-bottom: 2%;
+    font-size: large;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-body .assignee .assignee-img {
+    border-radius: 50%;
+    background-color: rgb(68, 162, 149);
+    text-align: center;
+    justify-content: center;
+    justify-items: center;
+    font-size: large;
+    width: 28px;
+    height: 28px;
+    margin-right: 1%;
+}
+
+.open-assign-btn {
+    width: 24px;
+    height: 24px;
+    background-color: transparent;
+    border: 0;
+    position: relative;
+    left: 25%;
+    top: 40%;
+    margin: 0;
+}
+
+.open-assign-btn img {
+    width: 24px;
+    height: 24px;
+    background-color: transparent;
+    border: 0;
+    position: relative;
+    left: 25%;
+    top: 0%;
+    margin: 0;
+}
+
+.open-assign-btn img:hover {
+    transform: scale(1.1);
+    transition: 200ms;
+}
+
+.assign {
+    display: flex;
+}
+
+.assign p {
+    font-size: large;
+}
+
+.assign button {
+    position: relative;
+    top: 3%;
+    margin: 0;
+}
+
+.task-label {
+    font-size: large;
+}
+
+.task-name {
+    margin-top: 3%;
+    margin-bottom: 3%;
+    border: solid rgb(81, 79, 79) 0.25px;
+    width: 280px;
+}
+
+.add-btn {
+    background-color: #F5F5F5;
+    width: 15%;
+    height: 10%;
+    position: absolute;
+    top: 85%;
+    left: 80%;
+    border: solid black 0.5px;
+}
+
+.add-btn:hover {
+    font-size: medium;
+    transition: 200ms;
+    border: solid black 1px;
 }

@@ -16,10 +16,10 @@ const errorHandler = (req, err) => {
 const Check_dup_task_create = async (name, master_project) => {
     // kiểm tra trùng project name và trùng tên task khi tạo 
     let task_name = name;
-    master_project = new mongoose.Types.ObjectId(master_project);
+    master_project = master_project;
 
     let check_task = await Task.find({ "name": task_name });
-    let check_Project = await Project.find({ "_id": master_project });
+    let check_Project = await Project.findById(master_project);
 
     if (check_Project.length > 0) {
         if (check_task.length <= 0) {
@@ -43,10 +43,19 @@ const Check_Task_exist = async (task_id = mongoose.Types.ObjectId) => {
     throw err;
 }
 
-const getTaskPage = (req, res) => {
+const getTaskPage = async (req, res) => {
     try {
-
-        res.render("task.ejs");
+        const Task_list = [];
+        console.log("ham nay", req.query.id)
+        const project = await Project.findById(req.query.id);
+        //const proID = list(res.locals.user.project_ID)
+        console.log(project, project['task'])
+        for (let i = 0; i < project['task'].length; i++) {
+            const task = await Task.findById(project['task'][i])
+            Task_list.push(task);
+        }
+        console.log(Task_list)
+        res.render("task.ejs", { "Task_list": Task_list });
         res.status(200);
     } catch (err) {
         let error = errorHandler(req, err);
@@ -60,8 +69,9 @@ const TaskCreate = async (req, res) => {
     // những tham số cần thiết để khởi tạo 1 task mới
     console.log(req.body)
     let name = req.body.name;
-    let content = req.body.content;
-    let master_project = new mongoose.Types.ObjectId(req.body.master_project); // id project chứa task này
+    let content = "";
+    //let master_project = new mongoose.Types.ObjectId(req.body.master_project); // id project chứa task này
+    let master_project = req.query.id; // id project chứa task này
     let created_date = new Date();
     let status = 0; // mặc định để to do
     let end_date = Date(req.body.end_date); // giả định dữ liệu đã được parse sang 
@@ -76,6 +86,11 @@ const TaskCreate = async (req, res) => {
             "master_project": master_project, "status": status, "content": content,
             "created_date": created_date, "end_date": end_date
         });
+
+        //add task to project
+        const project = await Project.findById(req.query.id);
+        project['task'].push(task['_id']);
+        await project.save()
         res.status(201).json(task);
     }
     catch (err) {
