@@ -238,6 +238,7 @@
   let popupNotify = document.getElementById("notify");
   let popupShare = document.getElementById("share");
   let currentProjectId;
+  let page;
 
   $(document).ready(function () {
     $.ajax({
@@ -255,12 +256,39 @@
     });
   });
 
+  // function navigateToHomePage(){
+  //   navigationLinks = document.getElementsByTagName("a");
+  //   for (let i = 0; i < navigationLinks.length; ++i) {
+  //     console.log("I'm here!");
+  //     currentProjectId = window.location.search;
+  //     console.log(currentProjectId);
+  //     var anchorElement = navigationLinks[0];
+  //     console.log(navigationLinks[1]);
+  //     // Check if the anchor tag has a specific href value
+  //     // if (anchorElement.getAttribute("href") === "/") {
+  //     var content = anchorElement.innerText;
+  //     console.log(content);
+  //     //break; // Exit the loop after finding the first match
+  //     // }
+  //     navigationLinks[i].addEventListener("click", function (event) {
+  //       event.preventDefault();
+  //       console.log(navigationLinks[i]);
+  //       window.location.href = "/Projects/tasks"+currentProjectId;
+  //     })
+  //   }
+  // }
+
   function navigateToHomePage(){
-    navigationLinks = document.getElementsByTagName("a");
+    navigationLinks = document.querySelectorAll('a');
     for (let i = 0; i < navigationLinks.length; ++i) {
-      console.log("I'm here!");
       currentProjectId = window.location.search;
       console.log(currentProjectId);
+      // console.log(navigationLinks[i].textContent);
+      if (i == 0)
+        page = navigationLinks[i].textContent;
+      else
+        page = navigationLinks[i].textContent;
+
       navigationLinks[i].addEventListener("click", function (event) {
         event.preventDefault();
         console.log(navigationLinks[i]);

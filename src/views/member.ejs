@@ -71,9 +71,35 @@
       </div>
     </div>
 
+    <!-- pop up -->
+    <div class="popup-add-mem" id="add-mem">
+      <div class="popup-head">
+        <h3 class="popup-title">Invite new member</h3>
+        <button onclick="closePopupAddMem()">X</button>
+      </div>
+      <form class="invitation-info" action="">
+        <label for="invitation">Invite Some Friends</label>
+        <input type="text" name="invitation" placeholder="Email or name">
+        <button id="invite-btn"><img src="images\Add Administrator.png" alt=""></button>
+      </form>
+    </div>
+
+    <!-- pop up -->
+    <div class="popup-share" id="share">
+      <div class="popup-head">
+        <h3 class="popup-title">Invite new member</h3>
+        <button onclick="closePopupShare()">X</button>
+      </div>
+      <form class="invitation-info" action="">
+        <label for="invitation">Invite Some Friends</label>
+        <input type="text" name="invitation" placeholder="link">
+        <button id="invite-btn"><img src="images/icons8-copy-24.png" alt=""></button>
+      </form>
+    </div>
+
     <!-- Project Name -->
     <div class="header">
-      <h1 style="left: 18%; position: fixed;">Project Name</h1>
+      <!-- <h1 style="left: 18%; position: fixed;">Project Name</h1> -->
       <!-- notify button -->
       <button class="notify-btn" onclick="openNotify()">
         <svg xmlns="http://www.w3.org/2000/svg" height="2em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M224 0c-17.7 0-32 14.3-32 32V51.2C119 66 64 130.6 64 208v18.8c0 47-17.3 92.4-48.5 127.6l-7.4 8.3c-8.4 9.4-10.4 22.9-5.3 34.4S19.4 416 32 416H416c12.6 0 24-7.4 29.2-18.9s3.1-25-5.3-34.4l-7.4-8.3C401.3 319.2 384 273.9 384 226.8V208c0-77.4-55-142-128-156.8V32c0-17.7-14.3-32-32-32zm45.3 493.3c12-12 18.7-28.3 18.7-45.3H224 160c0 17 6.7 33.3 18.7 45.3s28.3 18.7 45.3 18.7s33.3-6.7 45.3-18.7z"/></svg>
@@ -86,12 +112,48 @@
         </div>
       </div>
     </div>
+    <div class="project-title">
+      <h1>Project Name</h1>
+    </div>
+    <h3 class="member-title">Project's member (3)</h3>
+
     <!-- buttons -->
-    
+    <div class="functional-btn">
+      <img src="images/icons8-member-60.png" alt="">
+      <div class="search">
+        <input class="form-control" type="text" placeholder="Filter by name ...">
+      </div>
+      <button type="button" class="btn btn-secondary btn-sm" id="add-member-btn" onclick="openPopupAddMem()"><img src="images/Add Administrator.png" alt="" width="24px" height="24px"> Invite by email</button>
+      <button type="button" class="btn btn-secondary btn-sm" id="share-by-link-btn" onclick="openPopupShare()"><img src="images/icons8-link-24.png" alt="" width="24px" height="24px"> Invite by link</button>
+    </div>
+
+    <!-- member list -->
+    <div class="member-list">
+      <div class="member">
+        <div class="profile-img" id="mem-tag">U</div>
+        <p class="mem-name">Member 1</p>
+        <p class="mem-role">(Role)</p>
+        <button type="button" class="btn btn-secondary btn-sm" id="remove-member-btn">Leave</button>
+      </div>
+      <div class="member">
+        <div class="profile-img" id="mem-tag">U</div>
+        <p class="mem-name">Member 2</p>
+        <p class="mem-role">(Role)</p>
+        <button type="button" class="btn btn-secondary btn-sm" id="remove-member-btn">Remove</button>
+      </div>
+      <div class="member">
+        <div class="profile-img" id="mem-tag">U</div>
+        <p class="mem-name">Member 3</p>
+        <p class="mem-role">(Role)</p>
+        <button type="button" class="btn btn-secondary btn-sm" id="remove-member-btn">Remove</button>
+      </div>
+    </div>    
   </div>
 </body>
 <script>
   let popupNotify = document.getElementById("notify");
+  let popupAddMem = document.getElementById("add-mem");
+  let popupShare = document.getElementById("share");
 
   function openNotify(){
     popupNotify.classList.add("open-notify");
@@ -99,7 +161,17 @@
   function closeNotify(){
     popupNotify.classList.remove("open-notify");
   }
+  function openPopupAddMem(){
+    popupAddMem.classList.add("open-add-mem");
+  }
+  function closePopupAddMem(){
+    popupAddMem.classList.remove("open-add-mem");
+  }
+  function openPopupShare(){
+    popupShare.classList.add("open-share");
+  }
+  function closePopupShare(){
+    popupShare.classList.remove("open-share");
+  }
 </script>
 </html>
-
-
