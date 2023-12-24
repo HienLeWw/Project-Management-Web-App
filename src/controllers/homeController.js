@@ -49,8 +49,9 @@ const getHomepage = async (req, res) => {
 }
 
 const loginPage = (req, res) => {
-    res.render('login.ejs');
-}
+    const { loginSuccess, loginError } = req.query;
+    res.render('login', { loginSuccess, loginError });
+};
 
 const signUpPage = (req, res) => {
     res.render('register.ejs')
@@ -68,20 +69,33 @@ const signUpRequest = async (req, res) => {
     }
 }
 
+// const loginRequest = async (req, res) => {
+//     const { username, password } = req.body;
+//     console.log(username);
+//     try {
+//         const user = await User.login(username, password);
+//         const token = createToken(user._id);
+//         res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
+//         res.status(200).redirect('/');
+//     }
+//     catch (err) {
+//         console.log(err)
+//         res.status(400).redirect('/login');
+//     }
+// }
 const loginRequest = async (req, res) => {
     const { username, password } = req.body;
     console.log(username);
     try {
-        const user = await User.login(username, password);
-        const token = createToken(user._id);
-        res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
-        res.status(200).redirect('/');
+      const user = await User.login(username, password);
+      const token = createToken(user._id);
+      res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
+      res.status(200).redirect('/?loginSuccess=true');
+    } catch (err) {
+      console.log(err);
+      res.status(400).redirect('/login?loginError=true');
     }
-    catch (err) {
-        console.log(err)
-        res.status(400).redirect('/login');
-    }
-}
+  };
 const logout = (req, res) => {
     res.cookie('jwt', '', { maxAge: 1 });
     res.redirect('/')
