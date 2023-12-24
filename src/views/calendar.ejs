@@ -118,6 +118,8 @@
 </body>
 <script>
   let popupNotify = document.getElementById("notify");
+  let currentProjectId;
+  let page;
 
   function openNotify() {
     popupNotify.classList.add("open-notify");
@@ -135,6 +137,31 @@
     { start_date: "2023-11-20", end_date: "2023-11-27", text: "Event 3", color: "#AB30E5" } //late
   ], "json");
 
+  function navigateToBetweenPages(){
+    let navigationLinks = document.getElementsByTagName('a');
+    for (let i = 0; i < navigationLinks.length; ++i) {
+      console.log("I'm here");
+      navigationLinks[i].addEventListener("click", function (event) {
+        event.preventDefault();
+        currentProjectId = window.location.search;
+        console.log(currentProjectId);
+        page = navigationLinks[i].textContent;
+        console.log(page);
+        if (i == 0)
+          page = "/";
+        else if (page=="Task" || page=="Member")
+          page = page.toLowerCase()+"s";
+        else if (page=="Home")
+          page = "project";
+        else
+          page = page.toLowerCase();
+        console.log(page);
+        window.location.href = "/Projects/"+page+currentProjectId;
+      })
+    }
+  }
+
+  navigateToBetweenPages();
 </script>
 
 </html>

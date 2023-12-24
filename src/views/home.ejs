@@ -256,47 +256,30 @@
     });
   });
 
-  // function navigateToHomePage(){
-  //   navigationLinks = document.getElementsByTagName("a");
-  //   for (let i = 0; i < navigationLinks.length; ++i) {
-  //     console.log("I'm here!");
-  //     currentProjectId = window.location.search;
-  //     console.log(currentProjectId);
-  //     var anchorElement = navigationLinks[0];
-  //     console.log(navigationLinks[1]);
-  //     // Check if the anchor tag has a specific href value
-  //     // if (anchorElement.getAttribute("href") === "/") {
-  //     var content = anchorElement.innerText;
-  //     console.log(content);
-  //     //break; // Exit the loop after finding the first match
-  //     // }
-  //     navigationLinks[i].addEventListener("click", function (event) {
-  //       event.preventDefault();
-  //       console.log(navigationLinks[i]);
-  //       window.location.href = "/Projects/tasks"+currentProjectId;
-  //     })
-  //   }
-  // }
-
-  function navigateToHomePage(){
-    navigationLinks = document.querySelectorAll('a');
+  function navigateToBetweenPages(){
+    let navigationLinks = document.getElementsByTagName('a');
     for (let i = 0; i < navigationLinks.length; ++i) {
-      currentProjectId = window.location.search;
-      console.log(currentProjectId);
-      // console.log(navigationLinks[i].textContent);
-      if (i == 0)
-        page = navigationLinks[i].textContent;
-      else
-        page = navigationLinks[i].textContent;
-
+      console.log("I'm here");
       navigationLinks[i].addEventListener("click", function (event) {
         event.preventDefault();
-        console.log(navigationLinks[i]);
-        window.location.href = "/Projects/tasks"+currentProjectId;
+        currentProjectId = window.location.search;
+        console.log(currentProjectId);
+        page = navigationLinks[i].textContent;
+        console.log(page);
+        if (i == 0)
+          page = "/";
+        else if (page=="Task" || page=="Member")
+          page = page.toLowerCase()+"s";
+        else if (page=="Home")
+          page = "project";
+        else
+          page = page.toLowerCase();
+        console.log(page);
+        window.location.href = "/Projects/"+page+currentProjectId;
       })
     }
   }
-
+  
   function openNotify() {
     popupNotify.classList.add("open-notify");
   }
@@ -309,7 +292,7 @@
   function closePopupShare() {
     popupShare.classList.remove("open-share");
   }
-  navigateToHomePage();
+  navigateToBetweenPages();
 </script>
 
 </html>

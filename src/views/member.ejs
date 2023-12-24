@@ -24,7 +24,7 @@
     crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <link rel="stylesheet" href="member_style.css">
+  <link rel="stylesheet" href="/css/member_style.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdn.dhtmlx.com/scheduler/edge/dhtmlxscheduler_material.css">
   <script src="https://cdn.dhtmlx.com/scheduler/edge/dhtmlxscheduler.js"></script>
@@ -35,38 +35,38 @@
   <div class="w3-sidebar">
     <a class="active" href="project.html">
       <div class="logo_contain">
-        <img src="images\combine_logo.png" alt="logo">
+        <img src="\img\combine_logo.png" alt="logo">
       </div>
     </a>
     <ul>
       <li>
         <div class="nav-items">
-          <a href="home.html"><img src="images\icons8-dashboard-layout-48.png" alt="" class="nav-img" width="32px"
+          <a href="home.html"><img src="\img\icons8-dashboard-layout-48.png" alt="" class="nav-img" width="32px"
               height="32px">Home</a>
         </div>
       </li>
       <li>
         <div class="nav-items">
-          <a href="member.html"><img src="images\icons8-member-48.png" alt="" class="nav-img" width="32px"
+          <a href="member.html"><img src="\img\icons8-member-48.png" alt="" class="nav-img" width="32px"
               height="32px">Member</a>
         </div>
       </li>
       <li>
         <div class="nav-items">
 
-          <a href="task.html"><img src="images\icons8-task-50.png" alt="" class="nav-img" width="32px"
+          <a href="task.html"><img src="\img\icons8-task-50.png" alt="" class="nav-img" width="32px"
               height="32px">Task</a>
         </div>
       </li>
       <li>
         <div class="nav-items">
-          <a href="calendar.html"><img src="images\icons8-calendar-64.png" alt="" class="nav-img" width="32px"
+          <a href="calendar.html"><img src="\img\icons8-calendar-64.png" alt="" class="nav-img" width="32px"
               height="32px">Calendar</a>
         </div>
       </li>
       <li>
         <div class="nav-items">
-          <a href="#setting"><img src="images\icons8-settings-64.png" alt="" class="nav-img" width="32px"
+          <a href="#setting"><img src="\img\icons8-settings-64.png" alt="" class="nav-img" width="32px"
               height="32px">Setting</a>
         </div>
       </li>
@@ -79,7 +79,7 @@
     <div class="popup-notify" id="notify">
       <div class="popup-head">
         <h3 class="popup-title">Notification</h3>
-        <img src="images\Notification-button.png" alt="">
+        <img src="\img\Notification-button.png" alt="">
         <button onclick="closeNotify()">X</button>
       </div>
       <div class="popup-body">
@@ -101,7 +101,7 @@
       <form class="invitation-info" action="">
         <label for="invitation">Invite Some Friends</label>
         <input type="text" name="invitation" placeholder="Email or name">
-        <button id="invite-btn"><img src="images\Add Administrator.png" alt=""></button>
+        <button id="invite-btn"><img src="\img\Add Administrator.png" alt=""></button>
       </form>
     </div>
 
@@ -114,7 +114,7 @@
       <form class="invitation-info" action="">
         <label for="invitation">Invite Some Friends</label>
         <input type="text" name="invitation" placeholder="link">
-        <button id="invite-btn"><img src="images/icons8-copy-24.png" alt=""></button>
+        <button id="invite-btn"><img src="/img/icons8-copy-24.png" alt=""></button>
       </form>
     </div>
 
@@ -144,14 +144,14 @@
 
     <!-- buttons -->
     <div class="functional-btn">
-      <img src="images/icons8-member-60.png" alt="">
+      <img src="/img/icons8-member-60.png" alt="">
       <div class="search">
         <input class="form-control" type="text" placeholder="Filter by name ...">
       </div>
       <button type="button" class="btn btn-secondary btn-sm" id="add-member-btn" onclick="openPopupAddMem()"><img
-          src="images/Add Administrator.png" alt="" width="24px" height="24px"> Invite by email</button>
+          src="/img/Add Administrator.png" alt="" width="24px" height="24px"> Invite by email</button>
       <button type="button" class="btn btn-secondary btn-sm" id="share-by-link-btn" onclick="openPopupShare()"><img
-          src="images/icons8-link-24.png" alt="" width="24px" height="24px"> Invite by link</button>
+          src="/img/icons8-link-24.png" alt="" width="24px" height="24px"> Invite by link</button>
     </div>
 
     <!-- member list -->
@@ -181,6 +181,8 @@
   let popupNotify = document.getElementById("notify");
   let popupAddMem = document.getElementById("add-mem");
   let popupShare = document.getElementById("share");
+  let currentProjectId;
+  let page;
 
   function openNotify() {
     popupNotify.classList.add("open-notify");
@@ -200,6 +202,32 @@
   function closePopupShare() {
     popupShare.classList.remove("open-share");
   }
+
+  function navigateToBetweenPages(){
+    let navigationLinks = document.getElementsByTagName('a');
+    for (let i = 0; i < navigationLinks.length; ++i) {
+      console.log("I'm here");
+      navigationLinks[i].addEventListener("click", function (event) {
+        event.preventDefault();
+        currentProjectId = window.location.search;
+        console.log(currentProjectId);
+        page = navigationLinks[i].textContent;
+        console.log(page);
+        if (i == 0)
+          page = "/";
+        else if (page=="Task" || page=="Member")
+          page = page.toLowerCase()+"s";
+        else if (page=="Home")
+          page = "project";
+        else
+          page = page.toLowerCase();
+        console.log(page);
+        window.location.href = "/Projects/"+page+currentProjectId;
+      })
+    }
+  }
+
+  navigateToBetweenPages();
 </script>
 
 </html>
