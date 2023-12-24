@@ -102,7 +102,16 @@
         <button onclick="closeAssign()">X</button>
       </div>
       <div class="popup-body">
-        <div class="assignee">
+        <% for (let i=0; i < users.length; i++) { %>
+          <div class="assignee">
+            <div class="assignee-img">
+              <%= users[i].username[0] %>
+            </div>
+            <%= users[i].username %>
+              <button class="open-assign-btn"><img src="/img/Add Administrator.png" alt=""></button>
+          </div>
+          <% } %>
+            <!-- <div class="assignee">
           <div class="assignee-img">U</div>Member 1<button class="open-assign-btn"><img src="/img/Add Administrator.png"
               alt=""></button>
         </div>
@@ -113,7 +122,7 @@
         <div class="assignee">
           <div class="assignee-img">U</div>Member 3<button class="open-assign-btn"><img src="/img/Add Administrator.png"
               alt=""></button>
-        </div>
+        </div> -->
       </div>
     </div>
 
@@ -155,8 +164,12 @@
         style="background-color: transparent; border: none; left: 85%; position: fixed; display: flex;">
         <div class="profile-img">U</div>
         <div class="profile-content">
-          <p class="profile-user">Username</p>
-          <p class="profile-email">Email</p>
+          <p class="profile-user">
+            <%= user.username %>>
+          </p>
+          <p class="profile-email">
+            <%= user.email %>>
+          </p>
         </div>
       </div>
     </div>
@@ -209,11 +222,19 @@
               </div>
             </td>
             <td>
-              <%= Task_list[i].created_date %>
+              <%= Task_list[i].created_date.toLocaleDateString('en-GB') %>
             </td>
-            <td>11/01/2024</td>
             <td>
-              <div class="status" id="Done">Done</div>
+              <%=Task_list[i].end_date.toLocaleDateString('en-GB') %>
+            </td>
+            <td>
+              <%if(Task_list[i].status==0) {%>
+                <div class="status" id="To-do">To-do</div>
+                <%} else if (Task_list[i].status==1) {%>
+                  <div class="status" id="In-progress">In-progress</div>
+                  <%} else{ %>
+                    <div class="status" id="Done">Done</div>
+                    <% } %>
             </td>
             <td>
               <div class="action">
@@ -334,8 +355,8 @@
   var buttons = document.querySelectorAll('.open-assign-btn');
 
   // Attach a click event listener to each button
-  buttons.forEach(function(button) {
-    button.addEventListener('click', function() {
+  buttons.forEach(function (button) {
+    button.addEventListener('click', function () {
       // Get the content of the assignee element
       var assigneeContent = this.parentNode.textContent.trim();
       // Output the content to the console (you can modify this to suit your needs)
