@@ -17,6 +17,7 @@ const authorization = async (req, res, next) => {
         }
     }
     catch (error) {
+        console.log("loi cho author ne")
         res.redirect('/')
     }
 }
