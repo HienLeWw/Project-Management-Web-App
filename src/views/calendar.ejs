@@ -147,8 +147,9 @@
         console.log(currentProjectId);
         page = navigationLinks[i].textContent;
         console.log(page);
-        if (i == 0)
-          page = "/";
+        if (i == 0){
+          window.location.href = "/";
+        }
         else if (page=="Task" || page=="Member")
           page = page.toLowerCase()+"s";
         else if (page=="Home")
