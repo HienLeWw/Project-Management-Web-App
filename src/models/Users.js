@@ -1,3 +1,4 @@
+require('dotenv').config();
 const mongoose = require('mongoose');
 const { isEmail } = require('validator');
 const bcrypt = require('bcrypt')
@@ -26,7 +27,7 @@ const userSchema = new mongoose.Schema({
 });
 
 userSchema.pre('save', async function (next) {
-    const salt = await bcrypt.genSalt();
+    const salt = process.env.SALT_SECRET
     this.password = await bcrypt.hash(this.password, salt);
     next();
 });
