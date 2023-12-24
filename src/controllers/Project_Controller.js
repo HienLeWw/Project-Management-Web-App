@@ -2,6 +2,7 @@ const { underscore } = require('consolidate');
 const { db } = require('../config/database');
 const Project = require('../models/Projects');
 const User = require('../models/Users');
+const Task = require('../models/Tasks')
 const mongoose = require('mongoose');
 
 const errorHandler = (req, err) => {
@@ -86,17 +87,27 @@ const calendarPage = async (req, res) => {
     res.render('calendar.ejs')
 }
 
-const getAllMembers = async (req, res) => {
+const getAllInfo = async (req, res) => {
     const users = await User.find({ 'project_ID': req.query.id })
-    console.log(users)
-    res.status(200).json({ "users": users })
+    const project = await Project.findById(req.query.id);
+    console.log("test", project['task'][0])
+    const taskList = []
+    for (let i = 0; i < project['task'].length; i++) {
+        const task = await Task.findById(project['task'][0]);
+        taskList.push(task);
+    }
+
+    res.status(200).json({ "users": users, "tasks": taskList })
 }
 const modProject = async (req, res) => {
     try {
-        const user = await User.find({ 'username': req.body.username });
-        console.log(user[0]['project_ID'], typeof (req.query.id))
-        user[0]['project_ID'].push(req.query.id);
-        await user[0].save();
+        for (let i = 0; i < req.body.username.length; i++) {
+            const user = await User.find({ 'username': req.body.username[i] });
+            console.log(user[0]['project_ID'])
+
+            user[i]['project_ID'].push(req.query.id);
+            await user[i].save();
+        }
         res.status(201).json({ "user": user })
     }
     catch (err) {
@@ -104,4 +115,4 @@ const modProject = async (req, res) => {
     }
 }
 
-module.exports = { Create_Project, Delete_Project, getProjects, projectPage, memberPage, getAllMembers, calendarPage, modProject };
+module.exports = { Create_Project, Delete_Project, getProjects, projectPage, memberPage, getAllInfo, calendarPage, modProject };
