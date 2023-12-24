@@ -209,7 +209,7 @@ tbody{
     top: 0%;
     transform: translate(-50%, -50%) scale(0.1);
     left: 50%;
-    z-index: 1000;
+    z-index: 100;
     visibility: hidden;
     transition: transform 0.3s, top 0.3s;
 }
@@ -276,7 +276,7 @@ tbody{
     top: 40%;
     transform: translate(-50%, -50%) scale(0.1);
     left: 0%;
-    z-index: 20;
+    z-index: 1000;
     visibility: hidden;
     transition: transform 0.3s, top 0.3s;
 }

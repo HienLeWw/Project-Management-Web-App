@@ -236,6 +236,22 @@
   let popupNotify = document.getElementById("notify");
   let popupShare = document.getElementById("share");
 
+  $(document).ready(function () {
+    $.ajax({
+      type: "GET",
+      url: "/Projects/project/member"+window.location.search,
+      contentType: "application/json",
+      success: function (res) {
+        window.sessionStorage.clear();
+        console.log(res);
+        res.project_list.forEach(element => {
+          //console.log(element);
+          window.sessionStorage.setItem("project" + element['_id'], JSON.stringify(element));
+        });
+      }
+    });
+  });
+
   function openNotify() {
     popupNotify.classList.add("open-notify");
   }

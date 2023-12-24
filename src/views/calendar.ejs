@@ -88,7 +88,7 @@
     </div>
     <!-- buttons -->
     
-    <div id="scheduler"></div>
+    <div id="scheduler" onclick="print()"></div>
   </div>
 </body>
 <script>
@@ -105,11 +105,20 @@
   scheduler.init('scheduler', new Date(), "week");
 
   scheduler.parse([
-    { start_date: "2023-11-19", end_date: "2023-11-22", text: "Event 1", color: "#1F9254" }, //todo
-    { start_date: "2023-11-17", end_date: "2023-11-24", text: "Event 2", color: "#CD6200" }, //in-progress
-    { start_date: "2023-11-20", end_date: "2023-11-27", text: "Event 3", color: "#AB30E5" } //late
+    { start_date: "2023-12-19", end_date: "2023-12-22", text: "Event 1", color: "#1F9254" }, //todo
+    { start_date: "2023-12-17", end_date: "2023-12-24", text: "Event 2", color: "#CD6200" }, //in-progress
+    { start_date: "2023-12-20", end_date: "2023-12-27", text: "Event 3", color: "#AB30E5" } //late
   ], "json");
-
+  // console.log(scheduler.text);
+  var eventId = scheduler.addEvent({
+    start_date: "16-06-2019 09:00",
+    end_date:   "16-06-2019 12:00",
+    text:   "Meeting"
+  });
+  console.log(eventId);
+  function print(){
+    console.log("hello!");
+  }
 </script>
 </html>
 
