@@ -16,7 +16,7 @@ const errorHandler = (req, err) => {
 const Check_dup_task_create = async (name, master_project) => {
     // kiểm tra trùng project name và trùng tên task khi tạo 
     let task_name = name;
-    master_project = master_project;
+    master_project = new mongoose.Types.ObjectId(master_project);
 
     let check_task = await Task.find({ "name": task_name });
     let check_Project = await Project.findById(master_project);
@@ -75,8 +75,15 @@ const TaskCreate = async (req, res) => {
     let content = "";
     //let master_project = new mongoose.Types.ObjectId(req.body.master_project); // id project chứa task này
     let master_project = req.query.id; // id project chứa task này
+    
+    // cần kiểm tra và đổi lại created date thành begin date
+    // cần kiểm tra begin date để xác định giá trị khởi tạo cho status
+    
+    
+    // mặc định để In progress, begin date == created date
     let created_date = new Date();
-    let status = 0; // mặc định để to do
+    let status = 1; 
+
     let end_date = Date(req.body.end_date); // giả định dữ liệu đã được parse sang 
     // kiểu Date trước khi được gửi đi 
     let user_ids = req.body.user_ids;
