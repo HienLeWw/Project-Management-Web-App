@@ -108,18 +108,18 @@ const ModTaskContent = async (req, res) => {
     // Các thuộc tính cần thiết
     const task_to_mod = req.body.task; // lấy task id
 
-
     // Các thuộc tính có thể được thay đổi
     const new_content = req.body.content;
     const new_end_date = req.body.end_date;
     const update_user_ids = req.body.user_ids;
+    const update_status = req.body.status;
 
     try {
         await Check_Task_exist(task_to_mod);
         update_content = Task.updateOne(
             { "_id": task_to_mod },
             {
-                $set: { 'content': new_content, 'end_date': new_end_date, 'user_ids': update_user_ids }
+                $set: { 'content': new_content, 'end_date': new_end_date, 'user_ids': update_user_ids, 'status': update_status }
             }
         )
         console.log("Modify OK!");

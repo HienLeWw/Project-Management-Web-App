@@ -91,5 +91,17 @@ const getAllMembers = async (req, res) => {
     console.log(users)
     res.status(200).json({ "users": users })
 }
+const modProject = async (req, res) => {
+    try {
+        const user = await User.find({ 'username': req.body.username });
+        console.log(user[0]['project_ID'], typeof (req.query.id))
+        user[0]['project_ID'].push(req.query.id);
+        await user[0].save();
+        res.status(201).json({ "user": user })
+    }
+    catch (err) {
+        res.status(400).json({ "error": err.message })
+    }
+}
 
-module.exports = { Create_Project, Delete_Project, getProjects, projectPage, memberPage, getAllMembers, calendarPage };
+module.exports = { Create_Project, Delete_Project, getProjects, projectPage, memberPage, getAllMembers, calendarPage, modProject };
