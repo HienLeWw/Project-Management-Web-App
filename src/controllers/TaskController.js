@@ -54,8 +54,11 @@ const getTaskPage = async (req, res) => {
             const task = await Task.findById(project['task'][i])
             Task_list.push(task);
         }
-        console.log(Task_list)
-        res.render("task.ejs", { "Task_list": Task_list });
+        // get members to render
+        const users = await User.find({ "project_ID": req.query.id })
+        console.log("username", users)
+        console.log("task", Task_list)
+        res.render("task.ejs", { "Task_list": Task_list, "users": users });
         res.status(200);
     } catch (err) {
         let error = errorHandler(req, err);
