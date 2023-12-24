@@ -115,4 +115,17 @@ const modProject = async (req, res) => {
     }
 }
 
-module.exports = { Create_Project, Delete_Project, getProjects, projectPage, memberPage, getAllInfo, calendarPage, modProject };
+const leaveProject = async (req, res) => {
+    try {
+        console.log(req.user['project_ID'])
+        const index = req.user['project_ID'].indexOf(2);
+        req.user['project_ID'].splice(index, 1)
+        console.log(req.user['project_ID'])
+        await req.user.save();
+        res.status(200).redirect('/');
+    }
+    catch (err) {
+    }
+}
+
+module.exports = { Create_Project, Delete_Project, getProjects, projectPage, memberPage, getAllInfo, calendarPage, modProject, leaveProject };
