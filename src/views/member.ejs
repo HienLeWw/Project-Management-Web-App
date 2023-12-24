@@ -98,10 +98,10 @@
         <h3 class="popup-title">Invite new member</h3>
         <button onclick="closePopupAddMem()">X</button>
       </div>
-      <form class="invitation-info" action="">
+      <form class="invitation-info" id="invite-form" action="">
         <label for="invitation">Invite Some Friends</label>
-        <input type="text" name="invitation" placeholder="Email or name">
-        <button id="invite-btn"><img src="\img\Add Administrator.png" alt=""></button>
+        <input type="text" name="id" id="invite-name" placeholder="Email or name">
+        <button id="invite-btn" type="submit"><img src="\img\Add Administrator.png" alt=""></button>
       </form>
     </div>
 
@@ -111,10 +111,10 @@
         <h3 class="popup-title">Invite new member</h3>
         <button onclick="closePopupShare()">X</button>
       </div>
-      <form class="invitation-info" action="">
-        <label for="invitation">Invite Some Friends</label>
-        <input type="text" name="invitation" placeholder="link">
-        <button id="invite-btn"><img src="/img/icons8-copy-24.png" alt=""></button>
+      <form class="invitation-info" action="/Projects/project" method="PUT">
+      <label for="invitation">Invite Some Friends</label>
+      <input type="text" name="id" placeholder="link">
+      <button id="invite-btn" type="submit"><img src="/img/icons8-copy-24.png" alt=""></button>
       </form>
     </div>
 
@@ -183,6 +183,36 @@
   let popupShare = document.getElementById("share");
   let currentProjectId;
   let page;
+
+  $(document).ready(function () {
+    $("#invite-btn").click(function (event) {
+      var inviteInfo = {
+        username: $("#invite-name").val().trim()
+      };
+      console.log(inviteInfo);
+      // console.log("/Projects/project"+window.location.search);
+      let requestURL = "/Projects/project?id=656d95051e56766a8fe65125";//+window.location.search;
+      $.ajax({
+        type: "PUT",
+        url: "/Projects/project?id=656d95051e56766a8fe65125",
+        data: JSON.stringify(inviteInfo),
+        //dataType: "json",
+        contentType: "application/json",
+        //encode: true,
+        success: function (res) {
+          console.log("successfully send request!");
+          console.log(res);
+          console.log(typeof(res));
+          window.sessionStorage.setItem("newmember" + res['_id'], JSON.stringify(res));
+          // navigateToHomePage();
+        }
+      }).done(function (data) {
+        // console.log(data);
+        // closePopupAddMem();
+      });
+      event.preventDefault();
+    });
+  });
 
   function openNotify() {
     popupNotify.classList.add("open-notify");

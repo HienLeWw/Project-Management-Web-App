@@ -9,6 +9,7 @@ const authorization = async (req, res, next) => {
         const user = await User.findById(req.user.id);
         //take object value and check if id of the project is in the user
         if (Object.values(user['project_ID']).indexOf(req.query.id) >= 0) {
+            console.log("pass");
             next();
         }
         else {

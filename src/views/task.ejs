@@ -133,16 +133,16 @@
       </div>
       <div class="popup-body">
         <!-- <form action="" class="task-info"> -->
-        <label for="task-name" class="task-label">Task name:</label><br>
-        <input type="text" name="task-name" class="task-name">
-        <div class="assign">
-          <p>Assign:</p>
-          <button class="open-assign-btn" onclick="openAssign()"><img src="/img/Add Administrator.png" alt="">
-        </div>
-        <label for="start" class="task-label">Start Date:</label>
-        <input id="datepicker1" name="start" width="276" />
-        <label for="due" class="task-label">Due Date:</label>
-        <input id="datepicker2" name="due" width="276" />
+          <label for="task-name" class="task-label">Task name:</label><br>
+          <input type="text" name="task-name" id="task-name" class="task-name">
+          <div class="assign">
+            <p>Assign:</p>
+            <button class="open-assign-btn" onclick="openAssign()" id="assign-btn"><img src="/img/Add Administrator.png" alt="">
+          </div>
+          <label for="start" class="task-label">Start Date:</label>
+          <input id="datepicker1" name="start" width="276" />
+          <label for="due" class="task-label">Due Date:</label>
+          <input id="datepicker2" name="due" width="276" />
         <!-- </form> -->
         <button class="add-btn">Add</button>
       </div>
@@ -321,6 +321,7 @@
   let selectedDueDate;
   let currentProjectId;
   let page;
+  let assigneeList = {};
 
   function openNotify() {
     popupNotify.classList.add("open-notify");
@@ -348,7 +349,7 @@
     console.log(selectedStartDate);
   });
   $('#datepicker2').on('change', function () {
-    selectedStartDate = $(this).datepicker('value');
+    selectedDueDate = $(this).datepicker('value');
     console.log(selectedDueDate);
   });
 
@@ -362,7 +363,9 @@
       // Get the content of the assignee element
       var assigneeContent = this.parentNode.textContent.trim();
       // Output the content to the console (you can modify this to suit your needs)
-      console.log(assigneeContent);
+      console.log(assigneeContent.split("\n ")[assigneeContent.split("\n ").length-1].trim());
+      assignee = assigneeContent.split("\n ")[assigneeContent.split("\n ").length-1].trim();
+      assigneeList.push(assignee);
     });
   });
 
@@ -395,6 +398,38 @@
       })
     }
   }
+
+  // $(document).ready(function () {
+  //   $("#assign-btn").click(function (event) {
+  //     var addTaskInfo = {
+  //       name: $("#task-name").val(),
+  //       user_ids: assigneeList,
+  //       create_date: selectedStartDate,
+  //       end_date: selectedDueDate
+  //     };
+  //     // console.log(projectInfo);
+  //     $.ajax({
+  //       type: "POST",
+  //       url: "/Projects/tasks",
+  //       data: JSON.stringify(addTaskInfo),
+  //       //dataType: "json",
+  //       contentType: "application/json",
+  //       //encode: true,
+  //       success: function (res) {
+  //         console.log("successfully send request!");
+  //         console.log(res);
+  //         console.log(typeof(res));
+  //         window.sessionStorage.setItem("project" + res['_id'], JSON.stringify(res));
+  //         updateProjectList();
+  //         closeAddTask();
+  //         // navigateToHomePage();
+  //       }
+  //     }).done(function (data) {
+  //       // console.log(data);
+  //     });
+  //     event.preventDefault();
+  //   });
+  // });
 
   navigateToBetweenPages();
 </script>

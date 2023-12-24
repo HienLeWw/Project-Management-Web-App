@@ -240,18 +240,44 @@
   let currentProjectId;
   let page;
 
+  // $(document).ready(function () {
+  //   $.ajax({
+  //     type: "GET",
+  //     url: "/Projects/project/members"+window.location.search,
+  //     contentType: "application/json",
+  //     success: function (res) {
+  //       window.sessionStorage.clear();
+  //       console.log(res);
+  //       console.log(res.users);
+  //       // res.users.forEach(element => {
+  //       //   //console.log(element);
+  //       //   window.sessionStorage.setItem("project" + element['_id'], JSON.stringify(element));
+  //       // });
+  //       // window.sessionStorage.getItem();
+  //     }
+  //   });
+  // });
+
   $(document).ready(function () {
     $.ajax({
       type: "GET",
-      url: "/Projects/project/members"+window.location.search,
+      url: "/Projects/project/info"+window.location.search,
       contentType: "application/json",
       success: function (res) {
         window.sessionStorage.clear();
         console.log(res.users);
-        // res.users.forEach(element => {
+        res.users.forEach(element => {
         //   //console.log(element);
-        //   window.sessionStorage.setItem("project" + element['_id'], JSON.stringify(element));
-        // });
+          window.sessionStorage.setItem("users" + element['_id'], JSON.stringify(element));
+        });
+        res.users.forEach(element => {
+        //   //console.log(element);
+          window.sessionStorage.setItem("tasks" + element['_id'], JSON.stringify(element));
+        });
+        // window.sessionStorage.getItem();
+        for (let index = 0; index < window.sessionStorage.length; index++) {
+         console.log(window.sessionStorage.key(index))
+        }
       }
     });
   });
