@@ -26,7 +26,8 @@ const updateNoti = async () => {
                         "taskName": tasks[i].name,
                         "taskID": tasks[i]._id.valueOf(),
                         "notiStatus": false,
-                        "endDate": tasks[i].end_date
+                        "endDate": tasks[i].end_date,
+                        "expiredDay": compareDay(currentDay, new Date(tasks[i]['end_date']))
                     }
                     user['notification'].push(noti)
                     await user.save()

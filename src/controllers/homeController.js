@@ -46,6 +46,15 @@ const getHomepage = async (req, res) => {
         Project_list.push(project);
     }
     let notiList = req.user.notification;
+    console.log(notiList)
+    for (let i = 0; i < req.user.notification.length; i++) {
+        if (req.user.notification[i].expiredDay > 30) {
+            req.user.notification[i].notiStatus = true;
+        }
+    }
+    const user = new User(req.user)
+    console.log(user)
+    await user.save();
     res.render('project.ejs', { 'project_list': Project_list, 'notiList': notiList })
 }
 
