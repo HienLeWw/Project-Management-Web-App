@@ -12,10 +12,7 @@ const errorHandler = (req, err) => {
     errors = [err]
     return errors
 }
-const dd_mm_yyyy_formating = (date_string) => {
-    let day_struct = date_string.split('/')
-    return new Date(day_struct[2], day_struct[1] - 1, day_struct[0])
-}
+
 const Check_dup_task_create = async (name, master_project) => {
     // kiểm tra trùng project name và trùng tên task khi tạo 
     let task_name = name;
