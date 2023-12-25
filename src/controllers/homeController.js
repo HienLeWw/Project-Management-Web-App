@@ -45,7 +45,8 @@ const getHomepage = async (req, res) => {
         const project = await Project.findById(res.locals.user.project_ID[i])
         Project_list.push(project);
     }
-    res.render('project.ejs', { 'project_list': Project_list })
+    let notiList = req.user.notification;
+    res.render('project.ejs', { 'project_list': Project_list, 'notiList': notiList })
 }
 
 const loginPage = (req, res) => {

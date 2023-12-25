@@ -21,7 +21,6 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser())
 
-schedule.scheduleJob({ hour: 0, minute: 0 }, async () => updateNoti())
 
 // Route
 app.use('*', checkUser);
@@ -30,6 +29,8 @@ app.use('/', projectRoute);
 app.use('/', taskRoute);
 
 app.listen(port, () => {
-
     console.log(`App listening on port ${port}`)
 })
+//schedule.scheduleJob({ hour: 0, minute: 0 }, async () => updateNoti())
+var cronExpress = '0 */1 * * * *'
+schedule.scheduleJob(cronExpress, updateNoti)

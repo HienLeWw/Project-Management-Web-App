@@ -28,8 +28,8 @@
       <% for(let i=0; i < project_list.length; ++i){ %>
         <li>
           <div class="nav-items">
-            <a href="/Projects/project?id=" + idProjectToNavigate><img src="img/icons8-project-50.png" alt="" class="nav-img" width="32px" height="32px"
-                style="margin-right: 10px; margin-left: 20px;">
+            <a href="/Projects/project?id=" + idProjectToNavigate><img src="img/icons8-project-50.png" alt=""
+                class="nav-img" width="32px" height="32px" style="margin-right: 10px; margin-left: 20px;">
               <%= project_list[i]['name'] %>
             </a>
           </div>
@@ -54,12 +54,19 @@
         <button onclick="closeNotify()">X</button>
       </div>
       <div class="popup-body">
-        <div class="notify-content">
-          <div class="notify-img">U</div>(Task remind) Due date: 11/1/2024
-        </div>
-        <div class="notify-content">
-          <div class="notify-img">U</div>(Event) Weekly Meeting: 12/1/2024
-        </div>
+        <% for (let i=0; i < notiList.length; i++){ %>
+          <% console.log(notiList[i].notiStatus, typeof(notiList[i].notiStatus)) %>
+            <% if(notiList[i].notiStatus==false) { %>
+              <div class="notify-content">
+                <div class="notify-img">
+                  <%= user.username[0] %>
+                </div>
+                Task <%= notiList[i].taskName %> has come. Due to: <%= notiList[i].endDate.toLocaleDateString('en-GB')
+                    %>
+
+              </div>
+              <% } %>
+                <% } %>
       </div>
     </div>
 
@@ -207,7 +214,7 @@
         success: function (res) {
           console.log("successfully send request!");
           console.log(res);
-          console.log(typeof(res));
+          console.log(typeof (res));
           window.sessionStorage.setItem("project" + res['_id'], JSON.stringify(res));
           updateProjectList();
           closePopupAddProject();
@@ -248,7 +255,7 @@
             '</tr>';
           var item = '<li>' +
             '<div class="nav-items">' +
-            '<a href="/Projects/project?id=' + idProjectToNavigate +'"><img src="img/icons8-project-50.png" alt="" class="nav-img" width="32px" height="32px"style="margin-right: 10px; margin-left: 20px;">' +
+            '<a href="/Projects/project?id=' + idProjectToNavigate + '"><img src="img/icons8-project-50.png" alt="" class="nav-img" width="32px" height="32px"style="margin-right: 10px; margin-left: 20px;">' +
             data['project_list'][i].name +
             '</a>' +
             '</div>' +
@@ -265,7 +272,7 @@
     });
   }
 
-  function navigateToHomePage(){
+  function navigateToHomePage() {
     navigationLinks = document.getElementsByTagName("a");
     for (let i = 0; i < navigationLinks.length; ++i) {
       console.log("I'm here!");
@@ -307,16 +314,16 @@
   // function navigateToHomePage() {
   //   document.addEventListener("DOMContentLoaded", function() {
   //     navigationLinks = document.querySelectorAll("a"); // Replace "a" with the appropriate selector for your navigation links
-      
+
   //     for (let i = 0; i < navigationLinks.length; ++i) {
   //       navigationLinks[i].addEventListener("click", function(event) {
   //         event.preventDefault();
   //         nameProjectToNavigate = this.textContent.trim();
-          
+
   //         for (let index = 0; index < window.sessionStorage.length; index++) {
   //           let key = window.sessionStorage.key(index);
   //           let item = JSON.parse(window.sessionStorage.getItem(key));
-            
+
   //           if (item && item.name == nameProjectToNavigate) {
   //             idProjectToNavigate = item._id;
   //             window.location.href = "/Projects/project?id=" + idProjectToNavigate;

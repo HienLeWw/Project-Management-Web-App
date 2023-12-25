@@ -24,6 +24,9 @@ const userSchema = new mongoose.Schema({
     project_ID: {
         type: [String]
     },
+    notification: {
+        type: [Object]
+    }
 });
 
 userSchema.pre('save', async function (next) {

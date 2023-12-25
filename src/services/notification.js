@@ -11,29 +11,32 @@ const compareDay = (date1, date2) => {
     return (d1 - d2) // == 0 => d1 == d2; < 0 => d1 < d2; > 0 => d1 > d2
 }
 const updateNoti = async () => {
-    const projects = await Project.find()
-    for (let i = 0; i < projects.length; i++) {
-        let noti = [];
-        for (let j = 0; j < projects[i].task.length; j++) {
-            const task = await Task.findById(projecs[i].task[j]);
-            const currentDay = new Date();
-            // nếu true : currentDay = end_date - 1
-            if (await compareDay(currentDay, new Date(task.end_date)) == 0) {
-
-                // chua hoan thanh
-                if (task.status != 2) {
-                    var infoNoti = {
-                        "endDate": task.end_date,
-                        "taskName": task.name,
-                        "taskID": task._id
-                    };
-                    noti.push(infoNoti)
+    console.log("running cronjob");
+    const tasks = await Task.find({});
+    for (let i = 0; i < tasks.length; i++) {
+        const currentDay = new Date();
+        if (compareDay(currentDay, new Date(tasks[i]['end_date'])) >= 0) {
+            console.log(i)
+            console.log(tasks[i]._id)
+            for (let j = 0; j < tasks[i]['user_ids'].length; j++) {
+                const user = await User.findById(tasks[i]['user_ids'][j])
+                console.log(tasks[i]['_id'].valueOf())
+                if (!user['notification'].find(({ taskID }) => taskID == tasks[i]._id.valueOf())) {
+                    noti = {
+                        "taskName": tasks[i].name,
+                        "taskID": tasks[i]._id.valueOf(),
+                        "notiStatus": false,
+                        "endDate": tasks[i].end_date
+                    }
+                    user['notification'].push(noti)
+                    await user.save()
                 }
             }
         }
-        projects[i].notification = noti;
-        await projects[i].save();
+
     }
+    console.log("done")
+    return;
 }
 
 module.exports = { updateNoti }
