@@ -157,7 +157,7 @@ const TaskCreate = async (req, res) => {
             "master_project": master_project, "status": status, "content": content,
             "created_date": begin_date, "end_date": end_date
         });
-
+        console.log("task create",task)
         //add task to project
         const project = await Project.findById(req.query.id);
         //console.log(task['_id'].valueOf())

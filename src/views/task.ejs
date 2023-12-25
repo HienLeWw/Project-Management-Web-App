@@ -317,13 +317,17 @@
   let noteContent;
   function openModifyTask(edit_btn) {
     const editBtn = document.querySelector(edit_btn);
+    console.log(editBtn);
     popupModifyTask.classList.add("open-modify-task");
     const tr = editBtn.closest('tr');
     taskNameToModify = tr.querySelector('th').textContent;
     console.log(taskNameToModify);
     document.getElementById("task-name-to-modify").value = taskNameToModify.trim();
     taskIdToModify = findTaskId(taskNameToModify.trim());
-    noteContent = JSON.parse(window.sessionStorage.getItem("tasks"+taskIdToModify)).content;
+    console.log(taskIdToModify);
+    let item = JSON.parse(window.sessionStorage.getItem("tasks"+taskIdToModify));
+    console.log(item);
+    noteContent = item.content;
     noteElement = document.getElementById("note");
     noteElement.textContent = noteContent;
   }
@@ -443,7 +447,7 @@
         data: JSON.stringify(deleteInfo),
         success: function (res) {
           console.log("Xoa dau`");
-          window.sessionStorage.removeItem("task"+taskId);
+          window.sessionStorage.removeItem("tasks"+taskId);
           updateTaskList();
         }
       });
@@ -474,14 +478,16 @@
           console.log(res.created_date);
           let startDate = new Date(res.created_date);
           let endDate = new Date(res.end_date);
+          let count = window.sessionStorage.length;
           startDate = startDate.toLocaleDateString('en-GB');
           endDate = endDate.toLocaleDateString('en-GB');
-          // window.sessionStorage.setItem("newtask" + res['_id'], JSON.stringify(res));
+          window.sessionStorage.setItem("tasks" + res['_id'], JSON.stringify(res));
           // updateTaskList(res);
           console.log("Name: ",res.name);
           console.log("Status: ",res.status);
           console.log("Start: ",res.created_date);
           console.log("End: ",res.end_date);
+
           
           let status = "";
           if(res.status == 0){
@@ -512,8 +518,8 @@
             status +
           '</td>' +
           '<td>' +
-               '<div class="action">' +
-                  '<button class="edit-btn" onclick="openModifyTask()"><img src="/img/edit.png" alt="">' +
+            '<div class="action">' +
+                  '<button class="edit-btn" onclick="openModifyTask('+ "'#edit_"+ count + "')" +'"' + 'id="edit_'+ count+ '"><img src="/img/edit.png" alt="">' +
                   '</button>' + 
                   '<button class="delete-btn"><img src="/img/delete.png" alt="">' +
                   '</button>'+
@@ -593,7 +599,10 @@
             console.log(res);
             let modifiedTasks = JSON.parse(window.sessionStorage.getItem("tasks"+taskIdToModify));
             modifiedTasks.user_ids = assigneeList;
-            modifiedTasks.end_date = updatedDueDate;
+            console.log(updatedDueDate.split('/')[0]);
+            console.log(updatedDueDate.split('/')[1]);
+            console.log(updatedDueDate.split('/')[2]);
+            modifiedTasks.end_date = new Date(updatedDueDate.split('/')[2] , (updatedDueDate.split('/')[1]-1) , updatedDueDate.split('/')[0]);
             modifiedTasks.content = noteContent;
             modifiedTasks.status = updatedStatus
 
@@ -632,8 +641,8 @@
         // updateTaskList(res);
         console.log("Name: ",task.name);
         console.log("Status: ",task.status);
-        console.log("Start: ",task.created_date);
-        console.log("End: ",task.end_date);
+        console.log("Start: ",startDate);
+        console.log("End: ",endDate);
           
         let status = "";
         if(task.status == 0){
