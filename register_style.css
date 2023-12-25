@@ -94,7 +94,6 @@ body{
     /* width: 60%; */
     margin: 2% 0 2% 0;
     /* margin: 0; */
-    font-size: medium;
     padding: 2% 0 0.5% 1%;
     /* padding: 0; */
     background-color: #304a6e;
@@ -151,3 +150,105 @@ body{
     top: 3vw;
     margin: 0;
 } */
+
+@media screen and (max-width: 320px){
+    .container{
+        border-radius: 10vw;
+    }
+    .img_contain{
+        display: none;
+    }
+    .login_form{
+        width: 100%;
+        border-radius: 500px;
+    }
+    .login_form .logo_contain img{
+        width: 70%;
+        top: 10%;
+        left: 17%;
+    }
+    .login_form h1{
+        font-size: 7vw;
+    }
+    .login_form form{
+        top: 1%
+    }
+    .login_form form input[type=text], input[type=password]{
+        margin: 3% 0 3% 0;
+        /* margin: 0; */
+        padding: 3% 0 0.5% 1%;
+        /* padding: 0; */
+        font-size: 5vw;
+    }
+    .login_form form button{
+        top: 10vh;
+        height: 10vw;
+        font-size: 6vw;
+    }
+}
+
+@media screen and (min-width: 321px) and (max-width: 425px){
+    .container{
+        border-radius: 10vw;
+    }
+    .img_contain{
+        display: none;
+    }
+    .login_form{
+        width: 100%;
+        border-radius: 500px;
+    }
+    .login_form .logo_contain img{
+        width: 70%;
+        top: 10%;
+        left: 17%;
+    }
+    .login_form h1{
+        font-size: 7vw;
+    }
+    .login_form form{
+        top: 1%
+    }
+    .login_form form input[type=text], input[type=password]{
+        margin: 3% 0 3% 0;
+        /* margin: 0; */
+        padding: 3% 0 0.5% 1%;
+        /* padding: 0; */
+        font-size: 5vw;
+    }
+    .login_form form button{
+        top: 2vh;
+        height: 10vw;
+        font-size: 6vw;
+    }
+}
+
+@media screen and (min-width: 426px) and (max-width: 768px){
+    .login_form .logo_contain img{
+        width: 50%;
+        height: 60%;
+        top: 15%;
+        left: 25%;
+    }
+    .login_form form{
+        top: 0%
+    }
+    .login_form form button{
+        top: 3vw;
+    }
+}
+
+@media screen and (min-width: 767px) and (max-width: 1024px){
+    .login_form .logo_contain img{
+        width: 50%;
+        height: 60%;
+        top: 15%;
+        left: 25%;
+    }
+    .login_form form{
+        top: 0%
+    }
+    .login_form form button{
+        top: 3vw;
+    }
+}
