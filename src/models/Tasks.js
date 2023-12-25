@@ -17,7 +17,6 @@ const Task_Schema = new mongoose.Schema({
 
     content: {
         type: String,
-        required: [true, "at least leave sth to describe the task"]
     },
 
     status: {

@@ -550,6 +550,7 @@
         var modifyTaskInfo = {
           task_to_mod: taskIdToModify,
           new_content: noteContent,
+          user_ids: assigneeList,
           new_end_date: updatedDueDate,
           update_status: updatedStatus
         };
@@ -560,33 +561,9 @@
           data: JSON.stringify(modifyTaskInfo),
           contentType: "application/json",
           success: function (res) {
+            assigneeList = [];
             console.log("sent request!");
-            console.log(res);
-            var row = '<tr><th scope="row">' + res.name
-              + '</th>' +
-              '<td>'+
-                  '<div class="assignee-list">' +
-                      '<div class="profile-img" id="assginee">U</div>' +
-                  '</div>' +
-              '</td>' +
-              '<td>' +
-                startDate +
-              '</td>' +
-              '<td>' +
-                  endDate +
-              '</td>' +
-              '<td>' +
-                status +
-              '</td>' +
-              '<td>' +
-                  '<div class="action">' +
-                      '<button class="edit-btn" onclick="openModifyTask()"><img src="/img/edit.png" alt="">' +
-                      '</button>' + 
-                      '<button class="delete-btn"><img src="/img/delete.png" alt="">' +
-                      '</button>'+
-                  '</div>'+
-              '</td>'+
-              '</tr>';
+            console.log(res); 
           }
         }).done(function (data) {
           // console.log(data);
@@ -596,7 +573,7 @@
     });
 
     function updateTaskList(){
-
+      
     }
 
   navigateToBetweenPages();

@@ -103,7 +103,7 @@ const TaskCreate = async (req, res) => {
     // những tham số cần thiết để khởi tạo 1 task mới
     console.log(req.body)
     let name = req.body.name;
-    let content = "";
+    let content = "do something";
     
     // let master_project = new mongoose.Types.ObjectId(req.body.master_project); // id project chứa task này
 
@@ -155,7 +155,7 @@ const TaskCreate = async (req, res) => {
         const task = await Task.create({
             "name": name, "user_ids": user_ids,
             "master_project": master_project, "status": status, "content": content,
-            "begin_date": begin_date, "end_date": end_date
+            "created_date": begin_date, "end_date": end_date
         });
 
         //add task to project
@@ -165,6 +165,7 @@ const TaskCreate = async (req, res) => {
     }
     catch (err) {
         errors = errorHandler(req, err)
+        console.log(errors);
         res.status(400).json({ errors })
     }
 
@@ -181,9 +182,12 @@ const ModTaskContent = async (req, res) => {
 
     // đề phòng gửi mảng user_ids rỗng
     const added_user_ids = req.body.user_ids;
-    const task_user_ids = await Task.findById(task_to_mod).user_ids;
+    // console.log(added_user_ids);
+    const task_user_ids = (await Task.findById(task_to_mod)).user_ids;
+    console.log(task_user_ids);
+    console.log(typeof(task_user_ids));
     const update_user_ids = mergeArray(task_user_ids, added_user_ids);
-
+    // console.log(added_user_ids);
     // TO DO:
     // - status cần được cập nhật theo begin date, end date và current date sau khi đc được đưa lên db
     // - người dùng chỉ có thể thay đổi trực tiếp status để đánh dấu công việc đã xong hay chưa?:
