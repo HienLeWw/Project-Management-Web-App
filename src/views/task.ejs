@@ -424,6 +424,31 @@
       })
     }
   }
+  
+  $(document).ready(function () {
+    $(".delete-btn").click(function(){
+      var row = $(this).closest('tr');
+      // console.log(row);
+      var taskName = row.find('th').text().trim();
+      console.log(taskName);
+      var taskId = findTaskId(taskName);
+      console.log(taskId);
+      var deleteInfo = {
+        task: taskId
+      }
+      $.ajax({
+        type: "POST",
+        url: "/Projects/Tasks/Delete"+window.location.search,
+        contentType: "application/json",
+        data: JSON.stringify(deleteInfo),
+        success: function (res) {
+          console.log("Xoa dau`");
+          window.sessionStorage.removeItem("task"+taskId);
+          updateTaskList();
+        }
+      });
+    })
+  });
 
   $(document).ready(function () {
     $("#addtask").click(function (event) {
@@ -509,6 +534,8 @@
     });
   });
 
+  $
+
   //Handle update status
   var updatedStatus = 0; // Biến lưu trữ giá trị được chọn
 
@@ -563,7 +590,18 @@
           success: function (res) {
             assigneeList = [];
             console.log("sent request!");
-            console.log(res); 
+            console.log(res);
+            let modifiedTasks = JSON.parse(window.sessionStorage.getItem("tasks"+taskIdToModify));
+            modifiedTasks.user_ids = assigneeList;
+            modifiedTasks.end_date = updatedDueDate;
+            modifiedTasks.content = noteContent;
+            modifiedTasks.status = updatedStatus
+
+            window.sessionStorage.setItem(("tasks"+taskIdToModify), JSON.stringify(modifiedTasks));
+
+            assigneeList = [];
+            closeModifyTask();
+            updateTaskList();
           }
         }).done(function (data) {
           // console.log(data);
@@ -573,8 +611,72 @@
     });
 
     function updateTaskList(){
-      
+      $("#task-table tbody").empty();
+      for(let i=0;i<window.sessionStorage.length;++i){
+        let id = window.sessionStorage.key(i);
+        if(id.includes("user")){
+          continue;
+        }
+        let task = window.sessionStorage.getItem(id);
+
+        console.log(task);
+        console.log(typeof(task));
+        task = JSON.parse(window.sessionStorage.getItem(id));
+        console.log(task.name);
+
+        let startDate = new Date(task.created_date);
+        let endDate = new Date(task.end_date);
+        startDate = startDate.toLocaleDateString('en-GB');
+        endDate = endDate.toLocaleDateString('en-GB');
+        // window.sessionStorage.setItem("newtask" + res['_id'], JSON.stringify(res));
+        // updateTaskList(res);
+        console.log("Name: ",task.name);
+        console.log("Status: ",task.status);
+        console.log("Start: ",task.created_date);
+        console.log("End: ",task.end_date);
+          
+        let status = "";
+        if(task.status == 0){
+          status = '<div class="status" id="To-do">To-do</div>';
+        }
+        else if(task.status == 1){
+          status = '<div class="status" id="In-progress">In-progress</div>';
+        }
+        else if(task.status == 2){
+          status = '<div class="status" id="Done">Done</div>';
+        }
+        console.log(status);
+
+        var row = '<tr><th scope="row" id="Task_<%= '+i + '%>">' + task.name
+           + '</th>' +
+           '<td>'+
+               '<div class="assignee-list">' +
+                   '<div class="profile-img" id="assginee">U</div>' +
+               '</div>' +
+           '</td>' +
+          '<td>' +
+            startDate +
+          '</td>' +
+          '<td>' +
+            endDate +
+          '</td>' +
+          '<td>' +
+            status +
+          '</td>' +
+          '<td>' +
+               '<div class="action">' +
+                  '<button class="edit-btn" onclick="openModifyTask('+ '#edit_<%='+ i +'%>' + ')' + 'id="edit_<%='+ i+ '%>'+ '"><img src="/img/edit.png" alt="">' +
+                  '</button>' + 
+                  '<button class="delete-btn"><img src="/img/delete.png" alt="">' +
+                  '</button>'+
+              '</div>'+
+          '</td>'+
+          '</tr>';
+        $("#task-table tbody").append(row);
+      }
     }
+  
+  
 
   navigateToBetweenPages();
 </script>

@@ -240,9 +240,13 @@ const deleteTask = async (req, res) => {
         await Check_Task_exist(task_id);
         await adminProject(req.body.task, req.user._id)
         task_to_del = await Task.deleteOne({ "_id": task_id })
+        const project = await Project.findById(req.query.id);
+        project['task'].splice(project['task'].indexOf(req.body.task),1)
+        await project.save();
         res.status(200).send("task deleted");
     } catch (err) {
         errors = errorHandler(req, err)
+        console.log(errors)
         res.status(400).json({ errors })
     }
 }

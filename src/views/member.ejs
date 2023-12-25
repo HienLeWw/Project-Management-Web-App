@@ -185,7 +185,7 @@
             <%= memberList[i].username %>
           </p>
           <% if(memberList[i].username==user.username) {%>
-            <button type="button" class="btn btn-secondary btn-sm" id="remove-member-btn">
+            <button type="button" class="btn btn-secondary btn-sm" id="remove-member-btn" onclick="leaveProjectRequest()">
               leave
             </button>
             <% }%>
@@ -233,6 +233,48 @@
       event.preventDefault();
     });
   });
+
+  // $(document).ready(function () {
+  //   $("#remove-member-btn").click(function (event) {
+  //     $.ajax({
+  //       type: "POST",
+  //       url: "/Projects/project/leave"+window.location.search,
+  //       //dataType: "json",
+  //       // contentType: "application/json",
+  //       //encode: true,
+  //       success: function (res) {
+  //         console.log("successfully send request!");
+  //         console.log(res);
+  //         console.log(typeof (res));
+  //         // navigateToHomePage();
+  //       }
+  //     }).done(function (data) {
+  //       // console.log(data);
+  //       // closePopupAddMem();
+  //     });
+  //     event.preventDefault();
+  //   });
+  // });
+
+  function leaveProjectRequest() {
+    // Create a data object with the payload for the POST request
+
+    // Make the POST request using fetch()
+    fetch("/Projects/project/leave"+window.location.search, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    })
+      .then(function(response) {
+        window.location.href = "/";
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+  }
+
+
 
   function openNotify() {
     popupNotify.classList.add("open-notify");
