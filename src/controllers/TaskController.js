@@ -16,12 +16,11 @@ const errorHandler = (req, err) => {
 const Check_dup_task_create = async (name, master_project) => {
     // kiểm tra trùng project name và trùng tên task khi tạo 
     let task_name = name;
-    master_project = new mongoose.Types.ObjectId(master_project);
 
     let check_task = await Task.find({ "name": task_name });
     let check_Project = await Project.findById(master_project);
 
-    if (check_Project.length > 0) {
+    if (Object.keys(check_Project).length > 0) {
         if (check_task.length <= 0) {
             return;
         }
@@ -41,6 +40,21 @@ const Check_Task_exist = async (task_id = mongoose.Types.ObjectId) => {
 
     let err = "Task not exist";
     throw err;
+}
+
+const dd_mm_yyyy_formating = (date_string) => {
+    let day_struct = date_string.split('/')
+    return new Date(day_struct[2], day_struct[1] - 1, day_struct[0])
+}
+
+const compare_day = (date1, date2) => {
+    let d1 = date1
+    let d2 = date2
+
+    d1.setHours(0, 0, 0, 0)
+    d2.setHours(0, 0, 0, 0)
+
+    return (d1 - d2) // == 0 => d1 == d2; < 0 => d1 < d2; > 0 => d1 > d2
 }
 
 const getTaskPage = async (req, res) => {
@@ -99,18 +113,12 @@ const TaskCreate = async (req, res) => {
         // current date < begin => 0: To Do
         // begin <= current date < end date => 1: In progress
         // current date >= end date và chưa xong => 3: Due to
-        let time_to_begin = current_Date - begin_date;
-        let time_to_end = end_date - current_Date;
+        let time_to_begin = compare_day(current_Date, begin_date);
+        let time_to_end = compare_day(end_date, current_Date);
 
-        // đổi mili giây thành ngày
-        let Milisec2Day = 1000 * 60 * 60 * 24
-        let diff_now_begin = Math.floor(time_to_begin / Milisec2Day)
-        let diff_now_end = Math.floor(time_to_end / Milisec2Day)
-
-
-        if (diff_now_begin < 0){
+        if (time_to_begin < 0){
             status = 0  // current date < begin => 0: To Do
-        } else if (diff_now_end) {
+        } else if (time_to_end <= 0) {
             status = 3 // current date >= end date và chưa xong => 3: Due to
         } else {
             status = 1 // begin <= current date < end date => 1: In progress
