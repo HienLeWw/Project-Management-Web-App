@@ -7,7 +7,7 @@ const projectRoute = require('./routes/project')
 const taskRoute = require('./routes/Task')
 
 const cookieParser = require('cookie-parser')
-//const { requireAuth, checkUser } = require('./middleware/authMiddleware')
+const { requireAuth, checkUser } = require('./middleware/authMiddleware')
 
 const app = express()
 const port = process.env.PORT || 4444;
@@ -22,7 +22,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser())
 
 // Route
-//app.use('*', checkUser);
+app.use('*', checkUser);
 app.use('/', webRoutes);
 app.use('/', projectRoute);
 app.use('/', taskRoute);
