@@ -138,12 +138,40 @@
 
   scheduler.config.date_format = "%Y-%m-%d";
   scheduler.init('scheduler', new Date(), "week");
+  let tasks = [];
 
-  scheduler.parse([
-    { start_date: "2023-11-19", end_date: "2023-11-22", text: "Event 1", color: "#1F9254" }, //todo
-    { start_date: "2023-11-17", end_date: "2023-11-24", text: "Event 2", color: "#CD6200" }, //in-progress
-    { start_date: "2023-11-20", end_date: "2023-11-27", text: "Event 3", color: "#AB30E5" } //late
-  ], "json");
+  for(let i =0;i<window.sessionStorage.length;++i){
+    let id = window.sessionStorage.key(i);
+    if(id.includes("user")){
+      continue;
+    }
+    let task = JSON.parse(window.sessionStorage.getItem(id));
+    let color = "";
+    if(task.status==0){
+      color = "#1F9254";
+    }
+    else if(task.status==1){
+      color = "#CD6200";
+    }
+    else if (task.status==2){
+      color = "#AB30E5";
+    }
+    // tasks.push(task);
+    taskObject = {
+      start_date: task.created_date.split('T')[0],
+      end_date: task.end_date.split('T')[0],
+      text: task.name,
+      color: color
+    };
+    tasks.push(taskObject);
+  }
+
+  // scheduler.parse([
+  //   { start_date: "2023-11-19", end_date: "2023-11-22", text: "Event 1", color: "#1F9254" }, //todo
+  //   { start_date: "2023-11-17", end_date: "2023-11-24", text: "Event 2", color: "#CD6200" }, //in-progress
+  //   { start_date: "2023-11-20", end_date: "2023-11-27", text: "Event 3", color: "#AB30E5" } //late
+  // ], "json");
+  scheduler.parse(tasks);
 
   function navigateToBetweenPages() {
     let navigationLinks = document.getElementsByTagName('a');
