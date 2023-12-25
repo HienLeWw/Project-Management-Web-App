@@ -186,7 +186,7 @@
     <div class="member-list">
       <% for (let i=0;i < memberList.length; i++) { %>
         <div class="member">
-          <div class="profile-img" id="mem-tag">U</div>
+          <div class="profile-img" id="mem-tag"><%= memberList[i].username[0] %></div>
           <p class="mem-name">
             <%= memberList[i].username %>
           </p>
@@ -212,7 +212,8 @@
 
   $(document).ready(function () {
     $("#invite-btn-1").click(function (event) {
-      listMemberToInvite.push($("#invite-name").val().trim());
+      // listMemberToInvite.push($("#invite-name").val().trim());
+      listMemberToInvite.push($("#invite-input").val().trim());
       var inviteInfo = {
         username: listMemberToInvite//$("#invite-name").val().trim()
       };
@@ -231,7 +232,17 @@
           console.log(res);
           console.log(typeof (res));
           window.sessionStorage.setItem("newmember" + res['_id'], JSON.stringify(res));
+          //console.log(res.user[0].user[0][0].username);
+          //console.log(res.user[0]);
           // navigateToHomePage();
+          var memberItem = 
+          '<div class="member">'+
+          '<div class="profile-img" id="mem-tag">'+res.user[0][0].username[0]+'</div>'+
+          '<p class="mem-name">'+
+            res.user[0][0].username + 
+          '</p>'+
+        '</div>'
+          $(".member-list").append(memberItem);
         }
       }).done(function (data) {
         // console.log(data);
