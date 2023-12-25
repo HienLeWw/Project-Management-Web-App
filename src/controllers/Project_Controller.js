@@ -130,9 +130,17 @@ const inviteUser = async (req, res) => {
 
 const leaveProject = async (req, res) => {
     try {
-        const index = req.user['project_ID'].indexOf(req.query.id);
-        req.user['project_ID'].splice(index, 1)
-        await req.user.save();
+        const project = await Project.findById(req.query.id);
+        if (project.admin == req.user._id.valueOf()) {
+            const index = req.user['project_ID'].indexOf(req.query.id);
+            req.user['project_ID'].splice(index, 1)
+            await req.user.save();
+
+            const users = await User.find({ 'project_ID': req.query.id })
+
+            project.admin = users['_id'].valueOf()
+            await project.save();
+        }
 
         res.status(200).redirect('/');
     }
