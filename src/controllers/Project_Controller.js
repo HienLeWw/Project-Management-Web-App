@@ -74,17 +74,25 @@ const getProjects = async (req, res) => {
 }
 
 const projectPage = async (req, res) => {
-    console.log("datoihamnay")
     const project = await Project.findById(req.query.id)
-    res.render('home.ejs', { "project": project })
+    const taskList = []
+    for (let i = 0; i < project['task'].length; i++) {
+        const task = await Task.findById(project['task'][i])
+        console.log(task)
+    }
+    res.render('home.ejs', { "project": project, "taskList": taskList })
 }
 
 const memberPage = async (req, res) => {
-    res.render('member.ejs')
+    const project = await Project.findById(req.query.id)
+    const users = await User.find({ "project_ID": req.query.id })
+    console.log(users)
+    res.render('member.ejs', { "memberList": users, "projName": project.name })
 }
 
 const calendarPage = async (req, res) => {
-    res.render('calendar.ejs')
+    const project = await Project.findById(req.query.id)
+    res.render('calendar.ejs', { "projName": project.name })
 }
 
 const getAllInfo = async (req, res) => {
