@@ -92,7 +92,7 @@ const TaskCreate = async (req, res) => {
 
     let master_project = req.query.id; // id project chứa task này
     
-    let begin_date = dd_mm_yyyy_formating(req.body.create_date)
+    
     let end_date = dd_mm_yyyy_formating(req.body.end_date); // giả định dữ liệu đã được parse sang 
                                             // kiểu Date trước khi được gửi đi 
 
@@ -101,13 +101,14 @@ const TaskCreate = async (req, res) => {
     //  - cần kiểm tra begin date và end date để xác định giá trị khởi tạo cho status 
 
     // mặc định để In progress, begin date == created date
+    let begin_date = new Date()
     var status = 1
 
     // TO DO:
     //  - Viết thành 1 hàm riêng
     //  - Kiểm lỗi
     try {
-        begin_date = Date(req.body.begin_date);
+        begin_date = dd_mm_yyyy_formating(req.body.create_date);
         let current_Date = new Date()
         
         // current date < begin => 0: To Do
