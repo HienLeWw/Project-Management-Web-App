@@ -137,16 +137,46 @@
           <input type="text" name="task-name" id="task-name" class="task-name">
           <div class="assign">
             <p>Assign:</p>
-            <button class="open-assign-btn" onclick="openAssign()" id="assign-btn"><img src="/img/Add Administrator.png" alt="">
+            <button class="open-assign-btn-1" onclick="openAssign()" id="assign-btn"><img src="/img/Add Administrator.png" alt="">
           </div>
           <label for="start" class="task-label">Start Date:</label>
           <input id="datepicker1" name="start" width="276" />
           <label for="due" class="task-label">Due Date:</label>
           <input id="datepicker2" name="due" width="276" />
         <!-- </form> -->
-        <button class="add-btn">Add</button>
+        <button class="add-btn" id="addtask">Add</button>
       </div>
+    </div>
 
+    <div class="popup-modify-task" id="modify-task">
+      <div class="popup-head">
+        <h3 class="popup-title"><img src="/img/icons8-task-50-black.png" alt="">Task Modify</h3>
+        <button onclick="closeModifyTask()">X</button>
+      </div>
+      <div class="popup-body">
+        <!-- <form action="" class="task-info"> -->
+          <label for="task-name" class="task-label">Task name:</label><br>
+          <input type="text" name="task-name" id="task-name-to-modify" class="task-name" value="readonly" readonly>
+          <div class="assign">
+            <p>Assign:</p>
+            <button class="open-assign-btn-1" onclick="openAssign()" id="assign-btn"><img src="/img/Add Administrator.png" alt="">
+          </div>
+          <label for="due" class="task-label">Due Date:</label>
+          <input id="datepicker4" name="due" width="276" />
+          <label for="status-update" class="task-label">Status:</label><br>
+          <div class="status-update">
+            <button id="dropdownButton" class="dropbtn">Status</button>
+            <div class="dropdown-content">
+              <p onclick="changeOption('To do')">To do</p>
+              <p onclick="changeOption('In progress')">In progress</p>
+              <p onclick="changeOption('Done')">Done</p>
+            </div>
+          </div><br><br>
+          <label for="note" class="task-label">Note:</label><br>
+          <textarea type="text" id="note" name="note" style="height: 100px; width: 100%;"></textarea><br>
+        <!-- </form> -->
+        <button class="add-btn" id="modifytask">Confirm</button>
+      </div>
     </div>
 
     <!-- Project Name -->
@@ -165,10 +195,10 @@
         <div class="profile-img">U</div>
         <div class="profile-content">
           <p class="profile-user">
-            <%= user.username %>>
+            <%= user.username %>
           </p>
           <p class="profile-email">
-            <%= user.email %>>
+            <%= user.email %>
           </p>
         </div>
       </div>
@@ -199,7 +229,7 @@
       </div>
     </div>
     <!-- Task Table -->
-    <table class="table" style="width: 85%;">
+    <table class="table" id="task-table" style="width: 85%;">
       <thead style="justify-items: center;">
         <tr>
           <th scope="col">Task name</th>
@@ -213,7 +243,7 @@
       <tbody>
         <% for(let i=0; i < Task_list.length; i++) {%>
           <tr>
-            <th scope="row">
+            <th scope="row" id="Task_<%= i %>">
               <%= Task_list[i].name %>
             </th>
             <td>
@@ -238,7 +268,7 @@
             </td>
             <td>
               <div class="action">
-                <button class="edit-btn"><img src="/img/edit.png" alt="">
+                <button class="edit-btn" onclick="openModifyTask('#edit_<%= i %>')" id="edit_<%= i %>"><img src="/img/edit.png" alt="">
                 </button>
                 <button class="delete-btn"><img src="/img/delete.png" alt="">
                 </button>
@@ -246,69 +276,6 @@
             </td>
           </tr>
           <% }%>
-            <!-- <tr>
-          <th scope="row">Task 1</th>
-          <td>
-            <div class="assignee-list">
-              <div class="profile-img" id="assginee">U</div>
-            </div>
-          </td>
-          <td>08/01/2024</td>
-          <td>11/01/2024</td>
-          <td>
-            <div class="status" id="Done">Done</div>
-          </td>
-          <td>
-            <div class="action">
-              <button class="edit-btn"><img src="/img/edit.png" alt="">
-              </button>
-              <button class="delete-btn"><img src="/img/delete.png" alt="">
-              </button>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <th scope="row">Task 2</th>
-          <td>
-            <div class="assignee-list">
-              <div class="profile-img" id="assginee">U</div>
-            </div>
-          </td>
-          <td>08/01/2024</td>
-          <td>11/01/2024</td>
-          <td>
-            <div class="status" id="In-progress">In progress</div>
-          </td>
-          <td>
-            <div class="action">
-              <button class="edit-btn"><img src="/img/edit.png" alt="">
-              </button>
-              <button class="delete-btn"><img src="/img/delete.png" alt="">
-              </button>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <th scope="row">Task 3</th>
-          <td>
-            <div class="assignee-list">
-              <div class="profile-img" id="assginee">U</div>
-            </div>
-          </td>
-          <td>08/01/2024</td>
-          <td>11/01/2024</td>
-          <td>
-            <div class="status" id="To-do">To do</div>
-          </td>
-          <td>
-            <div class="action">
-              <button class="edit-btn"><img src="/img/edit.png" alt="">
-              </button>
-              <button class="delete-btn"><img src="/img/delete.png" alt="">
-              </button>
-            </div>
-          </td>
-        </tr> -->
       </tbody>
     </table>
   </div>
@@ -317,11 +284,13 @@
   let popupNotify = document.getElementById("notify");
   let popupAssign = document.getElementById("assign");
   let popupAddTask = document.getElementById("task");
+  let popupModifyTask = document.getElementById("modify-task");
   let selectedStartDate;
   let selectedDueDate;
+  let updatedDueDate;
   let currentProjectId;
   let page;
-  let assigneeList = {};
+  let assigneeList = [];
 
   function openNotify() {
     popupNotify.classList.add("open-notify");
@@ -342,6 +311,24 @@
   function closeAddTask() {
     popupAddTask.classList.remove("open-add-task");
   }
+  let taskNameToModify;
+  let taskIdToModify;
+  let noteContent;
+  function openModifyTask(edit_btn) {
+    const editBtn = document.querySelector(edit_btn);
+    popupModifyTask.classList.add("open-modify-task");
+    const tr = editBtn.closest('tr');
+    taskNameToModify = tr.querySelector('th').textContent;
+    console.log(taskNameToModify);
+    document.getElementById("task-name-to-modify").value = taskNameToModify.trim();
+    taskIdToModify = findTaskId(taskNameToModify.trim());
+    noteContent = JSON.parse(window.sessionStorage.getItem("tasks"+taskIdToModify)).content;
+    noteElement = document.getElementById("note");
+    noteElement.textContent = noteContent;
+  }
+  function closeModifyTask() {
+    popupModifyTask.classList.remove("open-modify-task");
+  }
   $('#datepicker1').datepicker({ uiLibrary: 'bootstrap5', format: 'dd/mm/yyyy' });
   $('#datepicker2').datepicker({ uiLibrary: 'bootstrap5', format: 'dd/mm/yyyy' });
   $('#datepicker1').on('change', function () {
@@ -352,8 +339,12 @@
     selectedDueDate = $(this).datepicker('value');
     console.log(selectedDueDate);
   });
-
-  // Get all the buttons with the class "open-assign-btn"
+  $('#datepicker3').datepicker({ uiLibrary: 'bootstrap5', format: 'dd/mm/yyyy' });
+  $('#datepicker4').datepicker({ uiLibrary: 'bootstrap5', format: 'dd/mm/yyyy' });
+  $('#datepicker4').on('change', function () {
+    updatedDueDate = $(this).datepicker('value');
+    console.log(updatedDueDate);
+  });
   // Get all the buttons with the class "open-assign-btn"
   var buttons = document.querySelectorAll('.open-assign-btn');
 
@@ -365,9 +356,43 @@
       // Output the content to the console (you can modify this to suit your needs)
       console.log(assigneeContent.split("\n ")[assigneeContent.split("\n ").length-1].trim());
       assignee = assigneeContent.split("\n ")[assigneeContent.split("\n ").length-1].trim();
-      assigneeList.push(assignee);
+      // assigneeList.push(assignee);
+      let userId;
+      for (let i=0; i< window.sessionStorage.length;++i){
+        // console.log(window.sessionStorage[key]);
+        let id = window.sessionStorage.key(i);
+        let user = JSON.parse(window.sessionStorage.getItem(id));
+        console.log(user);
+        if(assignee==user.username){
+          userId = user._id;
+          console.log("Yeah!");
+          break;
+        }
+      }
+      if(userId){
+        assigneeList.push(userId);
+      }
+      else{
+        console.log("User not found");
+      }
     });
   });
+
+  function findTaskId(taskName){
+    let taskId = "";
+    for (let i=0; i< window.sessionStorage.length;++i){
+        // console.log(window.sessionStorage[key]);
+        let id = window.sessionStorage.key(i);
+        let task = JSON.parse(window.sessionStorage.getItem(id));
+        console.log("Found:",task);
+        if(taskName==task.name){
+          taskId = task._id;
+          console.log("Yeah!");
+          break;
+        }
+    }
+    return taskId;
+  }
 
   function navigateToBetweenPages(){
     let navigationLinks = document.getElementsByTagName('a');
@@ -399,37 +424,142 @@
     }
   }
 
-  // $(document).ready(function () {
-  //   $("#assign-btn").click(function (event) {
-  //     var addTaskInfo = {
-  //       name: $("#task-name").val(),
-  //       user_ids: assigneeList,
-  //       create_date: selectedStartDate,
-  //       end_date: selectedDueDate
-  //     };
-  //     // console.log(projectInfo);
-  //     $.ajax({
-  //       type: "POST",
-  //       url: "/Projects/tasks",
-  //       data: JSON.stringify(addTaskInfo),
-  //       //dataType: "json",
-  //       contentType: "application/json",
-  //       //encode: true,
-  //       success: function (res) {
-  //         console.log("successfully send request!");
-  //         console.log(res);
-  //         console.log(typeof(res));
-  //         window.sessionStorage.setItem("project" + res['_id'], JSON.stringify(res));
-  //         updateProjectList();
-  //         closeAddTask();
-  //         // navigateToHomePage();
-  //       }
-  //     }).done(function (data) {
-  //       // console.log(data);
-  //     });
-  //     event.preventDefault();
-  //   });
-  // });
+  $(document).ready(function () {
+    $("#addtask").click(function (event) {
+      var addTaskInfo = {
+        name: $("#task-name").val(),
+        user_ids: assigneeList,
+        create_date: selectedStartDate,
+        end_date: selectedDueDate
+      };
+      // console.log(projectInfo);
+      $.ajax({
+        type: "POST",
+        url: "/Projects/Tasks"+window.location.search,
+        data: JSON.stringify(addTaskInfo),
+        //dataType: "json",
+        contentType: "application/json",
+        //encode: true,
+        success: function (res) {
+          assigneeList = [];
+          console.log("successfully send request!");
+          console.log(res);
+          console.log(typeof(res));
+          console.log(res.created_date);
+          let startDate = new Date(res.created_date);
+          let endDate = new Date(res.end_date);
+          startDate = startDate.toLocaleDateString('en-GB');
+          endDate = endDate.toLocaleDateString('en-GB');
+          // window.sessionStorage.setItem("newtask" + res['_id'], JSON.stringify(res));
+          // updateTaskList(res);
+          console.log("Name: ",res.name);
+          console.log("Status: ",res.status);
+          console.log("Start: ",res.created_date);
+          console.log("End: ",res.end_date);
+          
+          let status = "";
+          if(res.status == 0){
+            status = '<div class="status" id="To-do">To-do</div>';
+          }
+          else if(res.status == 1){
+            status = '<div class="status" id="In-progress">In-progress</div>';
+          }
+          else if(res.status == 2){
+            status = '<div class="status" id="Done">Done</div>';
+          }
+          console.log(status);
+
+          var row = '<tr><th scope="row">' + res.name
+           + '</th>' +
+           '<td>'+
+               '<div class="assignee-list">' +
+                   '<div class="profile-img" id="assginee">U</div>' +
+               '</div>' +
+           '</td>' +
+          '<td>' +
+            startDate +
+          '</td>' +
+          '<td>' +
+              endDate +
+          '</td>' +
+          '<td>' +
+            status +
+          '</td>' +
+          '<td>' +
+               '<div class="action">' +
+                  '<button class="edit-btn" onclick="openModifyTask()"><img src="/img/edit.png" alt="">' +
+                  '</button>' + 
+                  '<button class="delete-btn"><img src="/img/delete.png" alt="">' +
+                  '</button>'+
+              '</div>'+
+          '</td>'+
+          '</tr>';
+          console.log(row);
+          console.log($("#task-table tbody"));
+          
+          $("#task-table tbody").append(row);
+
+          closeAddTask();
+        }
+      }).done(function (data) {
+        // console.log(data);
+      });
+      event.preventDefault();
+    });
+  });
+
+  //Handle update status
+  var updatedStatus = ""; // Biến lưu trữ giá trị được chọn
+
+    function changeOption(option) {
+        var dropdownButton = document.getElementById("dropdownButton");
+        dropdownButton.textContent = option;
+        updatedStatus = option; 
+        console.log(updatedStatus); 
+    }
+    document.getElementsByClassName("dropbtn")[0].addEventListener("click", function() {
+      var dropdownContent = document.getElementsByClassName("dropdown-content")[0];
+      dropdownContent.classList.toggle("show");
+    });
+
+    window.onclick = function(event) {
+        if (!event.target.matches('.dropbtn')) {
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            var i;
+            for (i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')) {
+                  openDropdown.classList.remove('show');
+                }
+            }
+        }
+    }
+
+    $(document).ready(function () {
+      $("#modifytask").click(function (event) {
+        var modifyTaskInfo = {
+          task_to_mod: taskIdToModify,
+          new_content: noteContent,
+          new_end_date: updatedDueDate,
+          update_status: updatedStatus
+        };
+        // console.log(projectInfo);
+        $.ajax({
+          type: "PUT",
+          url: "/Projects/Tasks"+window.location.search,
+          data: JSON.stringify(modifyTaskInfo),
+          contentType: "application/json",
+          success: function (res) {
+            console.log("sent request!");
+            console.log(res);
+          }
+        }).done(function (data) {
+          // console.log(data);
+        });
+        event.preventDefault();
+      });
+    });
+
 
   navigateToBetweenPages();
 </script>

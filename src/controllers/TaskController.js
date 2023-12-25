@@ -12,7 +12,10 @@ const errorHandler = (req, err) => {
     errors = [err]
     return errors
 }
-
+const dd_mm_yyyy_formating = (date_string) => {
+    let day_struct = date_string.split('/')
+    return new Date(day_struct[2], day_struct[1] - 1, day_struct[0])
+}
 const Check_dup_task_create = async (name, master_project) => {
     // kiểm tra trùng project name và trùng tên task khi tạo 
     let task_name = name;
@@ -39,6 +42,16 @@ const Check_Task_exist = async (task_id = mongoose.Types.ObjectId) => {
     }
 
     let err = "Task not exist";
+    throw err;
+}
+
+const adminProject = async (taskID, userID) => {
+    const task = await Task.findById(taskID);
+    const project = await Project.findById(task['master_project'])
+    if (project['admin'] == userID) {
+        return;
+    }
+    let err = "you don't have permission to delete Task"
     throw err;
 }
 
@@ -143,7 +156,6 @@ const TaskCreate = async (req, res) => {
 
         //add task to project
         const project = await Project.findById(req.query.id);
-        project['task'].push(task['_id']);
         await project.save()
         res.status(201).json(task);
     }
@@ -157,11 +169,11 @@ const TaskCreate = async (req, res) => {
 const ModTaskContent = async (req, res) => {
 
     // Các thuộc tính cần thiết
-    const task_to_mod = req.body.task; // lấy task id
+    const task_to_mod = req.body.task_to_mod; // lấy task id
 
     // Các thuộc tính có thể được thay đổi
-    const new_content = req.body.content;
-    const new_end_date = req.body.end_date;
+    const new_content = req.body.new_content;
+    const new_end_date =  dd_mm_yyyy_formating(req.body.new_end_date);
     const update_user_ids = req.body.user_ids;
 
     // TO DO:
@@ -170,18 +182,18 @@ const ModTaskContent = async (req, res) => {
     //      + người dùng gửi giá trị done = 0 => status giữ nguyên 
     //      + người dùng gửi giá trị done = 1 => status = 2 (done)
     // - mọi thay đổi khác liên quan đến status phải thực hiện gián tiếp thông qua thay đổi ngày
-    const update_status = req.body.status;
-
+    const update_status = req.body.update_status;
+    console.log(req.body);
     try {
         await Check_Task_exist(task_to_mod);
-        update_content = Task.updateOne(
+        update_content = await Task.updateOne(
             { "_id": task_to_mod },
             {
                 $set: { 'content': new_content, 'end_date': new_end_date, 'user_ids': update_user_ids, 'status': update_status }
             }
         )
         console.log("Modify OK!");
-        res.status(201).send('Modify OK!')
+        res.status(201).json({ 'message': 'Modify OK!' })
 
     } catch (err) {
         errors = errorHandler(req, err)
@@ -209,7 +221,9 @@ const getTask = async (req, res) => {
 const deleteTask = async (req, res) => {
     try {
         task_id = new mongoose.Types.ObjectId(req.body.task); //lấy ID task từ req
+        console.log("taskid", task_id)
         await Check_Task_exist(task_id);
+        await adminProject(req.body.task, req.user._id)
         task_to_del = await Task.deleteOne({ "_id": task_id })
         res.status(200).send("task deleted");
     } catch (err) {

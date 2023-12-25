@@ -100,9 +100,22 @@
         <button onclick="closePopupAddMem()">X</button>
       </div>
       <!-- <form class="invitation-info" id="invite-form" action=""> -->
-        <label for="invitation">Invite Some Friends</label>
-        <input type="text" name="id" id="invite-name" placeholder="Username">
+      <div class="invite-member">
+        <label for="invitation" id="invite-label">Invite Some Friends</label>
+        <input type="text" name="invitation" id="invite-input" placeholder="Email or name" style="position: absolute;
+        left: 5%;
+        top: 50%;
+        width: 80%;
+        margin: 0;
+        font-size: medium;
+        padding: 4% 0 1% 2%;
+        background-color: #F5F5F5;
+        color: #5e6269;
+        border: none;
+        border-bottom: 1px solid #4f6480;
+        /* font-size: 1.5vw; */">
         <button id="invite-btn-1" type="submit"><img src="\img\Add Administrator.png" alt=""></button>
+      </div>
       <!-- </form> -->
     </div>
 
@@ -113,9 +126,9 @@
         <button onclick="closePopupShare()">X</button>
       </div>
       <form class="invitation-info" action="" method="PUT">
-      <label for="invitation">Invite Some Friends</label>
-      <input type="text" name="id" placeholder="link">
-      <button id="invite-btn-2" type="submit"><img src="/img/icons8-copy-24.png" alt=""></button>
+        <label for="invitation">Invite Some Friends</label>
+        <input type="text" name="id" placeholder="link">
+        <button id="invite-btn-2" type="submit"><img src="/img/icons8-copy-24.png" alt=""></button>
       </form>
     </div>
 
@@ -131,17 +144,25 @@
         </svg>
       </button>
       <div class="profile">
-        <div class="profile-img">U</div>
+        <div class="profile-img">
+          <%= user.username[0] %>
+        </div>
         <div class="profile-content">
-          <p class="profile-user">Username</p>
-          <p class="profile-email">Email</p>
+          <p class="profile-user">
+            <%= user.username %>
+          </p>
+          <p class="profile-email">
+            <%= user.email %>
+          </p>
         </div>
       </div>
     </div>
     <div class="project-title">
-      <h1>Project Name</h1>
+      <h1>
+        <%= projName %>
+      </h1>
     </div>
-    <h3 class="member-title">Project's member (3)</h3>
+    <h3 class="member-title">Project's member (<%= memberList.length %>)</h3>
 
     <!-- buttons -->
     <div class="functional-btn">
@@ -157,24 +178,20 @@
 
     <!-- member list -->
     <div class="member-list">
-      <div class="member">
-        <div class="profile-img" id="mem-tag">U</div>
-        <p class="mem-name">Member 1</p>
-        <p class="mem-role">(Role)</p>
-        <button type="button" class="btn btn-secondary btn-sm" id="remove-member-btn">Leave</button>
-      </div>
-      <div class="member">
-        <div class="profile-img" id="mem-tag">U</div>
-        <p class="mem-name">Member 2</p>
-        <p class="mem-role">(Role)</p>
-        <button type="button" class="btn btn-secondary btn-sm" id="remove-member-btn">Remove</button>
-      </div>
-      <div class="member">
-        <div class="profile-img" id="mem-tag">U</div>
-        <p class="mem-name">Member 3</p>
-        <p class="mem-role">(Role)</p>
-        <button type="button" class="btn btn-secondary btn-sm" id="remove-member-btn">Remove</button>
-      </div>
+      <% for (let i=0;i < memberList.length; i++) { %>
+        <div class="member">
+          <div class="profile-img" id="mem-tag">U</div>
+          <p class="mem-name">
+            <%= memberList[i].username %>
+          </p>
+          <% if(memberList[i].username==user.username) {%>
+            <button type="button" class="btn btn-secondary btn-sm" id="remove-member-btn">
+              leave
+            </button>
+            <% }%>
+        </div>
+
+        <% } %>
     </div>
   </div>
 </body>
@@ -194,7 +211,7 @@
       };
       console.log(inviteInfo);
       // console.log("/Projects/project"+window.location.search);
-      let requestURL = "/Projects/project"+window.location.search;
+      let requestURL = "/Projects/project" + window.location.search;
       $.ajax({
         type: "PUT",
         url: requestURL,
@@ -205,7 +222,7 @@
         success: function (res) {
           console.log("successfully send request!");
           console.log(res);
-          console.log(typeof(res));
+          console.log(typeof (res));
           window.sessionStorage.setItem("newmember" + res['_id'], JSON.stringify(res));
           // navigateToHomePage();
         }
@@ -236,7 +253,7 @@
     popupShare.classList.remove("open-share");
   }
 
-  function navigateToBetweenPages(){
+  function navigateToBetweenPages() {
     let navigationLinks = document.getElementsByTagName('a');
     for (let i = 0; i < navigationLinks.length; ++i) {
       console.log("I'm here");
@@ -247,19 +264,19 @@
         page = navigationLinks[i].textContent;
         console.log(page);
         let isProjectsPage = 0;
-        if (i == 0){
+        if (i == 0) {
           page = "/"
           isProjectsPage = 1;
         }
-        else if (page=="Task" || page=="Member")
-          page = page.toLowerCase()+"s";
-        else if (page=="Home")
+        else if (page == "Task" || page == "Member")
+          page = page.toLowerCase() + "s";
+        else if (page == "Home")
           page = "project";
         else
           page = page.toLowerCase();
         console.log(page);
-        if(!isProjectsPage)
-          window.location.href = "/Projects/"+page+currentProjectId;
+        if (!isProjectsPage)
+          window.location.href = "/Projects/" + page + currentProjectId;
         else
           window.location.href = page;
       })
