@@ -130,9 +130,10 @@ const inviteUser = async (req, res) => {
 
 const leaveProject = async (req, res) => {
     try {
-        const index = req.user['project_ID'].indexOf(2);
+        const index = req.user['project_ID'].indexOf(req.query.id);
         req.user['project_ID'].splice(index, 1)
         await req.user.save();
+
         res.status(200).redirect('/');
     }
     catch (err) {

@@ -160,6 +160,8 @@ const TaskCreate = async (req, res) => {
 
         //add task to project
         const project = await Project.findById(req.query.id);
+        //console.log(task['_id'].valueOf())
+        project['task'].push(task['_id'].valueOf())
         await project.save()
         res.status(201).json(task);
     }
