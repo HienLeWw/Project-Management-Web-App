@@ -13,6 +13,14 @@ const errorHandler = (req, err) => {
     return errors
 }
 
+// ghép 2 mảng lại với nhau và bỏ những trường bị lặp
+const mergeArray = (a, b, predicate = (a, b) => a === b) => {
+    const c = [...a]; // copy to avoid side effects
+    // add all items from B to copy C if they're not already present
+    b.forEach((bItem) => (c.some((cItem) => predicate(bItem, cItem)) ? null : c.push(bItem)))
+    return c;
+}
+
 const Check_dup_task_create = async (name, master_project) => {
     // kiểm tra trùng project name và trùng tên task khi tạo 
     let task_name = name;
@@ -171,7 +179,11 @@ const ModTaskContent = async (req, res) => {
     // Các thuộc tính có thể được thay đổi
     const new_content = req.body.new_content;
     const new_end_date =  dd_mm_yyyy_formating(req.body.new_end_date);
-    const update_user_ids = req.body.user_ids;
+
+    // đề phòng gửi mảng user_ids rỗng
+    const added_user_ids = req.body.user_ids;
+    const task_user_ids = Task.findById(task_to_mod).user_ids;
+    const update_user_ids = mergeArray(task_user_ids, added_user_ids);
 
     // TO DO:
     // - status cần được cập nhật theo begin date, end date và current date sau khi đc được đưa lên db
@@ -189,6 +201,8 @@ const ModTaskContent = async (req, res) => {
                 $set: { 'content': new_content, 'end_date': new_end_date, 'user_ids': update_user_ids, 'status': update_status }
             }
         )
+        // nhớ gọi đến notification để update
+        // await getNotification(user, project)
         console.log("Modify OK!");
         res.status(201).json({ 'message': 'Modify OK!' })
 
@@ -202,7 +216,7 @@ const ModTaskContent = async (req, res) => {
 const getTask = async (req, res) => {
     try {
         let task_query = await url.parse(req.url, true)
-        task_id = new mongoose.Types.ObjectId(task_query.query.task); //lấy ID task từ req
+        task_id = new mongoose.Types.ObjectId(task_query.query.task); //lấy ID task từ query
 
         //console.log(task_id)
 
