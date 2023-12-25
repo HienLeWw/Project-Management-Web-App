@@ -84,11 +84,15 @@ const projectPage = async (req, res) => {
 }
 
 const memberPage = async (req, res) => {
-    res.render('member.ejs')
+    const project = await Project.findById(req.query.id)
+    const users = await User.find({ "project_ID": req.query.id })
+    console.log(users)
+    res.render('member.ejs', { "memberList": users, "projName": project.name })
 }
 
 const calendarPage = async (req, res) => {
-    res.render('calendar.ejs')
+    const project = await Project.findById(req.query.id)
+    res.render('calendar.ejs', { "projName": project.name })
 }
 
 const getAllInfo = async (req, res) => {

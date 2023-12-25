@@ -94,7 +94,9 @@
 
     <!-- Project Name -->
     <div class="header">
-      <h1 style="left: 18%; position: fixed;">Project Name</h1>
+      <h1 style="left: 18%; position: fixed;">
+        <%= projName %>
+      </h1>
       <!-- notify button -->
       <button class="notify-btn" onclick="openNotify()">
         <svg xmlns="http://www.w3.org/2000/svg" height="2em"
@@ -104,10 +106,16 @@
         </svg>
       </button>
       <div class="profile">
-        <div class="profile-img">U</div>
+        <div class="profile-img">
+          <%= user.username[0] %>
+        </div>
         <div class="profile-content">
-          <p class="profile-user">Username</p>
-          <p class="profile-email">Email</p>
+          <p class="profile-user">
+            <%= user.username %>
+          </p>
+          <p class="profile-email">
+            <%= user.email %>
+          </p>
         </div>
       </div>
     </div>
@@ -137,7 +145,7 @@
     { start_date: "2023-11-20", end_date: "2023-11-27", text: "Event 3", color: "#AB30E5" } //late
   ], "json");
 
-  function navigateToBetweenPages(){
+  function navigateToBetweenPages() {
     let navigationLinks = document.getElementsByTagName('a');
     for (let i = 0; i < navigationLinks.length; ++i) {
       console.log("I'm here");
@@ -148,19 +156,19 @@
         page = navigationLinks[i].textContent;
         console.log(page);
         let isProjectsPage = 0;
-        if (i == 0){
+        if (i == 0) {
           page = "/"
           isProjectsPage = 1;
         }
-        else if (page=="Task" || page=="Member")
-          page = page.toLowerCase()+"s";
-        else if (page=="Home")
+        else if (page == "Task" || page == "Member")
+          page = page.toLowerCase() + "s";
+        else if (page == "Home")
           page = "project";
         else
           page = page.toLowerCase();
         console.log(page);
-        if(!isProjectsPage)
-          window.location.href = "/Projects/"+page+currentProjectId;
+        if (!isProjectsPage)
+          window.location.href = "/Projects/" + page + currentProjectId;
         else
           window.location.href = page;
       })
