@@ -88,8 +88,7 @@ const getTaskPage = async (req, res) => {
         }
         // get members to render
         const users = await User.find({ "project_ID": req.query.id })
-        console.log("username", users)
-        console.log("task", Task_list)
+        console.log("tasklist",new Date(Task_list[0]['created_date']))
         res.render("task.ejs", { "Task_list": Task_list, "users": users });
         res.status(200);
     } catch (err) {

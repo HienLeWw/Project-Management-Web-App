@@ -244,7 +244,7 @@
         <% for(let i=0; i < Task_list.length; i++) {%>
           <tr>
             <th scope="row" id="Task_<%= i %>">
-              <%= Task_list[i].name %>
+              <%=Task_list[i].name %>
             </th>
             <td>
               <div class="assignee-list">
@@ -252,7 +252,8 @@
               </div>
             </td>
             <td>
-              <%= Task_list[i].created_date.toLocaleDateString('en-GB') %>
+              
+              <%=new Date(Task_list[i].created_date).toLocaleDateString('en-GB') %>
             </td>
             <td>
               <%=Task_list[i].end_date.toLocaleDateString('en-GB') %>
@@ -594,6 +595,9 @@
       });
     });
 
+    function updateTaskList(){
+
+    }
 
   navigateToBetweenPages();
 </script>
