@@ -10,14 +10,12 @@ const compareDay = (date1, date2) => {
     d2.setHours(0, 0, 0, 0)
     return (d1 - d2) // == 0 => d1 == d2; < 0 => d1 < d2; > 0 => d1 > d2
 }
-
-const getNotification = async (user, project) => {
-
-    let noti = [];
-    for (let i = 0; i < project.task.length; i++) {
-        const task = await Task.findById(project.task[i]);
-        console.log(task)
-        if (task.user_ids.indexOf(user.id) >= 0) {
+const updateNoti = async () => {
+    const projects = await Project.find()
+    for (let i = 0; i < projects.length; i++) {
+        let noti = [];
+        for (let j = 0; j < projects[i].task.length; j++) {
+            const task = await Task.findById(projecs[i].task[j]);
             const currentDay = new Date();
             // nếu true : currentDay = end_date - 1
             if (await compareDay(currentDay, new Date(task.end_date)) == 0) {
@@ -26,15 +24,16 @@ const getNotification = async (user, project) => {
                 if (task.status != 2) {
                     var infoNoti = {
                         "endDate": task.end_date,
-                        "taskName": task.name
+                        "taskName": task.name,
+                        "taskID": task._id
                     };
                     noti.push(infoNoti)
                 }
             }
         }
+        projects[i].notification = noti;
+        await projects[i].save();
     }
-    console.log(noti)
-    return noti;
 }
 
-module.exports = { getNotification }
+module.exports = { updateNoti }

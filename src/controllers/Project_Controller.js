@@ -4,7 +4,6 @@ const Project = require('../models/Projects');
 const User = require('../models/Users');
 const Task = require('../models/Tasks')
 const mongoose = require('mongoose');
-const { getNotification } = require('../services/notification')
 
 const errorHandler = (req, err) => {
     console.log(err.message, err.code);
@@ -49,7 +48,6 @@ const Create_Project = async (req, res) => {
     console.log(admin);
     const Project_name = req.body.name;
     const task = [];
-
     try {
         //create project and add project to owner
         const project = await Project.create({ "name": Project_name, admin, task });
@@ -81,7 +79,6 @@ const projectPage = async (req, res) => {
         const task = await Task.findById(project['task'][i])
         taskList.push(task)
     }
-    const notification = await getNotification(req.user, project)
     res.render('home.ejs', { "project": project, "taskList": taskList, "notiList": notification })
 }
 
@@ -108,7 +105,7 @@ const getAllInfo = async (req, res) => {
     }
     res.status(200).json({ "users": users, "tasks": taskList })
 }
-const modProject = async (req, res) => {
+const inviteUser = async (req, res) => {
     try {
         const userList = []
         console.log(req.body.username.length)
@@ -137,4 +134,4 @@ const leaveProject = async (req, res) => {
     }
 }
 
-module.exports = { Create_Project, Delete_Project, getProjects, projectPage, memberPage, getAllInfo, calendarPage, modProject, leaveProject };
+module.exports = { Create_Project, Delete_Project, getProjects, projectPage, memberPage, getAllInfo, calendarPage, inviteUser, leaveProject };
