@@ -156,16 +156,14 @@
       <div class="popup-body">
         <!-- <form action="" class="task-info"> -->
           <label for="task-name" class="task-label">Task name:</label><br>
-          <input type="text" name="task-name" id="task-name" class="task-name">
+          <input type="text" name="task-name" id="task-name-to-modify" class="task-name" value="readonly" readonly>
           <div class="assign">
             <p>Assign:</p>
             <button class="open-assign-btn-1" onclick="openAssign()" id="assign-btn"><img src="/img/Add Administrator.png" alt="">
           </div>
-          <label for="start" class="task-label">Start Date:</label>
-          <input id="datepicker3" name="start" width="276" />
           <label for="due" class="task-label">Due Date:</label>
           <input id="datepicker4" name="due" width="276" />
-          <label for="status-update" class="task-label">Status</label><br>
+          <label for="status-update" class="task-label">Status:</label><br>
           <div class="status-update">
             <button id="dropdownButton" class="dropbtn">Status</button>
             <div class="dropdown-content">
@@ -173,9 +171,11 @@
               <p onclick="changeOption('In progress')">In progress</p>
               <p onclick="changeOption('Done')">Done</p>
             </div>
-          </div>
+          </div><br><br>
+          <label for="note" class="task-label">Note:</label><br>
+          <textarea type="text" id="note" name="note" style="height: 100px; width: 100%;"></textarea><br>
         <!-- </form> -->
-        <button class="add-btn" id="addtask">Confirm</button>
+        <button class="add-btn" id="modifytask">Confirm</button>
       </div>
     </div>
 
@@ -243,7 +243,7 @@
       <tbody>
         <% for(let i=0; i < Task_list.length; i++) {%>
           <tr>
-            <th scope="row">
+            <th scope="row" id="Task_<%= i %>">
               <%= Task_list[i].name %>
             </th>
             <td>
@@ -268,7 +268,7 @@
             </td>
             <td>
               <div class="action">
-                <button class="edit-btn" onclick="openModifyTask()"><img src="/img/edit.png" alt="">
+                <button class="edit-btn" onclick="openModifyTask('#edit_<%= i %>')" id="edit_<%= i %>"><img src="/img/edit.png" alt="">
                 </button>
                 <button class="delete-btn"><img src="/img/delete.png" alt="">
                 </button>
@@ -311,8 +311,20 @@
   function closeAddTask() {
     popupAddTask.classList.remove("open-add-task");
   }
-  function openModifyTask() {
+  let taskNameToModify;
+  let taskIdToModify;
+  let noteContent;
+  function openModifyTask(edit_btn) {
+    const editBtn = document.querySelector(edit_btn);
     popupModifyTask.classList.add("open-modify-task");
+    const tr = editBtn.closest('tr');
+    taskNameToModify = tr.querySelector('th').textContent;
+    console.log(taskNameToModify);
+    document.getElementById("task-name-to-modify").value = taskNameToModify.trim();
+    taskIdToModify = findTaskId(taskNameToModify.trim());
+    noteContent = JSON.parse(window.sessionStorage.getItem("tasks"+taskIdToModify)).content;
+    noteElement = document.getElementById("note");
+    noteElement.textContent = noteContent;
   }
   function closeModifyTask() {
     popupModifyTask.classList.remove("open-modify-task");
@@ -366,6 +378,22 @@
     });
   });
 
+  function findTaskId(taskName){
+    let taskId = "";
+    for (let i=0; i< window.sessionStorage.length;++i){
+        // console.log(window.sessionStorage[key]);
+        let id = window.sessionStorage.key(i);
+        let task = JSON.parse(window.sessionStorage.getItem(id));
+        console.log("Found:",task);
+        if(taskName==task.name){
+          taskId = task._id;
+          console.log("Yeah!");
+          break;
+        }
+    }
+    return taskId;
+  }
+
   function navigateToBetweenPages(){
     let navigationLinks = document.getElementsByTagName('a');
     for (let i = 0; i < navigationLinks.length; ++i) {
@@ -413,6 +441,7 @@
         contentType: "application/json",
         //encode: true,
         success: function (res) {
+          assigneeList = [];
           console.log("successfully send request!");
           console.log(res);
           console.log(typeof(res));
@@ -507,29 +536,29 @@
     }
 
     $(document).ready(function () {
-    $("#modify-task").click(function (event) {
-      var addTaskInfo = {
-        task_to_mod: $("#task-name").val(),
-        new_content: "do sth",
-        new_end_date: updatedDueDate,
-        update_status: updatedStatus
-      };
-      // console.log(projectInfo);
-      $.ajax({
-        type: "PUT",
-        url: "/Projects/Tasks"+window.location.search,
-        data: JSON.stringify(addTaskInfo),
-        contentType: "application/json",
-        success: function (res) {
-          
-                    
-        }
-      }).done(function (data) {
-        // console.log(data);
+      $("#modifytask").click(function (event) {
+        var modifyTaskInfo = {
+          task_to_mod: taskIdToModify,
+          new_content: noteContent,
+          new_end_date: updatedDueDate,
+          update_status: updatedStatus
+        };
+        // console.log(projectInfo);
+        $.ajax({
+          type: "PUT",
+          url: "/Projects/Tasks"+window.location.search,
+          data: JSON.stringify(modifyTaskInfo),
+          contentType: "application/json",
+          success: function (res) {
+            console.log("sent request!");
+            console.log(res);
+          }
+        }).done(function (data) {
+          // console.log(data);
+        });
+        event.preventDefault();
       });
-      event.preventDefault();
     });
-  });
 
 
   navigateToBetweenPages();

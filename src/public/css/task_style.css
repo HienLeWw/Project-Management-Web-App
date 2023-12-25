@@ -334,7 +334,7 @@ tr td .profile-img {
     top: 0%;
     transform: translate(-50%, -50%) scale(0.1);
     left: 50%;
-    z-index: 30;
+    z-index: 1000;
     visibility: hidden;
     transition: transform 0.3s, top 0.3s;
 }
@@ -506,8 +506,8 @@ tr td .profile-img {
 
 .popup-modify-task {
     position: absolute;
-    width: 600px;
-    height: 600px;
+    width: 800px;
+    height: 700px;
     background-color: white;
     border: solid black 0.5px;
     top: 40%;
