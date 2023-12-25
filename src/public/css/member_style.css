@@ -389,7 +389,7 @@ li a:hover:not(.active) {
     transform: translate(-50%, -50%) scale(1);
 }
 
-.popup-add-mem form input[type=text] {
+/* .popup-add-mem form input[type=text] {
     position: relative;
     left: 5%;
     width: 77%;
@@ -401,8 +401,37 @@ li a:hover:not(.active) {
     border: none;
     border-bottom: 1px solid #4f6480;
     /* font-size: 1.5vw; */
+/* } */ */
+.popup-add-mem .invite-member input[type=text] {
+    position: absolute;
+    left: 5%;
+    top: 50%;
+    width: 80%;
+    margin: 0;
+    font-size: medium;
+    padding: 4% 0 1% 2%;
+    background-color: #F5F5F5;
+    color: #5e6269;
+    border: none;
+    border-bottom: 1px solid #4f6480;
+    /* font-size: 1.5vw; */
 }
-
+.popup-add-mem .invite-member{
+    display: flex;
+}
+/* #invite-input {
+    position: relative;
+    left: 5%;
+    width: 77%;
+    margin: 0;
+    font-size: medium;
+    padding: 4% 0 1% 2%;
+    background-color: #F5F5F5;
+    color: #5e6269;
+    border: none;
+    border-bottom: 1px solid #4f6480;
+    /* font-size: 1.5vw; */
+/* } */ */
 .header input {
     position: relative;
     width: 40%;
@@ -411,15 +440,30 @@ li a:hover:not(.active) {
     float: left;
 }
 
-.popup-add-mem form label {
+/* .popup-add-mem form label {
     position: absolute;
+    left: 5%;
+    margin: 0;
+    padding: 0;
+    font-size: large;
+} */
+
+#invite-label {
+    position: relative;
     left: 5%;
     margin: 0;
     padding: 0;
     font-size: large;
 }
 
-#invite-btn {
+#invite-btn-1 {
+    background-color: transparent;
+    border: 0;
+    position: absolute;
+    left: 85%;
+    top: 50%;
+}
+#invite-btn-2 {
     background-color: transparent;
     border: 0;
     position: absolute;
@@ -483,7 +527,7 @@ li a:hover:not(.active) {
     font-size: large;
 }
 
-#invite-btn {
+#invite-btn-1 {
     background-color: transparent;
     border: 0;
     position: absolute;
@@ -491,7 +535,21 @@ li a:hover:not(.active) {
     top: 45%;
 }
 
-#invite-btn img:hover {
+#invite-btn-1 img:hover {
+    transform: scale(1.1);
+    transition: 200ms;
+}
+
+
+#invite-btn-2 {
+    background-color: transparent;
+    border: 0;
+    position: absolute;
+    left: 85%;
+    top: 45%;
+}
+
+#invite-btn-2 img:hover {
     transform: scale(1.1);
     transition: 200ms;
 }

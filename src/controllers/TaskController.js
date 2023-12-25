@@ -16,12 +16,14 @@ const errorHandler = (req, err) => {
 const Check_dup_task_create = async (name, master_project) => {
     // kiểm tra trùng project name và trùng tên task khi tạo 
     let task_name = name;
-    master_project = master_project;
-
+    
+    console.log(task_name)
     let check_task = await Task.find({ "name": task_name });
-    let check_Project = await Project.findById(master_project);
+    let check_Project = await Project.findById( master_project);
 
-    if (check_Project.length > 0) {
+    console.log(Object.keys(check_Project).length)
+
+    if (Object.keys(check_Project).length > 0) {
         if (check_task.length <= 0) {
             return;
         }
@@ -41,6 +43,11 @@ const Check_Task_exist = async (task_id = mongoose.Types.ObjectId) => {
 
     let err = "Task not exist";
     throw err;
+}
+
+const mm_dd_2_dd_mm = (day_string = String) => {
+    let tmp = day_string.split('/')
+    return new Date(tmp[2], tmp[1] - 1, tmp[0])
 }
 
 const getTaskPage = async (req, res) => {
@@ -72,12 +79,16 @@ const TaskCreate = async (req, res) => {
     // những tham số cần thiết để khởi tạo 1 task mới
     console.log(req.body)
     let name = req.body.name;
-    let content = "";
+    let content = "do sth";
     //let master_project = new mongoose.Types.ObjectId(req.body.master_project); // id project chứa task này
     let master_project = req.query.id; // id project chứa task này
-    let created_date = new Date();
-    let status = 0; // mặc định để to do
-    let end_date = Date(req.body.end_date); // giả định dữ liệu đã được parse sang 
+    let created_date = mm_dd_2_dd_mm(req.body.create_date);
+    let status = 1; // mặc định để to do
+    
+
+    
+    let end_date = mm_dd_2_dd_mm(req.body.end_date); // giả định dữ liệu đã được parse sang 
+    console.log(end_date);
     // kiểu Date trước khi được gửi đi 
     let user_ids = req.body.user_ids;
 
@@ -98,6 +109,7 @@ const TaskCreate = async (req, res) => {
     }
     catch (err) {
         errors = errorHandler(req, err)
+        console.log(errors)
         res.status(400).json({ errors })
     }
 
