@@ -139,6 +139,7 @@ const ModTaskContent = async (req, res) => {
 
     } catch (err) {
         errors = errorHandler(req, err)
+        console.log(errors);
         res.status(400).json({ errors })
     }
 

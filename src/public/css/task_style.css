@@ -490,11 +490,11 @@ tr td .profile-img {
 
 .add-btn {
     background-color: #F5F5F5;
-    width: 15%;
-    height: 10%;
+    width: 10%;
+    height: 8%;
     position: absolute;
-    top: 85%;
-    left: 80%;
+    top: 90%;
+    left: 85%;
     border: solid black 0.5px;
 }
 
@@ -506,11 +506,11 @@ tr td .profile-img {
 
 .popup-modify-task {
     position: absolute;
-    width: 800px;
-    height: 700px;
+    width: 750px;
+    height: 600px;
     background-color: white;
     border: solid black 0.5px;
-    top: 40%;
+    top: 45%;
     transform: translate(-50%, -50%) scale(0.1);
     left: 10%;
     z-index: 110;
