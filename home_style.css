@@ -11,7 +11,7 @@ body {
 }
 .w3-sidebar{
     position: relative;
-    background-color: #C0D0EF;
+    background-color: #304A6E;
     left: 0%;
     width: 15%;
 }
@@ -163,13 +163,18 @@ li a:hover:not(.active) {
 #dropdownMenuButton{
     background-color: #668DC0;
     color: black;
-    width: 100px;
+    width: 5vw;
+    font-size: 1vw;
 }
 #share-btn{
     margin-left: 1%;
     background-color: #668DC0;
     color: black;
-    font-size: 15px;
+    font-size: 1vw;
+}
+#share-btn img{
+    width: 1.2vw;
+    height: 1.2vw;
 }
 .status{
     width: 100%;
@@ -183,6 +188,7 @@ li a:hover:not(.active) {
 }
 .notify-btn svg{
     transition: 0.3s;
+    height: 2em;
 }
 .notify-btn:hover svg{
     transform: scale(1.2);
@@ -214,7 +220,7 @@ li a:hover:not(.active) {
 
 .popup-notify{
     position: absolute;
-    width: 400px;
+    width: 40vw;
     height: auto;
     background-color: white;
     border: solid black 0.5px;
@@ -240,16 +246,16 @@ li a:hover:not(.active) {
 }
 
 .popup-head img{
-    width: 36px;
-    height: 36px;
+    width: 2vw;
+    height: 2vw;
     /* margin-right: 50%; */
 }
 
 .popup-head button{
     background-color: transparent;    
     border: black solid 1px;    
-    width: 30px;
-    height: 30px;
+    width: 2vw;
+    height: 2vw;
     /* margin-left: 50%; */
     position: absolute;
     left: 90%;
@@ -274,15 +280,16 @@ li a:hover:not(.active) {
     justify-content: center;
     justify-items: center;
     font-size: large;
-    width: 28px;
-    height: 28px;
+    width: 1.8vw;
+    height: 1.8vw;
+    margin-bottom: 0.5vw;
     margin-right: 1%;
 }
 
 .popup-share{
     position: absolute;
-    width: 600px;
-    height: 180px;
+    width: 45vw;
+    height: 10vw;
     background-color: white;
     border: solid black 0.5px;
     top: 40%;
@@ -462,12 +469,12 @@ li a:hover:not(.active) {
 @media screen and (max-width: 320px){
     .w3-sidebar{
         width: 100vw;
-        height: 9vh;
+        height: 8vh;
     }
     .logo_contain img{
-        width: 50vw;
-        top: 2.5vw;
-        left: 25vw;
+        width: 40vw;
+        top: 2vw;
+        left: 30vw;
     }
     .w3-sidebar ul{
         display: none;
@@ -478,19 +485,546 @@ li a:hover:not(.active) {
     }
     .w3-container .project-title{
         width: 50%;
-        top: 5%;
+        top: 4%;
         left: 0%;
     }
     .w3-container .project-title h1{
         font-size: 3vh;
     }
+    .w3-container .functional-btn{
+        top: 5vh;
+        left: 55vw;
+    }
+    #dropdownMenuButton{
+        background-color: #668DC0;
+        color: black;
+        width: 10vh;
+        font-size: 2vh;
+    }
+    #share-btn{
+        margin-left: 1%;
+        width: 10vh;
+        background-color: #668DC0;
+        color: black;
+        font-size: 2vh;
+    }
+    #share-btn img{
+        display: none;
+    }
+    .dropdown-item{
+        width: 0.5vh;
+        font-size: 2vh;
+    }
+    .w3-container .notify-btn{
+        top: 8.5vh;
+        right: 15vw;
+    }
+    .w3-container .profile{
+        top: 9vh;
+    }
+    .w3-container .profile .profile-img{
+        width: 4vh;
+        height: 4vh;
+        font-size: 2.5vh;
+    }
+    .w3-container .profile .profile-content{
+        display: none;
+    }
+    .search{
+        top: 15vh;
+        left: 2vw;
+    }
+    .bucket-parent{
+        display: grid;
+        top: 24vh;
+    }
+    .bucket-parent .bucket-child{
+        width: 90%;
+    }
+    .bucket-parent .bucket-child .vector-icon{
+        top: 18%;
+        height: 1vh;
+    }
+    .bucket-parent .bucket-child .bucket-header .bucket-title{
+        top: -0.3vh;
+    }
+    .bucket-parent .bucket-child .bucket-header .group-item{
+        width: 2.5vh;
+        height: 2.5vh;
+        top: 0.3vh;
+        left: -1vh;
+    }
+    .bucket-parent .bucket-child .task-list{
+        top: 25%;
+    }
+
+    .w3-container .popup-notify{
+        width: 40vh;
+    }
+    .popup-head img{
+        width: 4vh;
+        height: 4vh;
+    }
+    
+    .popup-head button{  
+        border: black solid 1px;    
+        width: 3vh;
+        height: 3vh;
+        /* margin-left: 50%; */
+        position: absolute;
+        top: 2vw;
+    }
+    .popup-head button a{
+        position: relative;
+        bottom: 0.5vh;
+        right: 0.2vh;
+    }
+    .popup-body{
+        width: 80%;
+        height: auto;
+        margin-left: 5%;
+    }
+    
+    .popup-body .notify-content{
+        display: flex;
+        border-bottom: gray solid 0.3px;
+        margin-bottom: 2%;
+    }
+    
+    .popup-body .notify-content .notify-img{
+        display: none;
+    }
+
+    .popup-share{
+        width: 80%;
+        height: 15vh;
+    }
 }
 
 @media screen and (min-width: 321px) and (max-width: 426px){
+    .w3-sidebar{
+        width: 100vw;
+        height: 8vh;
+    }
+    .logo_contain img{
+        width: 40vw;
+        top: 2vw;
+        left: 30vw;
+    }
+    .w3-sidebar ul{
+        display: none;
+    }
+    .w3-container{
+        width: 100%;
+        margin-left: 0%;
+    }
+    .w3-container .project-title{
+        width: 50%;
+        top: 4%;
+        left: 0%;
+    }
+    .w3-container .project-title h1{
+        font-size: 3vh;
+    }
+    .w3-container .functional-btn{
+        top: 5vh;
+        left: 55vw;
+    }
+    #dropdownMenuButton{
+        background-color: #668DC0;
+        color: black;
+        width: 10vh;
+        font-size: 2vh;
+    }
+    #share-btn{
+        margin-left: 1%;
+        width: 10vh;
+        background-color: #668DC0;
+        color: black;
+        font-size: 2vh;
+    }
+    #share-btn img{
+        display: none;
+    }
+    .dropdown-item{
+        width: 0.5vh;
+        font-size: 2vh;
+    }
+    .w3-container .notify-btn{
+        top: 8.5vh;
+        right: 15vw;
+    }
+    .w3-container .profile{
+        top: 9vh;
+    }
+    .w3-container .profile .profile-img{
+        width: 4vh;
+        height: 4vh;
+        font-size: 2.5vh;
+    }
+    .w3-container .profile .profile-content{
+        display: none;
+    }
+    .search{
+        top: 15vh;
+        left: 2vw;
+    }
+    .bucket-parent{
+        display: grid;
+        top: 24vh;
+    }
+    .bucket-parent .bucket-child{
+        width: 90%;
+    }
+    .bucket-parent .bucket-child .vector-icon{
+        top: 18%;
+        height: 1vh;
+    }
+    .bucket-parent .bucket-child .bucket-header .bucket-title{
+        top: -0.3vh;
+    }
+    .bucket-parent .bucket-child .bucket-header .group-item{
+        width: 2.5vh;
+        height: 2.5vh;
+        top: 0.3vh;
+        left: -1vh;
+    }
+    .bucket-parent .bucket-child .task-list{
+        top: 25%;
+    }
+
+    .w3-container .popup-notify{
+        width: 40vh;
+    }
+    .popup-head img{
+        width: 4vh;
+        height: 4vh;
+    }
+    
+    .popup-head button{  
+        border: black solid 1px;    
+        width: 3vh;
+        height: 3vh;
+        /* margin-left: 50%; */
+        position: absolute;
+        top: 2vw;
+    }
+    .popup-head button a{
+        position: relative;
+        bottom: 0.5vh;
+        right: 0.2vh;
+    }
+    .popup-body{
+        width: 80%;
+        height: auto;
+        margin-left: 5%;
+    }
+    
+    .popup-body .notify-content{
+        display: flex;
+        border-bottom: gray solid 0.3px;
+        margin-bottom: 2%;
+    }
+    
+    .popup-body .notify-content .notify-img{
+        display: none;
+    }
+
+    .popup-share{
+        width: 80%;
+        height: 15vh;
+    }
 }
 
-@media screen and (min-width: 426px) and (max-width: 768px){
+@media screen and (min-width: 426px) and (max-width: 767px){
+    .w3-sidebar{
+        width: 100vw;
+        height: 8vh;
+    }
+    .logo_contain img{
+        width: 40vw;
+        top: 2vw;
+        left: 30vw;
+    }
+    .w3-sidebar ul{
+        display: none;
+    }
+    .w3-container{
+        width: 100%;
+        margin-left: 0%;
+    }
+    .w3-container .project-title{
+        width: 50%;
+        top: 4%;
+        left: 0%;
+    }
+    .w3-container .project-title h1{
+        font-size: 3vh;
+    }
+    .w3-container .functional-btn{
+        top: 5vh;
+        left: 55vw;
+    }
+    #dropdownMenuButton{
+        background-color: #668DC0;
+        color: black;
+        width: 10vh;
+        font-size: 2vh;
+    }
+    #share-btn{
+        margin-left: 1%;
+        width: 10vh;
+        background-color: #668DC0;
+        color: black;
+        font-size: 2vh;
+    }
+    #share-btn img{
+        display: none;
+    }
+    .dropdown-item{
+        width: 0.5vh;
+        font-size: 2vh;
+    }
+    .w3-container .notify-btn{
+        top: 8.5vh;
+        right: 15vw;
+    }
+    .w3-container .profile{
+        top: 9vh;
+    }
+    .w3-container .profile .profile-img{
+        width: 4vh;
+        height: 4vh;
+        font-size: 2.5vh;
+    }
+    .w3-container .profile .profile-content{
+        display: none;
+    }
+    .search{
+        top: 15vh;
+        left: 2vw;
+    }
+    .bucket-parent{
+        display: grid;
+        top: 24vh;
+    }
+    .bucket-parent .bucket-child{
+        width: 90%;
+    }
+    .bucket-parent .bucket-child .vector-icon{
+        top: 18%;
+        height: 1vh;
+    }
+    .bucket-parent .bucket-child .bucket-header .bucket-title{
+        top: -0.3vh;
+    }
+    .bucket-parent .bucket-child .bucket-header .group-item{
+        width: 2.5vh;
+        height: 2.5vh;
+        top: 0.3vh;
+        left: -1vh;
+    }
+    .bucket-parent .bucket-child .task-list{
+        top: 25%;
+    }
+
+    .w3-container .popup-notify{
+        width: 40vh;
+    }
+    .popup-head img{
+        width: 4vh;
+        height: 4vh;
+    }
+    
+    .popup-head button{  
+        border: black solid 1px;    
+        width: 3vh;
+        height: 3vh;
+        /* margin-left: 50%; */
+        position: absolute;
+        top: 2vw;
+    }
+    .popup-head button a{
+        position: relative;
+        bottom: 0.5vh;
+        right: 0.2vh;
+    }
+    .popup-body{
+        width: 80%;
+        height: auto;
+        margin-left: 5%;
+    }
+    
+    .popup-body .notify-content{
+        display: flex;
+        border-bottom: gray solid 0.3px;
+        margin-bottom: 2%;
+    }
+    
+    .popup-body .notify-content .notify-img{
+        display: none;
+    }
+
+    .popup-share{
+        width: 80%;
+        height: 15vh;
+    }
 }
 
-@media screen and (min-width: 769px) and (max-width: 1024px){
+@media screen and (min-width: 768px) and (max-width: 1023px){
+    .w3-sidebar{
+        width: 100vw;
+        height: 8vh;
+    }
+    .logo_contain img{
+        width: 40vw;
+        top: 1vw;
+        left: 30vw;
+        margin: 0;
+    }
+    .w3-sidebar ul{
+        display: none;
+    }
+    .w3-container{
+        top: 9vh;
+        width: 100%;
+        margin-left: 0%;
+    }
+    .w3-container .project-title{
+        width: 50%;
+        top: -4%;
+        left: 2%;
+    }
+    .w3-container .project-title h1{
+        font-size: 4vh;
+    }
+    .w3-container .functional-btn{
+        top: -3vh;
+        left: 54vw;
+    }
+    #dropdownMenuButton{
+        background-color: #668DC0;
+        color: black;
+        width: 10vh;
+        font-size: 2vh;
+    }
+    #share-btn{
+        margin-left: 1%;
+        width: 10vh;
+        background-color: #668DC0;
+        color: black;
+        font-size: 2vh;
+    }
+    #share-btn img{
+        width: 2vh;
+        height: 2vh;
+    }
+    .dropdown-item{
+        width: 0.5vh;
+        font-size: 2vh;
+    }
+    .w3-container .notify-btn{
+        top: 15vh;
+        right: 3vw;
+    }
+    .notify-btn svg{
+        transition: 0.3s;
+        height: 3em;
+    }
+    .w3-container .profile{
+        top: 9vh;
+    }
+    .w3-container .profile .profile-img{
+        width: 4vh;
+        height: 4vh;
+        font-size: 2.5vh;
+        margin-right: 0vw;
+    }
+    .w3-container .profile .profile-content{
+        display: none;
+    }
+    .search{
+        top: 6.4vh;
+        left: 5vw;
+    }
+    .search .form-control{
+        width: 30vw;
+        font-size: 2vh;
+    }
+    .search button{
+        font-size: 2vh;
+    }
+    .bucket-parent{
+        display: grid;
+        top: 12vh;
+        left: 14vw;
+    }
+    .bucket-parent .bucket-child{
+        width: 90%;
+    }
+    .bucket-parent .bucket-child .vector-icon{
+        top: 18%;
+        height: 1vh;
+    }
+    .bucket-parent .bucket-child .bucket-header .bucket-title{
+        top: -0.3vh;
+        font-size: 2.5vh;
+    }
+    .bucket-parent .bucket-child .bucket-header .group-item{
+        width: 2.5vh;
+        height: 2.5vh;
+        top: 0.5vh;
+        left: -1vh;
+    }
+    .bucket-parent .bucket-child .task-list{
+        top: 25%;
+        font-size: 2vh;
+    }
+    #assignee{
+        font-size: 1.5vh;
+        top: 0.15vh;
+        width: 2.5vh;
+        height: 2.5vh;
+    }
+    .w3-container .popup-notify{
+        width: 40vh;
+    }
+    .popup-head img{
+        width: 4vh;
+        height: 4vh;
+    }
+    
+    .popup-head button{  
+        border: black solid 1px;    
+        width: 3vh;
+        height: 3vh;
+        /* margin-left: 50%; */
+        position: absolute;
+        top: 2vw;
+    }
+    .popup-head button a{
+        position: relative;
+        bottom: 0.5vh;
+        right: 0.2vh;
+    }
+    .popup-body{
+        width: 80%;
+        height: auto;
+        margin-left: 5%;
+    }
+    
+    .popup-body .notify-content{
+        display: flex;
+        border-bottom: gray solid 0.3px;
+        margin-bottom: 2%;
+    }
+    
+    .popup-body .notify-content .notify-img{
+        display: none;
+    }
+
+    .popup-share{
+        width: 80%;
+        height: 15vh;
+    }
 }

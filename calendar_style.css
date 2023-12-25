@@ -428,7 +428,7 @@ tbody{
     }
 }
 
-@media screen and (min-width: 426px) and (max-width: 768px){
+@media screen and (min-width: 426px) and (max-width: 767px){
     .w3-sidebar{
         width: 100vw;
         height: 9vh;
@@ -507,26 +507,35 @@ tbody{
     }
 }
 
-@media screen and (min-width: 769px) and (max-width: 1024px){
-    .nav-items{
-        /* margin-left: 20%; */
-        /* margin-right: 10%; */
-        margin-bottom: 1vw;
-        margin-right: 1vw; 
-        margin-left: -0.7vw;
+@media screen and (min-width: 768px) and (max-width: 1023px){
+    .w3-sidebar{
+        width: 100vw;
+        height: 9vh;
+    }
+    .logo_contain img{
+        width: 30vw;
+        top: 1.5vh;
+        left: 35vw;
+    }
+    .w3-sidebar ul{
+        display: none;
     }
     .w3-container{
-        margin-left: 10%;
+        margin-left: 0%;
     }
-    #scheduler{ 
-        height: 86vh; 
-        left: 6.2vw; 
-        top: 2vh;
+    .w3-container .header{
+        width: 100%;
+        top: 10vh;
+        left: -10vw;
     }
-    .w3-container .popup-notify .popup-head img{
-        width: 3vw;
-        height: 3vw;
+    .w3-container .popup-notify{
+        width: 40vw;
     }
+    .popup-head img{
+        width: 4vh;
+        height: 4vh;
+    }
+    
     .popup-head button{  
         border: black solid 1px;    
         width: 3vh;
@@ -553,6 +562,26 @@ tbody{
     }
     
     .popup-body .notify-content .notify-img{
-        font-size: 1.2vw;
+        display: none;
+    }
+    .w3-container .header h1{
+        font-size: 4vw;
+        left: 3%; 
+    }
+    .w3-container .header .notify-btn{
+        top: 11.5vh;
+        right: 25vw;
+    }
+    .w3-container .profile .profile-img{
+        width: 4vh;
+        height: 4vh;
+        font-size: 2.5vh;
+    }
+    #scheduler{
+        width: 100%; 
+        height: 75vh; 
+        left: 3vw; 
+        position: absolute;
+        top: 15vh;
     }
 }

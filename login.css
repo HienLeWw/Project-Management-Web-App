@@ -198,7 +198,7 @@ body{
     }
 }
 
-@media screen and (min-width: 321px) and (max-width: 425px){
+@media screen and (min-width: 321px) and (max-width: 424px){
     .container{
         border-radius: 10vw;
     }
@@ -246,32 +246,98 @@ body{
     }
 }
 
-@media screen and (min-width: 426px) and (max-width: 768px){
+@media screen and (min-width: 425px) and (max-width: 767px){
+    .container{
+        border-radius: 10vw;
+    }
+    .img_contain{
+        display: none;
+    }
+    .login_form{
+        width: 100%;
+        top: 8%;
+        border-radius: 500px;
+    }
     .login_form .logo_contain img{
-        width: 50%;
-        height: 60%;
-        top: 15%;
-        left: 25%;
+        width: 80%;
+        top: 10%;
+        left: 12%;
+    }
+    .login_form h1{
+        font-size: 7vw;
     }
     .login_form form{
-        top: 0%
+        top: 1%
+    }
+    .login_form form input[type=text], input[type=password]{
+        margin: 4% 0 4% 0;
+        /* margin: 0; */
+        padding: 4% 0 0.5% 1%;
+        /* padding: 0; */
+        font-size: 5vw;
+    }
+    .login_form form a{
+        margin-top: 3vh;
+        font-size: 4vw;
     }
     .login_form form button{
-        top: 3vw;
+        top: 15vh;
+        height: 10vw;
+        font-size: 6vw;
+    }
+    .login_form .sign_up{
+        margin: 0;
+        padding: 0;
+    }
+    .login_form .sign_up a, p{
+        font-size: 4vw;
     }
 }
 
-@media screen and (min-width: 767px) and (max-width: 1024px){
+@media screen and (min-width: 768px) and (max-width: 1024px){
+    .container{
+        border-radius: 10vw;
+    }
+    .img_contain{
+        display: none;
+    }
+    .login_form{
+        width: 100%;
+        top: 8%;
+        border-radius: 500px;
+    }
     .login_form .logo_contain img{
-        width: 50%;
-        height: 60%;
-        top: 15%;
-        left: 25%;
+        width: 80%;
+        top: 10%;
+        left: 12%;
+    }
+    .login_form h1{
+        font-size: 7vw;
     }
     .login_form form{
-        top: 0%
+        top: 1%
+    }
+    .login_form form input[type=text], input[type=password]{
+        margin: 4% 0 4% 0;
+        /* margin: 0; */
+        padding: 4% 0 0.5% 1%;
+        /* padding: 0; */
+        font-size: 5vw;
+    }
+    .login_form form a{
+        margin-top: 3vh;
+        font-size: 4vw;
     }
     .login_form form button{
-        top: 3vw;
+        top: 15vh;
+        height: 10vw;
+        font-size: 6vw;
+    }
+    .login_form .sign_up{
+        margin: 0;
+        padding: 0;
+    }
+    .login_form .sign_up a, p{
+        font-size: 4vw;
     }
 }
