@@ -12,19 +12,23 @@ const errorHandler = (req, err) => {
     errors = [err]
     return errors
 }
-const dd_mm_yyyy_formating = (date_string) => {
-    let day_struct = date_string.split('/')
-    return new Date(day_struct[2], day_struct[1] - 1, day_struct[0])
+
+// ghép 2 mảng lại với nhau và bỏ những trường bị lặp
+const mergeArray = (a, b, predicate = (a, b) => a === b) => {
+    const c = [...a]; // copy to avoid side effects
+    // add all items from B to copy C if they're not already present
+    b.forEach((bItem) => (c.some((cItem) => predicate(bItem, cItem)) ? null : c.push(bItem)))
+    return c;
 }
+
 const Check_dup_task_create = async (name, master_project) => {
     // kiểm tra trùng project name và trùng tên task khi tạo 
     let task_name = name;
-    master_project = master_project;
 
     let check_task = await Task.find({ "name": task_name });
     let check_Project = await Project.findById(master_project);
 
-    if (check_Project.length > 0) {
+    if (Object.keys(check_Project).length > 0) {
         if (check_task.length <= 0) {
             return;
         }
@@ -54,6 +58,21 @@ const adminProject = async (taskID, userID) => {
     }
     let err = "you don't have permission to delete Task"
     throw err;
+}
+
+const dd_mm_yyyy_formating = (date_string) => {
+    let day_struct = date_string.split('/')
+    return new Date(day_struct[2], day_struct[1] - 1, day_struct[0])
+}
+
+const compare_day = (date1, date2) => {
+    let d1 = date1
+    let d2 = date2
+
+    d1.setHours(0, 0, 0, 0)
+    d2.setHours(0, 0, 0, 0)
+
+    return (d1 - d2) // == 0 => d1 == d2; < 0 => d1 < d2; > 0 => d1 > d2
 }
 
 const getTaskPage = async (req, res) => {
@@ -86,12 +105,49 @@ const TaskCreate = async (req, res) => {
     console.log(req.body)
     let name = req.body.name;
     let content = "";
-    //let master_project = new mongoose.Types.ObjectId(req.body.master_project); // id project chứa task này
+    
+    // let master_project = new mongoose.Types.ObjectId(req.body.master_project); // id project chứa task này
+
     let master_project = req.query.id; // id project chứa task này
-    let created_date = new Date();
-    let status = 0; // mặc định để to do
-    let end_date = Date(req.body.end_date); // giả định dữ liệu đã được parse sang 
-    // kiểu Date trước khi được gửi đi 
+    
+    
+    let end_date = dd_mm_yyyy_formating(req.body.end_date); // giả định dữ liệu đã được parse sang 
+                                            // kiểu Date trước khi được gửi đi 
+
+    // DONE:
+    //  - cần kiểm tra và đổi lại created date thành begin date 
+    //  - cần kiểm tra begin date và end date để xác định giá trị khởi tạo cho status 
+
+    // mặc định để In progress, begin date == created date
+    let begin_date = new Date()
+    var status = 1
+
+    // TO DO:
+    //  - Viết thành 1 hàm riêng
+    //  - Kiểm lỗi
+    try {
+        begin_date = dd_mm_yyyy_formating(req.body.create_date);
+        let current_Date = new Date()
+        
+        // current date < begin => 0: To Do
+        // begin <= current date < end date => 1: In progress
+        // current date >= end date và chưa xong => 3: Due to
+        let time_to_begin = compare_day(current_Date, begin_date);
+        let time_to_end = compare_day(end_date, current_Date);
+
+        if (time_to_begin < 0){
+            status = 0  // current date < begin => 0: To Do
+        } else if (time_to_end <= 0) {
+            status = 3 // current date >= end date và chưa xong => 3: Due to
+        } else {
+            status = 1 // begin <= current date < end date => 1: In progress
+        }
+    }
+    catch (err) {
+        // default case
+        console.warn("enable to receive or process begining date, using default setting"); 
+    }
+
     let user_ids = req.body.user_ids;
 
     try {
@@ -100,7 +156,7 @@ const TaskCreate = async (req, res) => {
         const task = await Task.create({
             "name": name, "user_ids": user_ids,
             "master_project": master_project, "status": status, "content": content,
-            "created_date": created_date, "end_date": end_date
+            "begin_date": begin_date, "end_date": end_date
         });
 
         //add task to project
@@ -123,7 +179,18 @@ const ModTaskContent = async (req, res) => {
     // Các thuộc tính có thể được thay đổi
     const new_content = req.body.new_content;
     const new_end_date =  dd_mm_yyyy_formating(req.body.new_end_date);
-    const update_user_ids = req.body.user_ids;
+
+    // đề phòng gửi mảng user_ids rỗng
+    const added_user_ids = req.body.user_ids;
+    const task_user_ids = await Task.findById(task_to_mod).user_ids;
+    const update_user_ids = mergeArray(task_user_ids, added_user_ids);
+
+    // TO DO:
+    // - status cần được cập nhật theo begin date, end date và current date sau khi đc được đưa lên db
+    // - người dùng chỉ có thể thay đổi trực tiếp status để đánh dấu công việc đã xong hay chưa?:
+    //      + người dùng gửi giá trị done = 0 => status giữ nguyên 
+    //      + người dùng gửi giá trị done = 1 => status = 2 (done)
+    // - mọi thay đổi khác liên quan đến status phải thực hiện gián tiếp thông qua thay đổi ngày
     const update_status = req.body.update_status;
     console.log(req.body);
     try {
@@ -134,6 +201,8 @@ const ModTaskContent = async (req, res) => {
                 $set: { 'content': new_content, 'end_date': new_end_date, 'user_ids': update_user_ids, 'status': update_status }
             }
         )
+        // nhớ gọi đến notification để update
+        // await getNotification(user, project)
         console.log("Modify OK!");
         res.status(201).json({ 'message': 'Modify OK!' })
 
@@ -148,7 +217,7 @@ const ModTaskContent = async (req, res) => {
 const getTask = async (req, res) => {
     try {
         let task_query = await url.parse(req.url, true)
-        task_id = new mongoose.Types.ObjectId(task_query.query.task); //lấy ID task từ req
+        task_id = new mongoose.Types.ObjectId(task_query.query.task); //lấy ID task từ query
 
         //console.log(task_id)
 
@@ -175,4 +244,4 @@ const deleteTask = async (req, res) => {
     }
 }
 
-module.exports = { getTaskPage, TaskCreate, ModTaskContent, getTask, deleteTask };
+module.exports = { getTaskPage, TaskCreate, ModTaskContent, getTask, deleteTask, Check_Task_exist };
