@@ -81,7 +81,9 @@ const projectPage = async (req, res) => {
         const task = await Task.findById(project['task'][i])
         taskList.push(task)
     }
+    //console.log("in ra task homepage",taskList)
     const notification = await getNotification(req.user, project)
+    console.log("get",notification.length)
     res.render('home.ejs', { "project": project, "taskList": taskList, "notiList": notification })
 }
 

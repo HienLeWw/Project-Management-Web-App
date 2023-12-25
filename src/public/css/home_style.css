@@ -2,24 +2,20 @@ body {
     margin: 0;
     background-color: #C0D0EF;
 }
-
-.w3-sidebar {
+.w3-sidebar{
     background-color: #C0D0EF;
     width: 15%;
 }
-
-.w3-container {
+.w3-container{
     background-color: #C0D0EF;
     height: 100%;
     padding: 0;
-    margin-left: 15%;
+    margin-left:15%; 
     width: 100%;
 }
-
-html {
+html{
     background-color: #C0D0EF;
 }
-
 ul {
     list-style-type: none;
     margin: 0;
@@ -30,7 +26,6 @@ ul {
     height: 100%;
     overflow: auto;
 }
-
 li a {
     display: block;
     color: #dfdfdf;
@@ -39,13 +34,12 @@ li a {
     text-align: center;
     font-size: large;
 }
-
+  
 li a.active {
     color: white;
     justify-content: center;
 }
-
-.logo_contain img {
+.logo_contain img{
     position: relative;
     width: 100%;
     height: 60%;
@@ -53,48 +47,41 @@ li a.active {
     left: 0%;
     margin-bottom: 5%;
 }
-
-.logo_contain {
-    background-color: #304A6E;
+.logo_contain{
+  background-color: #304A6E;
 }
-
 li a:hover:not(.active) {
     color: white;
     text-decoration: none;
 }
-
-.nav-items {
-    display: flex;
+.nav-items{
+    display: flex; 
     width: auto;
     margin: 0;
     /* margin-left: 20%; */
     /* margin-right: 10%; */
     margin-bottom: 5%;
-    margin-right: 10px;
+    margin-right: 10px; 
     margin-left: 20px;
 }
-
-.nav-items img {
+.nav-items img{
     left: 0%;
 }
-
-.header {
-    display: flex;
-    margin-top: 0%;
+.header{
+    display: flex; 
+    margin-top: 0%; 
     position: relative;
 }
-
-.search {
+.search{
     width: 70%;
     position: fixed;
     left: 35%;
 }
-
-.search .form-control {
+.search .form-control{
     margin: 0;
 }
 
-.header input {
+.header input{
     position: relative;
     width: 40%;
     margin: 1% 0% 1% 0%;
@@ -102,12 +89,12 @@ li a:hover:not(.active) {
     float: left;
 }
 
-.project-title {
+.project-title{
     margin-top: 3%;
     margin-left: 3%;
 }
 
-.add-task-btn {
+.add-task-btn{
     background-color: transparent;
     border: none;
     cursor: pointer;
@@ -116,24 +103,21 @@ li a:hover:not(.active) {
     left: 18%;
     position: absolute;
 }
-
-.add-task-btn:hover {
+.add-task-btn:hover{
     color: black;
-    text-decoration: underline;
+    text-decoration: underline; 
     transition-duration: 200ms;
 }
-
-.profile {
-    background-color: transparent;
-    border: none;
-    left: 85%;
-    position: fixed;
+.profile{
+    background-color: transparent; 
+    border: none; 
+    left: 85%; 
+    position: fixed; 
     display: flex;
 }
-
-.profile-img {
+.profile-img{
     border-radius: 50%;
-    background-color: rgb(68, 162, 149);
+    background-color:rgb(68, 162, 149);
     text-align: center;
     justify-content: center;
     justify-items: center;
@@ -142,97 +126,78 @@ li a:hover:not(.active) {
     height: 36px;
     margin-top: 5%;
 }
-
-.profile-user {
-    font-size: large;
-    margin: 0;
+.profile-user{
+    font-size: large; margin: 0;
 }
-
-.profile-email {
-    font-size: medium;
-    margin: 0;
+.profile-email{
+    font-size: medium; margin: 0;
 }
-
-.profile-content {
+.profile-content{
     margin-left: 2%;
 }
-
 /* .dropdown{ */
-/* margin-right: 35%; */
-/* position: fixed; */
-/* left: 60%; */
+    /* margin-right: 35%; */
+    /* position: fixed; */
+    /* left: 60%; */
 /* } */
-.functional-btn {
+.functional-btn{
     display: flex;
     position: relative;
     left: 60%;
 }
-
-#dropdownMenuButton {
+#dropdownMenuButton{
     background-color: #668DC0;
     color: black;
     width: 100px;
 }
-
-#share-btn {
+#share-btn{
     margin-left: 1%;
     background-color: #668DC0;
     color: black;
     font-size: 15px;
 }
-
-.status {
+.status{
     width: 100%;
 }
-
-.notify-btn {
-    background-color: transparent;
-    border: none;
-    left: 80%;
+.notify-btn{
+    background-color: transparent; 
+    border: none; 
+    left: 80%; 
     top: 1%;
     position: fixed;
 }
-
-.notify-btn svg {
+.notify-btn svg{
     transition: 0.3s;
 }
-
-.notify-btn:hover svg {
+.notify-btn:hover svg{
     transform: scale(1.2);
 }
-
-.edit-btn {
+.edit-btn{
     margin: 0;
-    padding: 0;
-    ;
+    padding: 0;;
     background-color: transparent;
     border: none;
 }
-
-.edit-btn img {
+.edit-btn img{
     transition: 0.3s;
 }
-
-.edit-btn:hover img {
+.edit-btn:hover img{
     transform: scale(1.2);
 }
-
-.delete-btn {
+.delete-btn{
     margin: 0;
     padding: 0;
     background-color: transparent;
     border: none;
 }
-
-.delete-btn img {
+.delete-btn img{
     transition: 0.3s;
 }
-
-.delete-btn:hover img {
+.delete-btn:hover img{
     transform: scale(1.2);
 }
 
-.popup-notify {
+.popup-notify{
     position: absolute;
     width: 400px;
     height: auto;
@@ -245,14 +210,12 @@ li a:hover:not(.active) {
     visibility: hidden;
     transition: transform 0.3s, top 0.3s;
 }
-
-.open-notify {
+.open-notify{
     visibility: visible;
     top: 30%;
     transform: translate(-50%, -50%) scale(1);
 }
-
-.popup-head {
+.popup-head{
     margin-top: 2%;
     margin-bottom: 2%;
     width: 80%;
@@ -261,15 +224,15 @@ li a:hover:not(.active) {
     margin-left: 5%;
 }
 
-.popup-head img {
+.popup-head img{
     width: 36px;
     height: 36px;
     /* margin-right: 50%; */
 }
 
-.popup-head button {
-    background-color: transparent;
-    border: black solid 1px;
+.popup-head button{
+    background-color: transparent;    
+    border: black solid 1px;    
     width: 30px;
     height: 30px;
     /* margin-left: 50%; */
@@ -277,19 +240,19 @@ li a:hover:not(.active) {
     left: 90%;
 }
 
-.popup-body {
+.popup-body{
     width: 80%;
     height: auto;
     margin-left: 5%;
 }
 
-.popup-body .notify-content {
+.popup-body .notify-content{
     display: flex;
     border-bottom: gray solid 0.3px;
     margin-bottom: 2%;
 }
 
-.popup-body .notify-content .notify-img {
+.popup-body .notify-content .notify-img{
     border-radius: 50%;
     background-color: rgb(68, 162, 149);
     text-align: center;
@@ -301,7 +264,7 @@ li a:hover:not(.active) {
     margin-right: 1%;
 }
 
-.popup-share {
+.popup-share{
     position: absolute;
     width: 600px;
     height: 180px;
@@ -315,13 +278,13 @@ li a:hover:not(.active) {
     transition: transform 0.3s, top 0.3s;
 }
 
-.open-share {
+.open-share{
     visibility: visible;
     left: 50%;
     transform: translate(-50%, -50%) scale(1);
 }
 
-.popup-share form input[type=text] {
+.popup-share form input[type=text]{
     position: relative;
     left: 5%;
     width: 77%;
@@ -334,8 +297,7 @@ li a:hover:not(.active) {
     border-bottom: 1px solid #4f6480;
     /* font-size: 1.5vw; */
 }
-
-.header input {
+.header input{
     position: relative;
     width: 40%;
     margin: 1% 0% 1% 0%;
@@ -343,7 +305,7 @@ li a:hover:not(.active) {
     float: left;
 }
 
-.popup-share form label {
+.popup-share form label{
     position: absolute;
     left: 5%;
     margin: 0;
@@ -351,20 +313,19 @@ li a:hover:not(.active) {
     font-size: large;
 }
 
-#invite-btn {
+#invite-btn{
     background-color: transparent;
     border: 0;
     position: absolute;
     left: 85%;
     top: 45%;
 }
-
-#invite-btn img:hover {
+#invite-btn img:hover{
     transform: scale(1.1);
     transition: 200ms;
 }
 
-.bucket-parent {
+.bucket-parent{
     display: flex;
     position: absolute;
     width: 80%;
@@ -372,7 +333,7 @@ li a:hover:not(.active) {
     /* background-color: #1F9254; */
 }
 
-.bucket-parent .bucket-child {
+.bucket-parent .bucket-child{
     overflow-y: scroll;
     overflow-x: hidden;
     position: relative;
@@ -388,7 +349,6 @@ li a:hover:not(.active) {
     /* align-items: flex-start; */
     /* flex-direction: row; */
 }
-
 .vector-icon {
     position: absolute;
     margin: 0 !important;
@@ -401,7 +361,6 @@ li a:hover:not(.active) {
     height: 3px;
     z-index: 1;
 }
-
 .bucket-header {
     position: relative;
     margin: 0 !important;
@@ -411,7 +370,6 @@ li a:hover:not(.active) {
     height: 19.07px;
     z-index: 2;
 }
-
 .bucket-title {
     position: absolute;
     top: 0;
@@ -421,7 +379,6 @@ li a:hover:not(.active) {
     width: 80%;
     height: 19.07px;
 }
-
 .group-item {
     position: relative;
     top: 5.02px;
@@ -430,19 +387,15 @@ li a:hover:not(.active) {
     width: 8px;
     height: 8.03px;
 }
-
-#todo-item {
+#todo-item{
     background-color: #5030e5;
 }
-
-#progress-item {
+#progress-item{
     background-color: orange;
 }
-
-#done-item {
+#done-item{
     background-color: #76a5ea;
 }
-
 .vuesaxbulkadd-square-icon {
     position: absolute;
     margin: 0 !important;
@@ -452,8 +405,7 @@ li a:hover:not(.active) {
     height: 24px;
     z-index: 4;
 }
-
-.task-list {
+.task-list{
     position: absolute;
     /* background-color: white; */
     width: 90%;
@@ -461,30 +413,26 @@ li a:hover:not(.active) {
     top: 15%;
     left: 5%;
 }
-
-.task-list .task {
+.task-list .task{
     background-color: white;
     border-radius: 5px;
     margin-bottom: 5px;
 }
 
-.task-list .task .task-name {
+.task-list .task .task-name{
     margin: 0;
     width: 80%;
     margin-left: 10%;
     border-bottom: solid black 0.5px;
 }
-
-.task-list .task .info {
+.task-list .task .info{
     display: flex;
 }
-
-.task-list .task .info .due-date {
+.task-list .task .info .due-date{
     margin: 0;
     margin-left: 10%;
 }
-
-#assignee {
+#assignee{
     position: relative;
     width: 20px;
     height: 20px;

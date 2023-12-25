@@ -16,7 +16,6 @@ const getNotification = async (user, project) => {
     let noti = [];
     for (let i = 0; i < project.task.length; i++) {
         const task = await Task.findById(project.task[i]);
-        console.log(task)
         if (task.user_ids.indexOf(user.id) >= 0) {
             const currentDay = new Date();
             // nếu true : currentDay = end_date - 1
@@ -33,7 +32,6 @@ const getNotification = async (user, project) => {
             }
         }
     }
-    console.log(noti)
     return noti;
 }
 
