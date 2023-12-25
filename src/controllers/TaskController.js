@@ -182,7 +182,7 @@ const ModTaskContent = async (req, res) => {
 
     // đề phòng gửi mảng user_ids rỗng
     const added_user_ids = req.body.user_ids;
-    const task_user_ids = Task.findById(task_to_mod).user_ids;
+    const task_user_ids = await Task.findById(task_to_mod).user_ids;
     const update_user_ids = mergeArray(task_user_ids, added_user_ids);
 
     // TO DO:
