@@ -92,8 +92,8 @@ const TaskCreate = async (req, res) => {
 
     let master_project = req.query.id; // id project chứa task này
     
-    let begin_date = new Date()
-    let end_date = Date(req.body.end_date); // giả định dữ liệu đã được parse sang 
+    let begin_date = dd_mm_yyyy_formating(req.body.create_date)
+    let end_date = dd_mm_yyyy_formating(req.body.end_date); // giả định dữ liệu đã được parse sang 
                                             // kiểu Date trước khi được gửi đi 
 
     // DONE:
