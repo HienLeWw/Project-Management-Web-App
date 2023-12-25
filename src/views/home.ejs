@@ -43,8 +43,8 @@
     <ul>
       <li>
         <div class="nav-items">
-          <a href="/"><img src="/img/icons8-dashboard-layout-48.png" alt="" class="nav-img"
-              width="32px" height="32px">Home</a>
+          <a href="/"><img src="/img/icons8-dashboard-layout-48.png" alt="" class="nav-img" width="32px"
+              height="32px">Home</a>
         </div>
       </li>
       <li>
@@ -62,8 +62,8 @@
       </li>
       <li>
         <div class="nav-items">
-          <a href="/projects/project/calendar"><img src="/img/icons8-calendar-64.png" alt="" class="nav-img" width="32px"
-              height="32px">Calendar</a>
+          <a href="/projects/project/calendar"><img src="/img/icons8-calendar-64.png" alt="" class="nav-img"
+              width="32px" height="32px">Calendar</a>
         </div>
       </li>
       <li>
@@ -162,76 +162,106 @@
     </div>
     <!-- buckets -->
     <div class="bucket-parent">
-      <div class="bucket-child">
-
-
-        <div class="bucket-header">
-          <div class="bucket-title">To Do</div>
-          <div class="group-item" id="todo-item"></div>
-        </div>
-        <img class="vector-icon" alt="" src="/img/vector-11.svg" />
-        <div class="task-list">
-          <div class="task" draggable="true">
-            <p class="task-name">Task 4</p>
-            <div class="info">
-              <p class="due-date">12/1</p>
-              <div class="profile-img" id="assignee">U</div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="bucket-child">
-
-
-        <div class="bucket-header">
-          <div class="bucket-title">
-            <p>In progress</p>
-          </div>
-          <div class="group-item" id="progress-item"></div>
-        </div>
-        <img class="vector-icon" alt="" src="/img/vector-12.svg" />
-        <div class="task-list">
-          <div class="task" draggable="true">
-            <p class="task-name">Task 2</p>
-            <div class="info">
-              <p class="due-date">8/1</p>
-              <div class="profile-img" id="assignee">U</div>
-            </div>
-          </div>
-          <div class="task" draggable="true">
-            <p class="task-name">Task 3</p>
-            <div class="info">
-              <p class="due-date">8/1</p>
-              <div class="profile-img" id="assignee">U</div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="bucket-child">
-
-
-        <div class="bucket-header">
-          <div class="bucket-title">Done</div>
-          <div class="group-item" id="done-item"></div>
-        </div>
-        <img class="vector-icon" alt="" src="/img/vector-13.svg" />
-        <div class="task-list">
-          <div class="task" draggable="true">
-            <p class="task-name">Task 1</p>
-            <div class="info">
-              <p class="due-date">4/1</p>
-              <div class="profile-img" id="assignee">U</div>
-            </div>
-          </div>
-        </div>
-        <!-- <img
-            class="vuesaxbulkadd-square-icon"
-            alt=""
-            src="//img/vuesaxbulkaddsquare.svg"
-          /> -->
-      </div>
+      <% let status0=0; %>
+        <% let status1=0; %>
+          <% let status2=0; %>
+            <% for(let i=0; i < taskList.length; i++) {%>
+              <div class="bucket-child">
+                <div class="bucket-header">
+                  <div class="bucket-title">To Do</div>
+                  <div class="group-item" id="todo-item"></div>
+                </div>
+                <img class="vector-icon" alt="" src="/img/vector-11.svg" />
+                <% if(taskList[i].status==0) { %>
+                  <% status0 +=1; %>
+                    <div class="task-list">
+                      <div class="task" draggable="true">
+                        <p class="task-name">
+                          <%= taskList[i].name %>
+                        </p>
+                        <div class="info">
+                          <p class="due-date"><%=taskList[i].end_date.toLocaleDateString('en-GB') %></p>
+                          <div class="profile-img" id="assignee">U</div>
+                        </div>
+                      </div>
+                    </div>
+                    <% } %>
+              </div>
+              <div class="bucket-child">
+                <div class="bucket-header">
+                  <div class="bucket-title">
+                    <p>In progress</p>
+                  </div>
+                  <div class="group-item" id="progress-item"></div>
+                </div>
+                <img class="vector-icon" alt="" src="/img/vector-12.svg" />
+                <% if(taskList[i].status==1){ %>
+                  <% status1 +=1; %>
+                    <div class="task-list">
+                      <div class="task" draggable="true">
+                        <p class="task-name">
+                          <%= taskList[i].name %>
+                        </p>
+                        <div class="info">
+                          <p class="due-date"><%=taskList[i].end_date.toLocaleDateString('en-GB') %></p>
+                          <div class="profile-img" id="assignee">U</div>
+                        </div>
+                      </div>
+                    </div>
+                    <% } %>
+              </div>
+              <div class="bucket-child">
+                <div class="bucket-header">
+                  <div class="bucket-title">Done</div>
+                  <div class="group-item" id="done-item"></div>
+                </div>
+                <img class="vector-icon" alt="" src="/img/vector-13.svg" />
+                <% if(tasList[i].status==2){ %>
+                  <% status2 +=1; %>
+                    <div class="task-list">
+                      <div class="task" draggable="true">
+                        <p class="task-name">
+                          <%= taskList[i].name %>
+                        </p>
+                        <div class="info">
+                          <p class="due-date"><%=taskList[i].end_date.toLocaleDateString('en-GB') %></p>
+                          <div class="profile-img" id="assignee">U</div>
+                        </div>
+                      </div>
+                    </div>
+                    <% } %>
+              </div>
+              <% } %>
+                <% if( status0==0){ %>
+                  <div class="bucket-child">
+                    <div class="bucket-header">
+                      <div class="bucket-title">To Do</div>
+                      <div class="group-item" id="todo-item"></div>
+                    </div>
+                    <img class="vector-icon" alt="" src="/img/vector-11.svg" />
+                  </div>
+                  <% } %>
+                    <% if( status1==0) { %>
+                      <div class="bucket-child">
+                        <div class="bucket-header">
+                          <div class="bucket-title">
+                            <p>In progress</p>
+                          </div>
+                          <div class="group-item" id="progress-item"></div>
+                        </div>
+                        <img class="vector-icon" alt="" src="/img/vector-12.svg" />
+                      </div>
+                      <% } %>
+                        <% if (status2==0) { %>
+                          <div class="bucket-child">
+                            <div class="bucket-header">
+                              <div class="bucket-title">Done</div>
+                              <div class="group-item" id="done-item"></div>
+                            </div>
+                            <img class="vector-icon" alt="" src="/img/vector-13.svg" />
+                          </div>
+                          <% } %>
     </div>
-
   </div>
 </body>
 <script>
@@ -261,28 +291,28 @@
   $(document).ready(function () {
     $.ajax({
       type: "GET",
-      url: "/Projects/project/info"+window.location.search,
+      url: "/Projects/project/info" + window.location.search,
       contentType: "application/json",
       success: function (res) {
         window.sessionStorage.clear();
         console.log(res.users);
         res.users.forEach(element => {
-        //   //console.log(element);
+          //   //console.log(element);
           window.sessionStorage.setItem("users" + element['_id'], JSON.stringify(element));
         });
         res.tasks.forEach(element => {
-        //   //console.log(element);
+          //   //console.log(element);
           window.sessionStorage.setItem("tasks" + element['_id'], JSON.stringify(element));
         });
         // window.sessionStorage.getItem();
         for (let index = 0; index < window.sessionStorage.length; index++) {
-         console.log(window.sessionStorage.key(index))
+          console.log(window.sessionStorage.key(index))
         }
       }
     });
   });
 
-  function navigateToBetweenPages(){
+  function navigateToBetweenPages() {
     let navigationLinks = document.getElementsByTagName('a');
     for (let i = 0; i < navigationLinks.length; ++i) {
       console.log("I'm here");
@@ -293,25 +323,25 @@
         page = navigationLinks[i].textContent;
         console.log(page);
         let isProjectsPage = 0;
-        if (i == 0){
+        if (i == 0) {
           page = "/"
           isProjectsPage = 1;
         }
-        else if (page=="Task" || page=="Member")
-          page = page.toLowerCase()+"s";
-        else if (page=="Home")
+        else if (page == "Task" || page == "Member")
+          page = page.toLowerCase() + "s";
+        else if (page == "Home")
           page = "project";
         else
           page = page.toLowerCase();
         console.log(page);
-        if(!isProjectsPage)
-          window.location.href = "/Projects/"+page+currentProjectId;
+        if (!isProjectsPage)
+          window.location.href = "/Projects/" + page + currentProjectId;
         else
           window.location.href = page;
       })
     }
   }
-  
+
   function openNotify() {
     popupNotify.classList.add("open-notify");
   }

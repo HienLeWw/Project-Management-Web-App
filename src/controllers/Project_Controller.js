@@ -74,9 +74,13 @@ const getProjects = async (req, res) => {
 }
 
 const projectPage = async (req, res) => {
-    console.log("datoihamnay")
     const project = await Project.findById(req.query.id)
-    res.render('home.ejs', { "project": project })
+    const taskList = []
+    for (let i = 0; i < project['task'].length; i++) {
+        const task = await Task.findById(project['task'][i])
+        console.log(task)
+    }
+    res.render('home.ejs', { "project": project, "taskList": taskList })
 }
 
 const memberPage = async (req, res) => {
