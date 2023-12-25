@@ -79,10 +79,9 @@ const projectPage = async (req, res) => {
     const taskList = []
     for (let i = 0; i < project['task'].length; i++) {
         const task = await Task.findById(project['task'][i])
-        console.log(task)
+        taskList.push(task)
     }
     const notification = await getNotification(req.user, project)
-    console.log("pass qua thz nay", notification)
     res.render('home.ejs', { "project": project, "taskList": taskList, "notiList": notification })
 }
 
@@ -102,13 +101,11 @@ const calendarPage = async (req, res) => {
 const getAllInfo = async (req, res) => {
     const users = await User.find({ 'project_ID': req.query.id })
     const project = await Project.findById(req.query.id);
-    console.log("test", project['task'][0])
     const taskList = []
     for (let i = 0; i < project['task'].length; i++) {
         const task = await Task.findById(project['task'][i]);
         taskList.push(task);
     }
-
     res.status(200).json({ "users": users, "tasks": taskList })
 }
 const modProject = async (req, res) => {
@@ -117,10 +114,7 @@ const modProject = async (req, res) => {
         console.log(req.body.username.length)
         for (let i = 0; i < req.body.username.length; i++) {
             const user = await User.find({ 'username': req.body.username[i] });
-            console.log(user)
-            console.log(user[i]['project_ID'])
             user[0]['project_ID'].push(req.query.id);
-            console.log("push dc nha")
             await user[0].save();
             userList.push(user)
         }
@@ -134,10 +128,8 @@ const modProject = async (req, res) => {
 
 const leaveProject = async (req, res) => {
     try {
-        console.log(req.user['project_ID'])
         const index = req.user['project_ID'].indexOf(2);
         req.user['project_ID'].splice(index, 1)
-        console.log(req.user['project_ID'])
         await req.user.save();
         res.status(200).redirect('/');
     }
