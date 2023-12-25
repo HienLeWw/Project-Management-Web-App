@@ -88,7 +88,7 @@ const getTaskPage = async (req, res) => {
         }
         // get members to render
         const users = await User.find({ "project_ID": req.query.id })
-        console.log("tasklist",new Date(Task_list[0]['created_date']))
+        //console.log("tasklist",new Date(Task_list[0]['created_date']))
         res.render("task.ejs", { "Task_list": Task_list, "users": users });
         res.status(200);
     } catch (err) {
@@ -104,14 +104,14 @@ const TaskCreate = async (req, res) => {
     console.log(req.body)
     let name = req.body.name;
     let content = "do something";
-    
+
     // let master_project = new mongoose.Types.ObjectId(req.body.master_project); // id project chứa task này
 
     let master_project = req.query.id; // id project chứa task này
-    
-    
+
+
     let end_date = dd_mm_yyyy_formating(req.body.end_date); // giả định dữ liệu đã được parse sang 
-                                            // kiểu Date trước khi được gửi đi 
+    // kiểu Date trước khi được gửi đi 
 
     // DONE:
     //  - cần kiểm tra và đổi lại created date thành begin date 
@@ -127,14 +127,14 @@ const TaskCreate = async (req, res) => {
     try {
         begin_date = dd_mm_yyyy_formating(req.body.create_date);
         let current_Date = new Date()
-        
+
         // current date < begin => 0: To Do
         // begin <= current date < end date => 1: In progress
         // current date >= end date và chưa xong => 3: Due to
         let time_to_begin = compare_day(current_Date, begin_date);
         let time_to_end = compare_day(end_date, current_Date);
 
-        if (time_to_begin < 0){
+        if (time_to_begin < 0) {
             status = 0  // current date < begin => 0: To Do
         } else if (time_to_end <= 0) {
             status = 3 // current date >= end date và chưa xong => 3: Due to
@@ -144,7 +144,7 @@ const TaskCreate = async (req, res) => {
     }
     catch (err) {
         // default case
-        console.warn("enable to receive or process begining date, using default setting"); 
+        console.warn("enable to receive or process begining date, using default setting");
     }
 
     let user_ids = req.body.user_ids;
@@ -178,14 +178,14 @@ const ModTaskContent = async (req, res) => {
 
     // Các thuộc tính có thể được thay đổi
     const new_content = req.body.new_content;
-    const new_end_date =  dd_mm_yyyy_formating(req.body.new_end_date);
+    const new_end_date = dd_mm_yyyy_formating(req.body.new_end_date);
 
     // đề phòng gửi mảng user_ids rỗng
     const added_user_ids = req.body.user_ids;
     // console.log(added_user_ids);
     const task_user_ids = (await Task.findById(task_to_mod)).user_ids;
     console.log(task_user_ids);
-    console.log(typeof(task_user_ids));
+    console.log(typeof (task_user_ids));
     const update_user_ids = mergeArray(task_user_ids, added_user_ids);
     // console.log(added_user_ids);
     // TO DO:
@@ -241,7 +241,7 @@ const deleteTask = async (req, res) => {
         await adminProject(req.body.task, req.user._id)
         task_to_del = await Task.deleteOne({ "_id": task_id })
         const project = await Project.findById(req.query.id);
-        project['task'].splice(project['task'].indexOf(req.body.task),1)
+        project['task'].splice(project['task'].indexOf(req.body.task), 1)
         await project.save();
         res.status(200).send("task deleted");
     } catch (err) {

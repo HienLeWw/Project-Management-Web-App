@@ -83,7 +83,7 @@ const projectPage = async (req, res) => {
     }
     //console.log("in ra task homepage",taskList)
     const notification = await getNotification(req.user, project)
-    console.log("get",notification.length)
+    console.log("get", notification.length)
     res.render('home.ejs', { "project": project, "taskList": taskList, "notiList": notification })
 }
 
@@ -110,7 +110,7 @@ const getAllInfo = async (req, res) => {
     }
     res.status(200).json({ "users": users, "tasks": taskList })
 }
-const modProject = async (req, res) => {
+const inviteUser = async (req, res) => {
     try {
         const userList = []
         console.log(req.body.username.length)
@@ -139,4 +139,4 @@ const leaveProject = async (req, res) => {
     }
 }
 
-module.exports = { Create_Project, Delete_Project, getProjects, projectPage, memberPage, getAllInfo, calendarPage, modProject, leaveProject };
+module.exports = { Create_Project, Delete_Project, getProjects, projectPage, memberPage, getAllInfo, calendarPage, inviteUser, leaveProject };
