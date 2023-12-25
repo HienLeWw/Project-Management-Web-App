@@ -4,7 +4,6 @@ const Project = require('../models/Projects');
 const User = require('../models/Users');
 const Task = require('../models/Tasks')
 const mongoose = require('mongoose');
-const { getNotification } = require('../services/notification')
 
 const errorHandler = (req, err) => {
     console.log(err.message, err.code);
@@ -82,22 +81,48 @@ const projectPage = async (req, res) => {
         taskList.push(task)
     }
     //console.log("in ra task homepage",taskList)
-    const notification = await getNotification(req.user, project)
-    console.log("get", notification.length)
-    res.render('home.ejs', { "project": project, "taskList": taskList, "notiList": notification })
+    let notiList = req.user.notification;
+    console.log(notiList)
+    for (let i = 0; i < req.user.notification.length; i++) {
+        if (req.user.notification[i].expiredDay > 30) {
+            req.user.notification[i].notiStatus = true;
+        }
+    }
+    const user = new User(req.user)
+    console.log(user)
+    await user.save();
+    res.render('home.ejs', { "project": project, "taskList": taskList, 'notiList': notiList })
 }
 
 const memberPage = async (req, res) => {
     const project = await Project.findById(req.query.id)
     const users = await User.find({ "project_ID": req.query.id })
-    const notification = getNotification(req.user, project)
-    res.render('member.ejs', { "memberList": users, "projName": project.name, "notiList": notification })
+    let notiList = req.user.notification;
+    console.log(notiList)
+    for (let i = 0; i < req.user.notification.length; i++) {
+        if (req.user.notification[i].expiredDay > 30) {
+            req.user.notification[i].notiStatus = true;
+        }
+    }
+    const user = new User(req.user)
+    console.log(user)
+    await user.save();
+    res.render('member.ejs', { "memberList": users, "projName": project.name, 'notiList': notiList })
 }
 
 const calendarPage = async (req, res) => {
     const project = await Project.findById(req.query.id)
-    const notification = getNotification(req.user, project)
-    res.render('calendar.ejs', { "projName": project.name, "notiList": notification })
+    let notiList = req.user.notification;
+    console.log(notiList)
+    for (let i = 0; i < req.user.notification.length; i++) {
+        if (req.user.notification[i].expiredDay > 30) {
+            req.user.notification[i].notiStatus = true;
+        }
+    }
+    const user = new User(req.user)
+    console.log(user)
+    await user.save();
+    res.render('calendar.ejs', { "projName": project.name, 'notiList': notiList })
 }
 
 const getAllInfo = async (req, res) => {

@@ -85,15 +85,17 @@
       </div>
       <div class="popup-body">
         <% for (let i=0; i < notiList.length; i++) { %>
-          <div class="notify-content">
-            <div class="notify-img">
-              <%= user.username[0] %>
+          <% if(notiList[i].notiStatus==false){ %>
+            <div class="notify-content">
+              <div class="notify-img">
+                S
+              </div>
+              <p>
+                Task: <%= notiList[i].taskName %>: Due date: <%=notiList[i].endDate.toLocaleDateString('en-GB') %>
+              </p>
             </div>
-            <p>
-              Task: <%= notiList[i].taskName %>: Due date: <%=notiList[i].endDate.toLocaleDateString('en-GB') %> Due
-            </p>
-          </div>
-          <% } %>
+            <% } %>
+              <% } %>
       </div>
     </div>
 

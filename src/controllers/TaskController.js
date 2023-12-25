@@ -88,8 +88,18 @@ const getTaskPage = async (req, res) => {
         }
         // get members to render
         const users = await User.find({ "project_ID": req.query.id })
+        let notiList = req.user.notification;
+        console.log(notiList)
+        for (let i = 0; i < req.user.notification.length; i++) {
+            if (req.user.notification[i].expiredDay > 30) {
+                req.user.notification[i].notiStatus = true;
+            }
+        }
+        const userSave = new User(req.user)
+        console.log(userSave)
+        await userSave.save();
         //console.log("tasklist",new Date(Task_list[0]['created_date']))
-        res.render("task.ejs", { "Task_list": Task_list, "users": users });
+        res.render("task.ejs", { "Task_list": Task_list, "users": users, "projectName": project.name, 'notiList': notiList });
         res.status(200);
     } catch (err) {
         let error = errorHandler(req, err);
@@ -157,7 +167,7 @@ const TaskCreate = async (req, res) => {
             "master_project": master_project, "status": status, "content": content,
             "created_date": begin_date, "end_date": end_date
         });
-        console.log("task create",task)
+        console.log("task create", task)
         //add task to project
         const project = await Project.findById(req.query.id);
         //console.log(task['_id'].valueOf())

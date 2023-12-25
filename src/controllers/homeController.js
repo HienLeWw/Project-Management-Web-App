@@ -45,7 +45,17 @@ const getHomepage = async (req, res) => {
         const project = await Project.findById(res.locals.user.project_ID[i])
         Project_list.push(project);
     }
-    res.render('project.ejs', { 'project_list': Project_list })
+    let notiList = req.user.notification;
+    console.log(notiList)
+    for (let i = 0; i < req.user.notification.length; i++) {
+        if (req.user.notification[i].expiredDay > 30) {
+            req.user.notification[i].notiStatus = true;
+        }
+    }
+    const user = new User(req.user)
+    console.log(user)
+    await user.save();
+    res.render('project.ejs', { 'project_list': Project_list, 'notiList': notiList })
 }
 
 const loginPage = (req, res) => {

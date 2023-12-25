@@ -10,29 +10,34 @@ const compareDay = (date1, date2) => {
     d2.setHours(0, 0, 0, 0)
     return (d1 - d2) // == 0 => d1 == d2; < 0 => d1 < d2; > 0 => d1 > d2
 }
-
-const getNotification = async (user, project) => {
-
-    let noti = [];
-    for (let i = 0; i < project.task.length; i++) {
-        const task = await Task.findById(project.task[i]);
-        if (task.user_ids.indexOf(user.id) >= 0) {
-            const currentDay = new Date();
-            // nếu true : currentDay = end_date - 1
-            if (await compareDay(currentDay, new Date(task.end_date)) == 0) {
-
-                // chua hoan thanh
-                if (task.status != 2) {
-                    var infoNoti = {
-                        "endDate": task.end_date,
-                        "taskName": task.name
-                    };
-                    noti.push(infoNoti)
+const updateNoti = async () => {
+    console.log("running cronjob");
+    const tasks = await Task.find({});
+    for (let i = 0; i < tasks.length; i++) {
+        const currentDay = new Date();
+        if (compareDay(currentDay, new Date(tasks[i]['end_date'])) >= 0) {
+            console.log(i)
+            console.log(tasks[i]._id)
+            for (let j = 0; j < tasks[i]['user_ids'].length; j++) {
+                const user = await User.findById(tasks[i]['user_ids'][j])
+                console.log(tasks[i]['_id'].valueOf())
+                if (!user['notification'].find(({ taskID }) => taskID == tasks[i]._id.valueOf())) {
+                    noti = {
+                        "taskName": tasks[i].name,
+                        "taskID": tasks[i]._id.valueOf(),
+                        "notiStatus": false,
+                        "endDate": tasks[i].end_date,
+                        "expiredDay": compareDay(currentDay, new Date(tasks[i]['end_date'])) / (1000 * 3600 * 24)
+                    }
+                    user['notification'].push(noti)
+                    await user.save()
                 }
             }
         }
+
     }
-    return noti;
+    console.log("done")
+    return;
 }
 
-module.exports = { getNotification }
+module.exports = { updateNoti }

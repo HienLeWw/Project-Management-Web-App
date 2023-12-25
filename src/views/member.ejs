@@ -80,16 +80,22 @@
     <div class="popup-notify" id="notify">
       <div class="popup-head">
         <h3 class="popup-title">Notification</h3>
-        <img src="\img\Notification-button.png" alt="">
+        <img src="/img/Notification-button.png" alt="">
         <button onclick="closeNotify()">X</button>
       </div>
       <div class="popup-body">
-        <div class="notify-content">
-          <div class="notify-img">U</div>(Task remind) Due date: 11/1/2024
-        </div>
-        <div class="notify-content">
-          <div class="notify-img">U</div>(Event) Weekly Meeting: 12/1/2024
-        </div>
+        <% for (let i=0; i < notiList.length; i++) { %>
+          <% if(notiList[i].notiStatus==false){ %>
+            <div class="notify-content">
+              <div class="notify-img">
+                S
+              </div>
+              <p>
+                Task: <%= notiList[i].taskName %>: Due date: <%=notiList[i].endDate.toLocaleDateString('en-GB') %>
+              </p>
+            </div>
+            <% } %>
+              <% } %>
       </div>
     </div>
 
@@ -185,7 +191,8 @@
             <%= memberList[i].username %>
           </p>
           <% if(memberList[i].username==user.username) {%>
-            <button type="button" class="btn btn-secondary btn-sm" id="remove-member-btn" onclick="leaveProjectRequest()">
+            <button type="button" class="btn btn-secondary btn-sm" id="remove-member-btn"
+              onclick="leaveProjectRequest()">
               leave
             </button>
             <% }%>
@@ -260,16 +267,16 @@
     // Create a data object with the payload for the POST request
 
     // Make the POST request using fetch()
-    fetch("/Projects/project/leave"+window.location.search, {
+    fetch("/Projects/project/leave" + window.location.search, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
     })
-      .then(function(response) {
+      .then(function (response) {
         window.location.href = "/";
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.log(error);
       });
   }

@@ -28,8 +28,8 @@
       <% for(let i=0; i < project_list.length; ++i){ %>
         <li>
           <div class="nav-items">
-            <a href="/Projects/project?id=" + idProjectToNavigate><img src="img/icons8-project-50.png" alt="" class="nav-img" width="32px" height="32px"
-                style="margin-right: 10px; margin-left: 20px;">
+            <a href="/Projects/project?id=" + idProjectToNavigate><img src="img/icons8-project-50.png" alt=""
+                class="nav-img" width="32px" height="32px" style="margin-right: 10px; margin-left: 20px;">
               <%= project_list[i]['name'] %>
             </a>
           </div>
@@ -50,16 +50,22 @@
     <div class="popup-notify" id="notify">
       <div class="popup-head">
         <h3 class="popup-title">Notification</h3>
-        <img src="img/Notification-button.png" alt="">
+        <img src="/img/Notification-button.png" alt="">
         <button onclick="closeNotify()">X</button>
       </div>
       <div class="popup-body">
-        <div class="notify-content">
-          <div class="notify-img">U</div>(Task remind) Due date: 11/1/2024
-        </div>
-        <div class="notify-content">
-          <div class="notify-img">U</div>(Event) Weekly Meeting: 12/1/2024
-        </div>
+        <% for (let i=0; i < notiList.length; i++) { %>
+          <% if(notiList[i].notiStatus==false){ %>
+            <div class="notify-content">
+              <div class="notify-img">
+                S
+              </div>
+              <p>
+                Task: <%= notiList[i].taskName %>: Due date: <%=notiList[i].endDate.toLocaleDateString('en-GB') %>
+              </p>
+            </div>
+            <% } %>
+              <% } %>
       </div>
     </div>
 
@@ -149,9 +155,11 @@
               </th>
               <td>
                 <div class="action">
-                  <button class="edit-btn" onclick="navigateToHomePageByBtn('<%= project_list[i].name %>')"><img src="img/edit.png" alt="">
+                  <button class="edit-btn" onclick="navigateToHomePageByBtn('<%= project_list[i].name %>')"><img
+                      src="img/edit.png" alt="">
                   </button>
-                  <button class="delete-btn" onclick="leaveProjectRequest('<%= project_list[i].name %>')"><img src="img/delete.png" alt="">
+                  <button class="delete-btn" onclick="leaveProjectRequest('<%= project_list[i].name %>')"><img
+                      src="img/delete.png" alt="">
                   </button>
                 </div>
               </td>
@@ -176,28 +184,28 @@
   let nameProjectToNavigate;
   let idProjectToNavigate = "";
 
-  function navigateToHomePageByBtn(projectName){
+  function navigateToHomePageByBtn(projectName) {
     let projectId = "";
-    for(let i=0;i<window.sessionStorage.length;++i){
+    for (let i = 0; i < window.sessionStorage.length; ++i) {
       let id = window.sessionStorage.key(i);
-      if(id.includes("project")){
+      if (id.includes("project")) {
         let item = JSON.parse(window.sessionStorage.getItem(id));
-        if(projectName == item.name){
+        if (projectName == item.name) {
           projectId = item._id;
           break;
         }
       }
     }
-    window.location.href = "/Projects/project/?id="+projectId;
+    window.location.href = "/Projects/project/?id=" + projectId;
   }
 
   function leaveProjectRequest(projectName) {
     let projectId = "";
-    for(let i=0;i<window.sessionStorage.length;++i){
+    for (let i = 0; i < window.sessionStorage.length; ++i) {
       let id = window.sessionStorage.key(i);
-      if(id.includes("project")){
+      if (id.includes("project")) {
         let item = JSON.parse(window.sessionStorage.getItem(id));
-        if(projectName == item.name){
+        if (projectName == item.name) {
           projectId = item._id;
           break;
         }
@@ -205,16 +213,16 @@
     }
 
     // Make the POST request using fetch()
-    fetch("/Projects/project/leave?id="+projectId, {
+    fetch("/Projects/project/leave?id=" + projectId, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
     })
-      .then(function(response) {
+      .then(function (response) {
         window.location.href = "/";
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.log(error);
       });
   }
@@ -250,7 +258,7 @@
         success: function (res) {
           console.log("successfully send request!");
           console.log(res);
-          console.log(typeof(res));
+          console.log(typeof (res));
           window.sessionStorage.setItem("project" + res['_id'], JSON.stringify(res));
           updateProjectList();
           closePopupAddProject();
@@ -284,14 +292,14 @@
             '<th scope="row">' + data['project_list'][i].name + '</th>' +
             '<td>' +
             '<div class="action">' +
-            '<button class="edit-btn" onclick="navigateToHomePageByBtn'+ "('" + data['project_list'][i].name +"')"+'">'+'<img src="img/edit.png" alt=""></button>' +
-            '<button class="delete-btn" onclick="leaveProjectRequest"' +"('" + data['project_list'][i].name +"')"+'">'+'<img src="img/delete.png" alt=""></button>' +
+            '<button class="edit-btn" onclick="navigateToHomePageByBtn' + "('" + data['project_list'][i].name + "')" + '">' + '<img src="img/edit.png" alt=""></button>' +
+            '<button class="delete-btn" onclick="leaveProjectRequest"' + "('" + data['project_list'][i].name + "')" + '">' + '<img src="img/delete.png" alt=""></button>' +
             '</div>' +
             '</td>' +
             '</tr>';
           var item = '<li>' +
             '<div class="nav-items">' +
-            '<a href="/Projects/project?id=' + idProjectToNavigate +'"><img src="img/icons8-project-50.png" alt="" class="nav-img" width="32px" height="32px"style="margin-right: 10px; margin-left: 20px;">' +
+            '<a href="/Projects/project?id=' + idProjectToNavigate + '"><img src="img/icons8-project-50.png" alt="" class="nav-img" width="32px" height="32px"style="margin-right: 10px; margin-left: 20px;">' +
             data['project_list'][i].name +
             '</a>' +
             '</div>' +
@@ -308,7 +316,7 @@
     });
   }
 
-  function navigateToHomePage(){
+  function navigateToHomePage() {
     navigationLinks = document.getElementsByTagName("a");
     for (let i = 0; i < navigationLinks.length; ++i) {
       console.log("I'm here!");
@@ -350,16 +358,16 @@
   // function navigateToHomePage() {
   //   document.addEventListener("DOMContentLoaded", function() {
   //     navigationLinks = document.querySelectorAll("a"); // Replace "a" with the appropriate selector for your navigation links
-      
+
   //     for (let i = 0; i < navigationLinks.length; ++i) {
   //       navigationLinks[i].addEventListener("click", function(event) {
   //         event.preventDefault();
   //         nameProjectToNavigate = this.textContent.trim();
-          
+
   //         for (let index = 0; index < window.sessionStorage.length; index++) {
   //           let key = window.sessionStorage.key(index);
   //           let item = JSON.parse(window.sessionStorage.getItem(key));
-            
+
   //           if (item && item.name == nameProjectToNavigate) {
   //             idProjectToNavigate = item._id;
   //             window.location.href = "/Projects/project?id=" + idProjectToNavigate;
