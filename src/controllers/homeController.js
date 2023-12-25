@@ -6,6 +6,7 @@ const bcrypt = require('bcrypt')
 const Project = require('../models/Projects')
 
 
+
 const handleErrors = (err) => {
     let errors = { email: '', password: '', username: '' };
 
@@ -44,7 +45,6 @@ const getHomepage = async (req, res) => {
         const project = await Project.findById(res.locals.user.project_ID[i])
         Project_list.push(project);
     }
-    console.log(Project_list)
     res.render('project.ejs', { 'project_list': Project_list })
 }
 

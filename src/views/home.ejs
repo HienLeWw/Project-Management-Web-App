@@ -84,12 +84,16 @@
         <button onclick="closeNotify()">X</button>
       </div>
       <div class="popup-body">
-        <div class="notify-content">
-          <div class="notify-img">U</div>(Task remind) Due date: 11/1/2024
-        </div>
-        <div class="notify-content">
-          <div class="notify-img">U</div>(Event) Weekly Meeting: 12/1/2024
-        </div>
+        <% for (let i=0; i < notiList.length; i++) { %>
+          <div class="notify-content">
+            <div class="notify-img">
+              <%= user.username[0] %>
+            </div>
+            <p>
+              Task: <%= notiList[i].taskName %>: Due date: <%=notiList[i].endDate.toLocaleDateString('en-GB') %> Due
+            </p>
+          </div>
+          <% } %>
       </div>
     </div>
 

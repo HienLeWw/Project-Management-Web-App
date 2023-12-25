@@ -4,6 +4,7 @@ const Project = require('../models/Projects');
 const User = require('../models/Users');
 const Task = require('../models/Tasks')
 const mongoose = require('mongoose');
+const { getNotification } = require('../services/notification')
 
 const errorHandler = (req, err) => {
     console.log(err.message, err.code);
@@ -80,19 +81,22 @@ const projectPage = async (req, res) => {
         const task = await Task.findById(project['task'][i])
         console.log(task)
     }
-    res.render('home.ejs', { "project": project, "taskList": taskList })
+    const notification = await getNotification(req.user, project)
+    console.log("pass qua thz nay", notification)
+    res.render('home.ejs', { "project": project, "taskList": taskList, "notiList": notification })
 }
 
 const memberPage = async (req, res) => {
     const project = await Project.findById(req.query.id)
     const users = await User.find({ "project_ID": req.query.id })
-    console.log(users)
-    res.render('member.ejs', { "memberList": users, "projName": project.name })
+    const notification = getNotification(req.user, project)
+    res.render('member.ejs', { "memberList": users, "projName": project.name, "notiList": notification })
 }
 
 const calendarPage = async (req, res) => {
     const project = await Project.findById(req.query.id)
-    res.render('calendar.ejs', { "projName": project.name })
+    const notification = getNotification(req.user, project)
+    res.render('calendar.ejs', { "projName": project.name, "notiList": notification })
 }
 
 const getAllInfo = async (req, res) => {
@@ -101,7 +105,7 @@ const getAllInfo = async (req, res) => {
     console.log("test", project['task'][0])
     const taskList = []
     for (let i = 0; i < project['task'].length; i++) {
-        const task = await Task.findById(project['task'][0]);
+        const task = await Task.findById(project['task'][i]);
         taskList.push(task);
     }
 
