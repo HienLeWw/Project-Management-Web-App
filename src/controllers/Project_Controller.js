@@ -4,6 +4,7 @@ const Project = require('../models/Projects');
 const User = require('../models/Users');
 const Task = require('../models/Tasks')
 const mongoose = require('mongoose');
+const { getNotification } = require('../services/notification')
 
 const errorHandler = (req, err) => {
     console.log(err.message, err.code);
@@ -78,33 +79,33 @@ const projectPage = async (req, res) => {
     const taskList = []
     for (let i = 0; i < project['task'].length; i++) {
         const task = await Task.findById(project['task'][i])
-        console.log(task)
+        taskList.push(task)
     }
-    res.render('home.ejs', { "project": project, "taskList": taskList })
+    const notification = await getNotification(req.user, project)
+    res.render('home.ejs', { "project": project, "taskList": taskList, "notiList": notification })
 }
 
 const memberPage = async (req, res) => {
     const project = await Project.findById(req.query.id)
     const users = await User.find({ "project_ID": req.query.id })
-    console.log(users)
-    res.render('member.ejs', { "memberList": users, "projName": project.name })
+    const notification = getNotification(req.user, project)
+    res.render('member.ejs', { "memberList": users, "projName": project.name, "notiList": notification })
 }
 
 const calendarPage = async (req, res) => {
     const project = await Project.findById(req.query.id)
-    res.render('calendar.ejs', { "projName": project.name })
+    const notification = getNotification(req.user, project)
+    res.render('calendar.ejs', { "projName": project.name, "notiList": notification })
 }
 
 const getAllInfo = async (req, res) => {
     const users = await User.find({ 'project_ID': req.query.id })
     const project = await Project.findById(req.query.id);
-    console.log("test", project['task'][0])
     const taskList = []
     for (let i = 0; i < project['task'].length; i++) {
-        const task = await Task.findById(project['task'][0]);
+        const task = await Task.findById(project['task'][i]);
         taskList.push(task);
     }
-
     res.status(200).json({ "users": users, "tasks": taskList })
 }
 const modProject = async (req, res) => {
@@ -113,10 +114,7 @@ const modProject = async (req, res) => {
         console.log(req.body.username.length)
         for (let i = 0; i < req.body.username.length; i++) {
             const user = await User.find({ 'username': req.body.username[i] });
-            console.log(user)
-            console.log(user[i]['project_ID'])
             user[0]['project_ID'].push(req.query.id);
-            console.log("push dc nha")
             await user[0].save();
             userList.push(user)
         }
@@ -130,10 +128,8 @@ const modProject = async (req, res) => {
 
 const leaveProject = async (req, res) => {
     try {
-        console.log(req.user['project_ID'])
         const index = req.user['project_ID'].indexOf(2);
         req.user['project_ID'].splice(index, 1)
-        console.log(req.user['project_ID'])
         await req.user.save();
         res.status(200).redirect('/');
     }

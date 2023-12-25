@@ -84,12 +84,16 @@
         <button onclick="closeNotify()">X</button>
       </div>
       <div class="popup-body">
-        <div class="notify-content">
-          <div class="notify-img">U</div>(Task remind) Due date: 11/1/2024
-        </div>
-        <div class="notify-content">
-          <div class="notify-img">U</div>(Event) Weekly Meeting: 12/1/2024
-        </div>
+        <% for (let i=0; i < notiList.length; i++) { %>
+          <div class="notify-content">
+            <div class="notify-img">
+              <%= user.username[0] %>
+            </div>
+            <p>
+              Task: <%= notiList[i].taskName %>: Due date: <%=notiList[i].endDate.toLocaleDateString('en-GB') %> Due
+            </p>
+          </div>
+          <% } %>
       </div>
     </div>
 
@@ -164,105 +168,70 @@
     </div>
     <!-- buckets -->
     <div class="bucket-parent">
-      <% let status0=0; %>
-        <% let status1=0; %>
-          <% let status2=0; %>
-            <% for(let i=0; i < taskList.length; i++) {%>
-              <div class="bucket-child">
-                <div class="bucket-header">
-                  <div class="bucket-title">To Do</div>
-                  <div class="group-item" id="todo-item"></div>
+      <% for(let i=0; i < taskList.length; i++) {%>
+        <div class="bucket-child">
+          <div class="bucket-header">
+            <div class="bucket-title">To Do</div>
+            <div class="group-item" id="todo-item"></div>
+          </div>
+          <img class="vector-icon" alt="" src="/img/vector-11.svg" />
+          <% if(taskList[i].status==0) { %>
+            <div class="task-list">
+              <div class="task" draggable="true">
+                <p class="task-name">
+                  <%= taskList[i].name %>
+                </p>
+                <div class="info">
+                  <p class="due-date"><%=taskList[i].end_date.toLocaleDateString('en-GB') %></p>
+                  <div class="profile-img" id="assignee">U</div>
                 </div>
-                <img class="vector-icon" alt="" src="/img/vector-11.svg" />
-                <% if(taskList[i].status==0) { %>
-                  <% status0 +=1; %>
-                    <div class="task-list">
-                      <div class="task" draggable="true">
-                        <p class="task-name">
-                          <%= taskList[i].name %>
-                        </p>
-                        <div class="info">
-                          <p class="due-date"><%=taskList[i].end_date.toLocaleDateString('en-GB') %></p>
-                          <div class="profile-img" id="assignee">U</div>
-                        </div>
-                      </div>
-                    </div>
-                    <% } %>
               </div>
-              <div class="bucket-child">
-                <div class="bucket-header">
-                  <div class="bucket-title">
-                    <p>In progress</p>
-                  </div>
-                  <div class="group-item" id="progress-item"></div>
+            </div>
+            <% } %>
+        </div>
+        <div class="bucket-child">
+          <div class="bucket-header">
+            <div class="bucket-title">
+              <p>In progress</p>
+            </div>
+            <div class="group-item" id="progress-item"></div>
+          </div>
+          <img class="vector-icon" alt="" src="/img/vector-12.svg" />
+          <% if(taskList[i].status==1){ %>
+            <div class="task-list">
+              <div class="task" draggable="true">
+                <p class="task-name">
+                  <%= taskList[i].name %>
+                </p>
+                <div class="info">
+                  <p class="due-date"><%=taskList[i].end_date.toLocaleDateString('en-GB') %></p>
+                  <div class="profile-img" id="assignee">U</div>
                 </div>
-                <img class="vector-icon" alt="" src="/img/vector-12.svg" />
-                <% if(taskList[i].status==1){ %>
-                  <% status1 +=1; %>
-                    <div class="task-list">
-                      <div class="task" draggable="true">
-                        <p class="task-name">
-                          <%= taskList[i].name %>
-                        </p>
-                        <div class="info">
-                          <p class="due-date"><%=taskList[i].end_date.toLocaleDateString('en-GB') %></p>
-                          <div class="profile-img" id="assignee">U</div>
-                        </div>
-                      </div>
-                    </div>
-                    <% } %>
               </div>
-              <div class="bucket-child">
-                <div class="bucket-header">
-                  <div class="bucket-title">Done</div>
-                  <div class="group-item" id="done-item"></div>
+            </div>
+            <% } %>
+        </div>
+        <div class="bucket-child">
+          <div class="bucket-header">
+            <div class="bucket-title">Done</div>
+            <div class="group-item" id="done-item"></div>
+          </div>
+          <img class="vector-icon" alt="" src="/img/vector-13.svg" />
+          <% if(taskList[i].status==2){ %>
+            <div class="task-list">
+              <div class="task" draggable="true">
+                <p class="task-name">
+                  <%= taskList[i].name %>
+                </p>
+                <div class="info">
+                  <p class="due-date"><%=taskList[i].end_date.toLocaleDateString('en-GB') %></p>
+                  <div class="profile-img" id="assignee">U</div>
                 </div>
-                <img class="vector-icon" alt="" src="/img/vector-13.svg" />
-                <% if(tasList[i].status==2){ %>
-                  <% status2 +=1; %>
-                    <div class="task-list">
-                      <div class="task" draggable="true">
-                        <p class="task-name">
-                          <%= taskList[i].name %>
-                        </p>
-                        <div class="info">
-                          <p class="due-date"><%=taskList[i].end_date.toLocaleDateString('en-GB') %></p>
-                          <div class="profile-img" id="assignee">U</div>
-                        </div>
-                      </div>
-                    </div>
-                    <% } %>
               </div>
-              <% } %>
-                <% if( status0==0){ %>
-                  <div class="bucket-child">
-                    <div class="bucket-header">
-                      <div class="bucket-title">To Do</div>
-                      <div class="group-item" id="todo-item"></div>
-                    </div>
-                    <img class="vector-icon" alt="" src="/img/vector-11.svg" />
-                  </div>
-                  <% } %>
-                    <% if( status1==0) { %>
-                      <div class="bucket-child">
-                        <div class="bucket-header">
-                          <div class="bucket-title">
-                            <p>In progress</p>
-                          </div>
-                          <div class="group-item" id="progress-item"></div>
-                        </div>
-                        <img class="vector-icon" alt="" src="/img/vector-12.svg" />
-                      </div>
-                      <% } %>
-                        <% if (status2==0) { %>
-                          <div class="bucket-child">
-                            <div class="bucket-header">
-                              <div class="bucket-title">Done</div>
-                              <div class="group-item" id="done-item"></div>
-                            </div>
-                            <img class="vector-icon" alt="" src="/img/vector-13.svg" />
-                          </div>
-                          <% } %>
+            </div>
+            <% } %>
+        </div>
+        <% } %>
     </div>
   </div>
 </body>
