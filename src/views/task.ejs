@@ -509,13 +509,22 @@
   });
 
   //Handle update status
-  var updatedStatus = ""; // Biến lưu trữ giá trị được chọn
+  var updatedStatus = 0; // Biến lưu trữ giá trị được chọn
 
     function changeOption(option) {
         var dropdownButton = document.getElementById("dropdownButton");
         dropdownButton.textContent = option;
-        updatedStatus = option; 
-        console.log(updatedStatus); 
+        if (option.trim() == "To do"){
+          updatedStatus = 0;
+        }
+        else if (option.trim() == "In progress"){
+          updatedStatus = 1;
+        }
+        else if (option.trim() == "Done"){
+          updatedStatus = 2;
+        }
+        // updatedStatus = option; 
+        // console.log(updatedStatus); 
     }
     document.getElementsByClassName("dropbtn")[0].addEventListener("click", function() {
       var dropdownContent = document.getElementsByClassName("dropdown-content")[0];
@@ -552,6 +561,31 @@
           success: function (res) {
             console.log("sent request!");
             console.log(res);
+            var row = '<tr><th scope="row">' + res.name
+              + '</th>' +
+              '<td>'+
+                  '<div class="assignee-list">' +
+                      '<div class="profile-img" id="assginee">U</div>' +
+                  '</div>' +
+              '</td>' +
+              '<td>' +
+                startDate +
+              '</td>' +
+              '<td>' +
+                  endDate +
+              '</td>' +
+              '<td>' +
+                status +
+              '</td>' +
+              '<td>' +
+                  '<div class="action">' +
+                      '<button class="edit-btn" onclick="openModifyTask()"><img src="/img/edit.png" alt="">' +
+                      '</button>' + 
+                      '<button class="delete-btn"><img src="/img/delete.png" alt="">' +
+                      '</button>'+
+                  '</div>'+
+              '</td>'+
+              '</tr>';
           }
         }).done(function (data) {
           // console.log(data);
