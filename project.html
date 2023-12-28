@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <title>Project Page</title>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="project_style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- Calendar Bootstrap -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/color-calendar/dist/bundle.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/color-calendar/dist/css/theme-basic.css"/>
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <div class="w3-sidebar">
+    <ul>
+      <a class="active" href="#home">
+        <div class="logo_contain">
+          <img src="images\combine_logo.png" alt="logo">
+        </div>
+      </a>
+      <li>
+        <div class="nav-items">
+          <a href="home.html"><img src="images\icons8-project-50.png" alt="" class="nav-img" width="32px" height="32px" style="margin-right: 10px; margin-left: 20px;">Project 1</a>
+        </div>
+      </li>
+      <li>
+        <div class="nav-items">
+          <a href="home.html"><img src="images\icons8-project-50.png" alt="" class="nav-img" width="32px" height="32px" style="margin-right: 10px; margin-left: 20px;">Project 2</a>
+        </div>
+      </li>
+      <li>
+        <div class="nav-items">
+          <a href="home.html"><img src="images\icons8-project-50.png" alt="" class="nav-img" width="32px" height="32px" style="margin-right: 10px; margin-left: 20px;">Project 3</a>
+        </div>
+      </li>
+      <li>
+        <div class="nav-items">
+          <a href="#setting"><img src="images\icons8-settings-64.png" alt="" class="nav-img" width="32px" height="32px" style="margin-right: 10px; margin-left: 20px;">Setting</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+<!-- <div style="margin-left:20%;padding:1px 16px;height:1000px;"> -->
+  <div class="w3-container">
+    <!-- pop up -->
+    <div class="popup-notify" id="notify">
+      <div class="popup-head">
+        <h3 class="popup-title">Notification</h3>
+        <img src="images\Notification-button.png" alt="">
+        <button onclick="closeNotify()">X</button>
+      </div>
+      <div class="popup-body">
+        <div class="notify-content"><div class="notify-img">U</div>(Task remind) Due date: 11/1/2024</div>
+        <div class="notify-content"><div class="notify-img">U</div>(Event) Weekly Meeting: 12/1/2024</div>
+      </div>
+    </div>
+
+    <!-- pop up -->
+    <div class="popup-add-prj" id="add-prj">
+      <div class="popup-head">
+        <h3 class="popup-title">Create New Project</h3>
+        <button onclick="closePopupAddProject()">X</button>
+      </div>
+      <form class="proj-info" action="">
+        <label for="proj-name">Name</label>
+        <br></br>
+        <input type="text" name="proj-name" placeholder="Enter your project's name">
+        <br></br>
+
+        <label for="invitation">Invite Some Friends</label><br></br>
+        <input type="text" name="invitation" placeholder="Email or name">
+        <button id="invite-btn"><img src="images\Add Administrator.png" alt=""></button>
+      </form>
+      <!-- <div> -->
+      <button class="create-proj-btn">Create</button>
+      <!-- </div> -->
+    </div>
+
+    <!-- Project Name -->
+    <div class="header">
+      <div class="search">
+        <input class="form-control" type="text" placeholder="Search any thing...">
+        <button type="button" class="btn btn-primary" data-mdb-ripple-init>
+          Search
+        </button>
+      </div>
+      <!-- <div class="search">
+        <input type="text" name="search" placeholder="Search for any thing" size="500">
+        <button type="submit" class="search-btn"><img src="images\icons8-search-50.png" alt="" width="24px" height="24px"></button>
+      </div> -->
+        <!-- notify button -->
+      <button class="notify-btn" onclick="openNotify()">
+        <svg xmlns="http://www.w3.org/2000/svg" height="2em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M224 0c-17.7 0-32 14.3-32 32V51.2C119 66 64 130.6 64 208v18.8c0 47-17.3 92.4-48.5 127.6l-7.4 8.3c-8.4 9.4-10.4 22.9-5.3 34.4S19.4 416 32 416H416c12.6 0 24-7.4 29.2-18.9s3.1-25-5.3-34.4l-7.4-8.3C401.3 319.2 384 273.9 384 226.8V208c0-77.4-55-142-128-156.8V32c0-17.7-14.3-32-32-32zm45.3 493.3c12-12 18.7-28.3 18.7-45.3H224 160c0 17 6.7 33.3 18.7 45.3s28.3 18.7 45.3 18.7s33.3-6.7 45.3-18.7z"/></svg>
+      </button>
+      <div  class="profile">
+        <div class="profile-img">U</div>
+        <div class="profile-content">
+          <p style="font-size: large; margin: 0;">Username</p>
+          <p style="font-size: medium; margin: 0;">Email</p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Main -->
+    <div class="project-title">
+      <h1>My Workspace</h1>
+    </div>
+    <div class="functional-btn">
+      <!-- Add Project Button -->
+      <button class="add-project-btn" onclick="openPopupAddProject()">
+        <div style="display: flex;">
+          <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512" style="margin-right: 10px; margin-top: 3px"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"/></svg>
+          New Project
+        </div>
+      </button>
+    </div>
+    <div id="main">
+      <table class="table">
+        <thead style="justify-items: center;">
+          <tr>
+            <th scope="col">Project List</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+      <tbody>
+        <tr>
+          <div class="project-block">
+            <th scope="row">Project 1</th>
+            <td>
+              <div class="action">
+                <button class="edit-btn"><img src="images\edit.png" alt="">
+                </button>
+                <button class="delete-btn"><img src="images\delete.png" alt="">
+                </button>
+              </div>
+            </td>
+          </div>
+        </tr>
+        <tr>
+          <div class="project-block">
+            <th scope="row">Project 2</th>
+            <td><div class="action">
+                <button class="edit-btn"><img src="images\edit.png" alt="">
+                </button>
+                <button class="delete-btn"><img src="images\delete.png" alt="">
+                </button>
+              </div></td>
+          </div>
+        </tr>
+        <tr>
+          <div class="project-block">
+            <th scope="row">Project 3</th>
+            <td><div class="action">
+                <button class="edit-btn"><img src="images\edit.png" alt="">
+                </button>
+                <button class="delete-btn"><img src="images\delete.png" alt="">
+                </button>
+              </div></td>
+          </div>
+        </tr>
+      </tbody>
+      </table>
+      <div id="color-calendar"></div>
+      
+    </div>
+  </div>
+</body>
+<script>
+  new Calendar({
+        id: "#color-calendar",
+        calendarSize: "small",
+    });
+  let popupNotify = document.getElementById("notify");
+  let popupAddProject = document.getElementById("add-prj");
+
+  function openNotify(){
+    popupNotify.classList.add("open-notify");
+  }
+  function closeNotify(){
+    popupNotify.classList.remove("open-notify");
+  }
+  function openPopupAddProject(){
+    popupAddProject.classList.add("open-add-prj");
+  }
+  function closePopupAddProject(){
+    popupAddProject.classList.remove("open-add-prj");
+  }
+</script>
+</html>
+
+
