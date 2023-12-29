@@ -13,21 +13,21 @@
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <link rel="stylesheet" href="home_style.css">
+  <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdn.dhtmlx.com/scheduler/edge/dhtmlxscheduler_material.css">
   <script src="https://cdn.dhtmlx.com/scheduler/edge/dhtmlxscheduler.js"></script>
 </head>
-<body>
-  <div class="container">
+<body class="myBody">
+  <div class="myContainer">
     <!-- Navigation Bar -->
-    <div class="w3-sidebar">
+    <div class="sidebar">
       <a class="active" href="project.html">
         <div class="logo_contain">
           <img src="images\combine_logo.png" alt="logo">
         </div>
       </a>
-      <ul>
+      <ul class="myList">
         <li>
           <div class="nav-items">
             <a href="home.html"><img src="images\icons8-dashboard-layout-48.png" alt="" class="nav-img">Home</a>
@@ -56,8 +56,7 @@
         </li>
       </ul>
     </div>
-
-    <div class="w3-container">
+    <div class="main-container">
       <!-- pop up -->
       <div class="popup-notify" id="notify">
         <div class="popup-head">
@@ -70,7 +69,6 @@
           <div class="notify-content"><div class="notify-img">U</div>(Event) Weekly Meeting: 12/1/2024</div>
         </div>
       </div>
-
       <div class="popup-share" id="share">
         <div class="popup-head">
           <h3 class="popup-title">Invite new member</h3>
@@ -82,14 +80,10 @@
           <button id="invite-btn"><img src="images/icons8-copy-24.png" alt=""></button>
         </form>
       </div>
-
       <!-- Project Name -->
       <div class="header">
-        <div class="search">
-          <input class="form-control" type="text" placeholder="Search anything...">
-          <button type="button" class="btn btn-primary" data-mdb-ripple-init>
-            Search
-          </button>
+        <div class="project-title">
+          <h1>Project Name</h1>
         </div>
 
 
@@ -105,15 +99,16 @@
           </div>
         </div>
       </div>
-
-      
       <!-- Main -->
-      <div class="project-title">
-        <h1>Project Name</h1>
-      </div>
       <!-- buttons -->
       <!-- Filter Button -->
       <div class="functional-btn">
+        <div class="search_home">
+          <input class="form-control" type="text" placeholder="Search anything...">
+          <button type="button" class="btn btn-primary" data-mdb-ripple-init>
+            Search
+          </button>
+        </div>
         <div class="dropdown">
           <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown">
             Filter

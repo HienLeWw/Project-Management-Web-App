@@ -420,6 +420,9 @@ li a:hover:not(.active) {
 #done-item{
     background-color: #76a5ea;
 }
+#due-item{
+    background-color: #eb433d;
+}
 .vuesaxbulkadd-square-icon {
     position: absolute;
     margin: 0 !important;

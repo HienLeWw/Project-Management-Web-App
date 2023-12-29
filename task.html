@@ -19,203 +19,206 @@
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <script src="https://unpkg.com/gijgo@1.9.14/js/gijgo.min.js" type="text/javascript"></script>
-  <link href="https://unpkg.com/gijgo@1.9.14/css/gijgo.min.css" rel="stylesheet" type="text/css" />
-
-  <link rel="stylesheet" href="task_style.css">
+  <link href="https://unpkg.com/gijgo@1.9.14/css/gijgo.min.css" rel="stylesheet" type="text/css"/>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
-  <!-- Navigation Bar -->
-  <div class="w3-sidebar">
-    <a class="active" href="project.html">
-      <div class="logo_contain">
-        <img src="images\combine_logo.png" alt="logo">
-      </div>
-    </a>
-    <ul>
-      <li>
-        <div class="nav-items">
-          <a href="home.html"><img src="images\icons8-dashboard-layout-48.png" alt="" class="nav-img" width="32px" height="32px">Home</a>
+<body class="myBody">
+  <div class="myContainer">
+    <!-- Navigation Bar -->
+    <div class="sidebar">
+      <a class="active" href="project.html">
+        <div class="logo_contain">
+          <img src="images\combine_logo.png" alt="logo">
         </div>
-      </li>
-      <li>
-        <div class="nav-items">
-          <a href="member.html"><img src="images\icons8-member-48.png" alt="" class="nav-img" width="32px" height="32px">Member</a>
-        </div>
-      </li>
-      <li>
-        <div class="nav-items">
-          
-          <a href="task.html"><img src="images\icons8-task-50.png" alt="" class="nav-img" id="task-id" width="32px" height="32px">Task</a>
-        </div>
-      </li>
-      <li>
-        <div class="nav-items">
-          <a href="calendar.html"><img src="images\icons8-calendar-64.png" alt="" class="nav-img" width="32px" height="32px">Calendar</a>
-        </div>
-      </li>
-      <li>
-        <div class="nav-items">
-          <a href="#setting"><img src="images\icons8-settings-64.png" alt="" class="nav-img" width="32px" height="32px">Setting</a>
-        </div>
-      </li>
-    </ul>
-  </div>
-
-<!-- <div style="margin-left:20%;padding:1px 16px;height:1000px;"> -->
-  <div class="w3-container">
-    <!-- pop up -->
-    <div class="popup-notify" id="notify">
-      <div class="popup-head">
-        <h3 class="popup-title">Notification</h3>
-        <img src="images\Notification-button.png" alt="">
-        <button onclick="closeNotify()">X</button>
-      </div>
-      <div class="popup-body">
-        <div class="notify-content"><div class="notify-img">U</div>(Task remind) Due date: 11/1/2024</div>
-        <div class="notify-content"><div class="notify-img">U</div>(Event) Weekly Meeting: 12/1/2024</div>
-      </div>
-    </div>
-
-    <div class="popup-assign" id="assign">
-      <div class="popup-head">
-        <h3 class="popup-title">Member In Workspace</h3>
-        <button onclick="closeAssign()">X</button>
-      </div>
-      <div class="popup-body">
-        <div class="assignee"><div class="assignee-img">U</div>Member 1<button class="open-assign-btn"><img src="images\Add Administrator.png" alt=""></button></div>
-        <div class="assignee"><div class="assignee-img">U</div>Member 2<button class="open-assign-btn"><img src="images\Add Administrator.png" alt=""></button></div>
-        <div class="assignee"><div class="assignee-img">U</div>Member 3<button class="open-assign-btn"><img src="images\Add Administrator.png" alt=""></button></div>
-      </div>
-    </div>
-
-    <div class="popup-add-task" id="task">
-      <div class="popup-head">
-        <h3 class="popup-title"><img src="images\icons8-task-50-black.png" alt=""> Add Task</h3>
-        <button onclick="closeAddTask()">X</button>
-      </div>
-      <div class="popup-body">
-        <!-- <form action="" class="task-info"> -->
-          <label for="task-name" class="task-label">Task name:</label><br>
-          <input type="text" name="task-name" class="task-name">
-          <div class="assign">
-            <p>Assign:</p>
-            <button class="open-assign-btn" onclick="openAssign()"><img src="images\Add Administrator.png" alt="">
+      </a>
+      <ul class="myList">
+        <li>
+          <div class="nav-items">
+            <a href="home.html"><img src="images\icons8-dashboard-layout-48.png" alt="" class="nav-img">Home</a>
           </div>
-          <label for="start" class="task-label">Start Date:</label>
-          <input id="datepicker1" name="start" width="276" />
-          <label for="due" class="task-label">Due Date:</label>
-          <input id="datepicker2" name="due" width="276" />
-        <!-- </form> -->
-        <button class="add-btn">Add</button>
-      </div>
-      
+        </li>
+        <li>
+          <div class="nav-items">
+            <a href="member.html"><img src="images\icons8-member-48.png" alt="" class="nav-img">Member</a>
+          </div>
+        </li>
+        <li>
+          <div class="nav-items">
+            
+            <a href="task.html"><img src="images\icons8-task-50.png" alt="" class="nav-img" id="task-id">Task</a>
+          </div>
+        </li>
+        <li>
+          <div class="nav-items">
+            <a href="calendar.html"><img src="images\icons8-calendar-64.png" alt="" class="nav-img">Calendar</a>
+          </div>
+        </li>
+        <li>
+          <div class="nav-items">
+            <a href="#setting"><img src="images\icons8-settings-64.png" alt="" class="nav-img">Setting</a>
+          </div>
+        </li>
+      </ul>
     </div>
 
-    <!-- Project Name -->
-    <div class="header">
-      <h1 style="left: 18%; position: fixed;">Project Name</h1>
-      <!-- notify button -->
-      <button class="notify-btn" onclick="openNotify()">
-        <svg xmlns="http://www.w3.org/2000/svg" height="2em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M224 0c-17.7 0-32 14.3-32 32V51.2C119 66 64 130.6 64 208v18.8c0 47-17.3 92.4-48.5 127.6l-7.4 8.3c-8.4 9.4-10.4 22.9-5.3 34.4S19.4 416 32 416H416c12.6 0 24-7.4 29.2-18.9s3.1-25-5.3-34.4l-7.4-8.3C401.3 319.2 384 273.9 384 226.8V208c0-77.4-55-142-128-156.8V32c0-17.7-14.3-32-32-32zm45.3 493.3c12-12 18.7-28.3 18.7-45.3H224 160c0 17 6.7 33.3 18.7 45.3s28.3 18.7 45.3 18.7s33.3-6.7 45.3-18.7z"/></svg>
-      </button>
-      <div  class="profile" style="background-color: transparent; border: none; left: 85%; position: fixed; display: flex;">
-        <div class="profile-img">U</div>
-        <div class="profile-content">
-          <p class="profile-user">Username</p>
-          <p class="profile-email">Email</p>
+  <!-- <div style="margin-left:20%;padding:1px 16px;height:1000px;"> -->
+    <div class="main-container">
+      <!-- pop up -->
+      <div class="popup-notify" id="notify">
+        <div class="popup-head">
+          <h3 class="popup-title">Notification</h3>
+          <img src="images\Notification-button.png" alt="">
+          <button onclick="closeNotify()">X</button>
+        </div>
+        <div class="popup-body">
+          <div class="notify-content"><div class="notify-img">U</div>(Task remind) Due date: 11/1/2024</div>
+          <div class="notify-content"><div class="notify-img">U</div>(Event) Weekly Meeting: 12/1/2024</div>
         </div>
       </div>
-    </div>
-    <!-- buttons -->
-    <div class="functional-btn" style="display: flex; margin-top: 10%; margin-bottom: 1%;">
-      <!-- Add Task Button -->
-      <button class="add-task-btn" onclick="openAddTask()">
-        <div class="add-task-container">
-          <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512" style="margin-right: 10px; margin-top: 3px"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"/></svg>
-          Add Task
+
+      <div class="popup-assign" id="assign">
+        <div class="popup-head">
+          <h3 class="popup-title">Member In Workspace</h3>
+          <button onclick="closeAssign()">X</button>
         </div>
-      </button>
-      <!-- Filter Button -->
-      <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown">
-          Filter
+        <div class="popup-body">
+          <div class="assignee"><div class="assignee-img">U</div>Member 1<button class="open-assign-btn"><img src="images\Add Administrator.png" alt=""></button></div>
+          <div class="assignee"><div class="assignee-img">U</div>Member 2<button class="open-assign-btn"><img src="images\Add Administrator.png" alt=""></button></div>
+          <div class="assignee"><div class="assignee-img">U</div>Member 3<button class="open-assign-btn"><img src="images\Add Administrator.png" alt=""></button></div>
+        </div>
+      </div>
+
+      <div class="popup-add-task" id="task">
+        <div class="popup-head">
+          <h3 class="popup-title"><img src="images\icons8-task-50-black.png" alt=""> Add Task</h3>
+          <button onclick="closeAddTask()">X</button>
+        </div>
+        <div class="popup-body">
+          <!-- <form action="" class="task-info"> -->
+            <label for="task-name" class="task-label">Task name:</label><br>
+            <input type="text" name="task-name" class="task-name">
+            <div class="assign">
+              <p>Assign:</p>
+              <button class="open-assign-btn" onclick="openAssign()"><img src="images\Add Administrator.png" alt="">
+            </div>
+            <label for="start" class="task-label">Start Date:</label>
+            <input id="datepicker1" name="start" width="276" />
+            <label for="due" class="task-label">Due Date:</label>
+            <input id="datepicker2" name="due" width="276" />
+          <!-- </form> -->
+          <button class="add-btn">Add</button>
+        </div>
+        
+      </div>
+
+      <!-- Project Name -->
+      <div class="header">
+        <div class="project-title">
+          <h1>Project Name</h1>
+        </div>
+        <!-- notify button -->
+        <button class="notify-btn" onclick="openNotify()">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M224 0c-17.7 0-32 14.3-32 32V51.2C119 66 64 130.6 64 208v18.8c0 47-17.3 92.4-48.5 127.6l-7.4 8.3c-8.4 9.4-10.4 22.9-5.3 34.4S19.4 416 32 416H416c12.6 0 24-7.4 29.2-18.9s3.1-25-5.3-34.4l-7.4-8.3C401.3 319.2 384 273.9 384 226.8V208c0-77.4-55-142-128-156.8V32c0-17.7-14.3-32-32-32zm45.3 493.3c12-12 18.7-28.3 18.7-45.3H224 160c0 17 6.7 33.3 18.7 45.3s28.3 18.7 45.3 18.7s33.3-6.7 45.3-18.7z"/></svg>
         </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="#">Today</a>
-          <a class="dropdown-item" href="#">This Week</a>
-          <a class="dropdown-item" href="#">Late</a>
+        <div  class="profile">
+          <div class="profile-img">U</div>
+          <div class="profile-content">
+            <p class="profile-user">Username</p>
+            <p class="profile-email">Email</p>
+          </div>
         </div>
       </div>
+      <!-- buttons -->
+      <div class="functional-btn">
+        <!-- Add Task Button -->
+        <button class="add-task-btn" onclick="openAddTask()">
+          <div class="add-task-container">
+            <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"/></svg>
+            Add Task
+          </div>
+        </button>
+        <!-- Filter Button -->
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown">
+            Filter
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="#">Today</a>
+            <a class="dropdown-item" href="#">This Week</a>
+            <a class="dropdown-item" href="#">Late</a>
+          </div>
+        </div>
+      </div>
+      <!-- Task Table -->
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Task name</th>
+            <th scope="col">Assignment</th>
+            <th scope="col">Start Date</th>
+            <th scope="col">Due Date</th>
+            <th scope="col">Status</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Task 1</th>
+            <td>
+              <div class="assignee-list">
+                <div class="profile-img" id="assginee">U</div>
+              </div>
+            </td>
+            <td>08/01/2024</td>
+            <td>11/01/2024</td>
+            <td><div class="status" id="Done">Done</div></td>
+            <td>
+              <div class="action">
+                <button class="edit-btn"><img src="images\edit.png" alt="">
+                </button>
+                <button class="delete-btn"><img src="images\delete.png" alt="">
+                </button>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">Task 2</th>
+            <td>
+              <div class="assignee-list">
+                <div class="profile-img" id="assginee">U</div>
+              </div>
+            </td>
+            <td>08/01/2024</td>
+            <td>11/01/2024</td>
+            <td><div class="status" id="In-progress">In progress</div></td>
+            <td><div class="action">
+                <button class="edit-btn"><img src="images\edit.png" alt="">
+                </button>
+                <button class="delete-btn"><img src="images\delete.png" alt="">
+                </button>
+              </div></td>
+          </tr>
+          <tr>
+            <th scope="row">Task 3</th>
+            <td>
+              <div class="assignee-list">
+                <div class="profile-img" id="assginee">U</div>
+              </div>
+            </td>
+            <td>08/01/2024</td>
+            <td>11/01/2024</td>
+            <td><div class="status" id="To-do">To do</div></td>
+            <td><div class="action">
+                <button class="edit-btn"><img src="images\edit.png" alt="">
+                </button>
+                <button class="delete-btn"><img src="images\delete.png" alt="">
+                </button>
+              </div></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-    <!-- Task Table -->
-    <table class="table" style="width: 85%;">
-      <thead style="justify-items: center;">
-        <tr>
-          <th scope="col">Task name</th>
-          <th scope="col">Assignment</th>
-          <th scope="col">Start Date</th>
-          <th scope="col">Due Date</th>
-          <th scope="col">Status</th>
-          <th scope="col">Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th scope="row">Task 1</th>
-          <td>
-            <div class="assignee-list">
-              <div class="profile-img" id="assginee">U</div>
-            </div>
-          </td>
-          <td>08/01/2024</td>
-          <td>11/01/2024</td>
-          <td><div class="status" id="Done">Done</div></td>
-          <td>
-            <div class="action">
-              <button class="edit-btn"><img src="images\edit.png" alt="">
-              </button>
-              <button class="delete-btn"><img src="images\delete.png" alt="">
-              </button>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <th scope="row">Task 2</th>
-          <td>
-            <div class="assignee-list">
-              <div class="profile-img" id="assginee">U</div>
-            </div>
-          </td>
-          <td>08/01/2024</td>
-          <td>11/01/2024</td>
-          <td><div class="status" id="In-progress">In progress</div></td>
-          <td><div class="action">
-              <button class="edit-btn"><img src="images\edit.png" alt="">
-              </button>
-              <button class="delete-btn"><img src="images\delete.png" alt="">
-              </button>
-            </div></td>
-        </tr>
-        <tr>
-          <th scope="row">Task 3</th>
-          <td>
-            <div class="assignee-list">
-              <div class="profile-img" id="assginee">U</div>
-            </div>
-          </td>
-          <td>08/01/2024</td>
-          <td>11/01/2024</td>
-          <td><div class="status" id="To-do">To do</div></td>
-          <td><div class="action">
-              <button class="edit-btn"><img src="images\edit.png" alt="">
-              </button>
-              <button class="delete-btn"><img src="images\delete.png" alt="">
-              </button>
-            </div></td>
-        </tr>
-      </tbody>
-    </table>
   </div>
 </body>
 <script>
